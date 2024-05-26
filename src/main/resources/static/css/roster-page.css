@@ -1,0 +1,11 @@
+.roaster-gradient-img {
+  background: linear-gradient(
+      to bottom,
+      hsla(0, 0%, 0%, 0) 0%,
+      hsla(0, 0%, 0%, 1)
+  );
+}
+.roaster-card-img {
+  height: max-content;
+  width: max-content;
+}

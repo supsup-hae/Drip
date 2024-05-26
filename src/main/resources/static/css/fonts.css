@@ -1,0 +1,19 @@
+@font-face {
+  font-family: 'S-CoreDream-3Light';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family : 'S-CoreDream-6';
+  src : url("../fonts/S-Core_Dream_OTF/SCDream6.otf");
+  font-weight: normal;
+  font-style: normal;
+}
+* {
+  font-family: 'S-CoreDream-3Light', Arial, sans-serif;
+}
+
+#title-bold {
+  font-family: 'S-CoreDream-6', Arial, sans-serif;
+}

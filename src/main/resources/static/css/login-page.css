@@ -1,0 +1,10 @@
+.login-body {
+  margin-top: -50%;
+  background: hsla(0, 0%, 100%, 0.2);
+  backdrop-filter: blur(30px);
+}
+
+.login-bg {
+  background-image: url('../images/heureum/swiper.jpg');
+  height: 92.5%;
+}
