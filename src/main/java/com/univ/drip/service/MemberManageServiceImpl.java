@@ -15,22 +15,22 @@ public class MemberManageServiceImpl implements MemberManageService {
   private final MemberRepository memberRepository;
 
   @Override
-  public ResponseEntity<String> registrationMember(Member member) {
+  public String registrationMember(Member member) {
     return null;
   }
 
   @Override
-  public ResponseEntity<String> searchMemberSessionInfo(Member member) {
+  public String searchMemberSessionInfo(Member member) {
     return null;
   }
 
   @Override
-  public ResponseEntity<String> updateMemberInfo(Member member) {
+  public String updateMemberInfo(Member member) {
     return null;
   }
 
   @Override
-  public ResponseEntity<String> loginMember(Member member) {
+  public String loginMember(Member member) {
     return null;
   }
 }

@@ -42,7 +42,7 @@ public class PropertyManageRestController {
 
   //도로명주소에 해당하는 매물을 삭제
   @DeleteMapping(path = "/properties")
-  public ResponseEntity<String> deletePropertyByRoadNameAddress(
+  public String deletePropertyByRoadNameAddress(
       @RequestParam("road-name-address") String roadNameAddress) {
     return propertyService.deletePropertyByRoadNameAddress(roadNameAddress);
   }

@@ -15,12 +15,12 @@ public class ProductManageServiceImpl implements ProductManageService {
   private final ProductRepository productRepository;
 
   @Override
-  public ResponseEntity<String> registrationProduct(Product product) {
+  public String registrationProduct(Product product) {
     return null;
   }
 
   @Override
-  public ResponseEntity<String> addProductToCart(Product product) {
+  public String addProductToCart(Product product) {
     return null;
   }
 }

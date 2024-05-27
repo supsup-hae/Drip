@@ -1,39 +1,38 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Drips</title>
 
   <!--API-->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+  <link rel="stylesheet" th:href="@{'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css'}"/>
 
   <!--CSS-->
-  <link rel="stylesheet" href="./css/carousel.css">
-  <link rel='stylesheet' href='./css/bootstrap/bootstrap.css'>
-  <link rel="stylesheet" href="./css/navbar.css">
-  <link rel="stylesheet" href="./css/index-page.css">
-  <link rel="stylesheet" href="./css/theme.css">
+  <link rel="stylesheet" th:href="@{/css/carousel.css}"/>
+  <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap.css}"/>
+  <link rel="stylesheet" th:href="@{/css/navbar.css}"/>
+  <link rel="stylesheet" th:href="@{/css/index-page.css}"/>
+  <link rel="stylesheet" th:href="@{/css/theme.css}"/>
   <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.min.css"
+      th:href="@{'https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.min.css'}"
       rel="stylesheet"
   />
 
   <!--Font-->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="./css/fonts.css">
-  <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap">
-
+  <link rel="preconnect" th:href="@{'https://fonts.googleapis.com'}"/>
+  <link rel="preconnect" th:href="@{'https://fonts.gstatic.com'}" crossorigin/>
+  <link rel="stylesheet" th:href="@{/css/fonts.css}"/>
+  <link rel="stylesheet" th:href="@{'https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap'}"/>
 </head>
 <body style="overflow-x: hidden">
 
 <!--nav-->
 <nav class="navbar navbar-expand-lg shadow sticky-top ">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/content/index.jsp">
-      <img src="./images/logo.png" alt="Drips" width="64" height="60">
+    <a class="navbar-brand" href="/api/page/index">
+      <img th:src="@{/images/logo.png}" alt="Drips" width="64" height="60">
     </a>
     <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
             data-bs-target="#navbar-content">
@@ -56,7 +55,7 @@
                 <div class="row">
                   <div class="col-12 col-sm-4 col-md-3 py-4">
                     <div class="card">
-                      <img src="./images/lowkey/logo.jpg"
+                      <img th:src="@{/images/lowkey/logo.jpg}"
                            class="img-fluid rounded-top " alt="image">
                       <div class="card-body">
                         <figure>
@@ -66,7 +65,7 @@
                           <figcaption
                               class="blockquote-footer text-center">
                             서울특별시 성동구 연무장3길 6 <br>
-                            <a href="lowkey.jsp"
+                            <a href="/api/page/lowkey"
                                class="stretched-link"></a>
                           </figcaption>
                         </figure>
@@ -75,7 +74,7 @@
                   </div>
                   <div class="col-12 col-sm-4 col-md-3 py-4">
                     <div class="card">
-                      <img src="./images/pastel/logo.jpg"
+                      <img th:src="@{/images/pastel/logo.jpg}"
                            class="img-fluid rounded-top" alt="image">
                       <div class="card-body">
                         <figure>
@@ -85,7 +84,7 @@
                           <figcaption
                               class="blockquote-footer text-center">
                             서울특별시 마포구 성지길 58 1층
-                            <a href="PastelCoffeeWorks.jsp"
+                            <a href=/api/page/pastelCoffeeWorks
                                class="stretched-link"></a>
                           </figcaption>
                         </figure>
@@ -94,7 +93,7 @@
                   </div>
                   <div class="col-12 col-sm-4 col-md-3 py-4">
                     <div class="card">
-                      <img src="./images/peer/logo.jpg"
+                      <img th:src="@{/images/peer/logo.jpg}"
                            class="img-fluid rounded-top" alt="image">
                       <div class="card-body">
                         <figure>
@@ -104,7 +103,7 @@
                           <figcaption
                               class="blockquote-footer text-center">
                             서울특별시 성동구 연무장3길 6
-                            <a href="PeerCoffee.jsp"
+                            <a href="/api/page/peerCoffee"
                                class="stretched-link"></a>
                           </figcaption>
                         </figure>
@@ -113,7 +112,7 @@
                   </div>
                   <div class="col-12 col-sm-12 col-md-3 py-4">
                     <div class="card">
-                      <img src="./images/heureum/logo.jpg"
+                      <img th:src="@{/images/heureum/logo.jpg}"
                            class="img-fluid rounded-top" alt="image">
                       <div class="card-body">
                         <figure>
@@ -123,7 +122,7 @@
                           <figcaption
                               class="blockquote-footer text-center">
                             경기도 수원시 영통구 하동 975-2
-                            <a href="CoffeeHeureum.jsp"
+                            <a href="/api/page/coffeeHeureum"
                                class="stretched-link"></a>
                           </figcaption>
                         </figure>
@@ -139,12 +138,12 @@
           <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"
              data-bs-auto-close="outside">Products</a>
           <ul class="dropdown-menu shadow">
-            <li><a class="dropdown-item" href="/content/drip-bag.jsp">DripBag</a></li>
-            <li><a class="dropdown-item" href="/content/supplies.jsp">Supplies</a></li>
+            <li><a class="dropdown-item" href="/api/page/drip-bag">DripBag</a></li>
+            <li><a class="dropdown-item" href="/api/page/supplies">Supplies</a></li>
           </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/content/addProduct.jsp">Add Product</a>
+          <a class="nav-link" href="/api/page/addProduct">Add Product</a>
         </li>
       </ul>
       <ul class="navbar-nav ms-auto">
@@ -165,7 +164,7 @@
           </a>
         </li>
         <li class="nav-user ms-1">
-          <a class="nav-link icons" href="/profile"
+          <a class="nav-link icons" href="/api/page/profile"
              tabindex="-1"
              data-bs-toggle-theme="true"
              data-bs-toggle="tooltip" data-bs-placement="bottom"
@@ -180,7 +179,7 @@
           </a>
         </li>
         <li class="nav-cart ms-1">
-          <a class="nav-link icons" href="/cart" tabindex="-1" data-bs-toggle-theme="true"
+          <a class="nav-link icons" href="/api/page/cart" tabindex="-1" data-bs-toggle-theme="true"
              aria-disabled="true">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                  fill="currentColor" class="bi bi-bag-fill" viewBox="0 0 16 16">
@@ -196,25 +195,28 @@
 <!--nav-->
 
 <!--swiper-->
-<div class="swiper mySwiper">
+<div class="swiper mySwiper" style="height: 92.6%;">
   <div class="swiper-wrapper">
     <div class="swiper-slide">
-      <img src="./images/peer/swiper.jpg">
+      <img th:src="@{/images/peer/swiper.jpg}">
     </div>
     <div class="swiper-slide">
-      <img src="./images/lowkey/swiper.jpg">
+      <img th:src="@{/images/lowkey/swiper.jpg}">
     </div>
     <div class="swiper-slide">
-      <img src="./images/heureum/swiper.jpeg">
+      <img th:src="@{/images/heureum/swiper.jpeg}">
     </div>
     <div class="swiper-slide">
-      <img src="./images/pastel/swiper.jpg">
+      <img th:src="@{/images/pastel/swiper.jpg}">
     </div>
   </div>
   <div class="swiper-button-next"></div>
   <div class="swiper-button-prev"></div>
   <div class="swiper-pagination"></div>
   <div class="autoplay-progress bg-transparent">
+    <svg viewBox="0 0 48 48">
+      <circle cx="24" cy="24" r="20"></circle>
+    </svg>
     <span></span>
   </div>
 </div>
@@ -235,7 +237,7 @@
               <div class="text-center">
                 <h5 class="card-title" th:text="${product.name}">Drip Bag Coffee</h5>
                 <p class="card-text" th:text="${product.description}">간단한 설명</p>
-                <a th:href="@{/content/{productPath}(productPath=${product.productPath})}" class="btn btn-outline-light">BUY NOW</a>
+                <a th:href="@{{productPath}(productPath=${product.productPath})}" class="btn btn-outline-light">BUY NOW</a>
               </div>
             </div>
           </div>
@@ -244,39 +246,38 @@
     </div>
   </div>
 </div>
-  <!--seasonal-->
+<!--seasonal-->
 
-  <!--all_season-->
-  <div class="pd container-fluid">
-    <div class="pd-title">
-      ALL SEASON
-    </div>
-    <p>
-      로스터리의 시그니처 메뉴들
-    </p>
-    <div>
-      <div class="row w-100">
-        <div class="row row-cols-auto g-5 ms-3 mt-5">
-          <div th:each="product : ${seasonlessCoffeeProductList}">
-            <div class="col pd-col ms-5">
-              <div class="card bg-image roaster-card-img bg-dark text-white hover-overlay hover-zoom" data-mdb-ripple-init
-                   data-mdb-ripple-color="#525740">
-                <img th:src="@{${product.imgPath[0]}}" class="card-img" alt="..." style="width: 350px">
-                <div class="mask" style="background-color: hsla(0, 0%, 2%, 0.8)">
-                  <div class="card-img-overlay d-flex flex-column justify-content-between">
-                    <div>
-                      <h3 class="card-title" th:text="${product.productName}">Product Name</h3>
-                      <p class="card-text mb-5" th:text="${product.productDescription}">Product Description</p>
-                    </div>
-                    <div>
-                      <p class="card-text">
-                        Cup Note : <br>
-                        <span th:text="${product.cupNote}">Cup Note</span>
-                      </p>
-                    </div>
+<!--all_season-->
+<div class="pd container-fluid">
+  <div class="pd-title">
+    ALL SEASON
+  </div>
+  <p>
+    로스터리의 시그니처 메뉴들
+  </p>
+  <div>
+    <div class="row w-100">
+      <div class="row row-cols-auto g-5 ms-3 mt-5">
+        <div th:each="product : ${seasonlessCoffeeProductList}">
+          <div class="col pd-col ms-5">
+            <div class="card bg-image roaster-card-img bg-dark text-white hover-overlay hover-zoom" data-mdb-ripple-init
+                 data-mdb-ripple-color="#525740">
+              <img th:src="@{${product.imgPath[0]}}" class="card-img" alt="..." style="width: 350px">
+              <div class="mask" style="background-color: hsla(0, 0%, 2%, 0.8)">
+                <div class="card-img-overlay d-flex flex-column justify-content-between">
+                  <div>
+                    <h3 class="card-title" th:text="${product.productName}">Product Name</h3>
+                    <p class="card-text mb-5" th:text="${product.productDescription}">Product Description</p>
                   </div>
-                  <a th:href="@{/content/productInfo(id=${product.productId})}" class="stretched-link"></a>
+                  <div>
+                    <p class="card-text">
+                      Cup Note : <br>
+                      <span th:text="${product.cupNote}">Cup Note</span>
+                    </p>
+                  </div>
                 </div>
+                <a th:href="@{productInfo(id=${product.productId})}" class="stretched-link"></a>
               </div>
             </div>
           </div>
@@ -284,130 +285,130 @@
       </div>
     </div>
   </div>
-  <!--all_season-->
+</div>
+<!--all_season-->
 
-  <!--DripBag-->
-  <div class="container-fluid p-0">
-    <div class="img">
-      <img src="./images/drip_bag.jpg" class="img-fluid w-100" alt="">
-      <div class="card-img-overlay w-50 ms-4 me-5 mt-5">
-        <div class="pd-title mb-3 text-white">
-          DRIP-BAG
-        </div>
-        <p class="pd-link mb-5 text-white">
-          스페셜티 커피를 더욱 간편하게 즐겨보세요. <br>
-          다양한 로스터리가 제공하는 드립백을 골라보세요. <br>
-          집이나 사무실에 두거나, 선물하기도 좋습니다.
-        </p>
-        <button class="custom-btn mt-3 ms-5">
-          <a th:href="@{/content/drip-bag}" class="link-light"><span>Link</span></a>
-        </button>
+<!--DripBag-->
+<div class="container-fluid p-0">
+  <div class="img">
+    <img th:src="@{/images/drip_bag.jpg}" class="img-fluid w-100" alt="">
+    <div class="card-img-overlay w-50 ms-4 me-5 mt-5">
+      <div class="pd-title mb-3 text-white">
+        DRIP-BAG
       </div>
+      <p class="pd-link mb-5 text-white">
+        스페셜티 커피를 더욱 간편하게 즐겨보세요. <br>
+        다양한 로스터리가 제공하는 드립백을 골라보세요. <br>
+        집이나 사무실에 두거나, 선물하기도 좋습니다.
+      </p>
+      <button class="custom-btn mt-3 ms-5">
+        <a th:href="@{drip-bag}" class="link-light"><span>Link</span></a>
+      </button>
     </div>
   </div>
-  <!--dripBag-->
+</div>
+<!--dripBag-->
 
-  <!--supplies-->
-  <div class="pd container-fluid">
-    <div class="pd-title">
-      COFFEE SUPPLIES
-    </div>
-    <p>
-      커피 용품 (추가 예정)
-    </p>
+<!--supplies-->
+<div class="pd container-fluid">
+  <div class="pd-title">
+    COFFEE SUPPLIES
   </div>
-  <!--supplies-->
+  <p>
+    커피 용품 (추가 예정)
+  </p>
+</div>
+<!--supplies-->
 
-  <!--footer-->
-  <footer class="text-center text-lg-start bg-body-tertiary text-muted pt-5">
-    <section class="">
-      <div class="container text-center text-md-start mt-5">
+<!--footer-->
+<footer class="text-center text-lg-start bg-body-tertiary text-muted pt-5">
+  <section class="">
+    <div class="container text-center text-md-start mt-5">
 
-        <div class="row mt-3">
+      <div class="row mt-3">
 
-          <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
 
-            <h6 class="text-uppercase fw-bold mb-4">
-              <i class="fas fa-gem me-3"></i> 201958110 신윤섭
-            </h6>
-            <p>
-              DataBase Programming
-            </p>
-          </div>
-
-
-          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-
-            <h6 class="text-uppercase fw-bold mb-4">
-              Roastery
-            </h6>
-            <p>
-              <a href="/content/lowkey.jsp" class="text-reset">lowkey</a>
-            </p>
-            <p>
-              <a href="/content/PastelCoffeeWorks.jsp" class="text-reset">Pastel Coffee Works</a>
-            </p>
-            <p>
-              <a href="/content/PeerCoffee.jsp" class="text-reset">Peer Coffee</a>
-            </p>
-            <p>
-              <a href="/content/CoffeeHeureum.jsp" class="text-reset">Coffee Heureum</a>
-            </p>
-          </div>
+          <h6 class="text-uppercase fw-bold mb-4">
+            <i class="fas fa-gem me-3"></i> 201958110 신윤섭
+          </h6>
+          <p>
+            DataBase Programming
+          </p>
+        </div>
 
 
-          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
 
-            <h6 class="text-uppercase fw-bold mb-4">
-              Products
-            </h6>
-            <p>
-              <a href="content/drip-bag.jsp" class="text-reset">Drip Bag</a>
-            </p>
-            <p>
-              <a href="/content/supplies.jsp" class="text-reset">Supplies</a>
-            </p>
-          </div>
+          <h6 class="text-uppercase fw-bold mb-4">
+            Roastery
+          </h6>
+          <p>
+            <a href="/api/page/lowkey" class="text-reset">lowkey</a>
+          </p>
+          <p>
+            <a href="/api/page/pastelCoffeeWorks" class="text-reset">Pastel Coffee Works</a>
+          </p>
+          <p>
+            <a href="/api/page/peerCoffee" class="text-reset">Peer Coffee</a>
+          </p>
+          <p>
+            <a href="/api/page/coffeeHeureum" class="text-reset">Coffee Heureum</a>
+          </p>
+        </div>
 
 
-          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
 
-            <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
-            <p><i class="fas fa-home me-3"></i>한신대학교 장준하기념관 18201-1</p>
-            <p>
-              <i class="fas fa-envelope me-3"></i>
-              zksdbstjq@hs.ac.kr
-            </p>
-            <p><i class="fas fa-phone me-3"></i>010-1234-5679</p>
-          </div>
+          <h6 class="text-uppercase fw-bold mb-4">
+            Products
+          </h6>
+          <p>
+            <a href="/api/page/drip-bag" class="text-reset">Drip Bag</a>
+          </p>
+          <p>
+            <a href="/api/page/supplies" class="text-reset">Supplies</a>
+          </p>
+        </div>
 
+
+        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+
+          <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+          <p><i class="fas fa-home me-3"></i>한신대학교 장준하기념관 18201-1</p>
+          <p>
+            <i class="fas fa-envelope me-3"></i>
+            zksdbstjq@hs.ac.kr
+          </p>
+          <p><i class="fas fa-phone me-3"></i>010-1234-5679</p>
         </div>
 
       </div>
-    </section>
 
-
-    <div class="text-center p-4 bg-black text-light">
-      © 2024 Copyright:
-      <a class="text-reset fw-bold link-light" href="https://github.com/F-UMI">Shin Yun Seop</a>
     </div>
-
-  </footer>
-  <!--footer-->
+  </section>
 
 
-  <!--Script-->
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <script src='js/bootstrap.bundle.min.js'></script>
-  <script src="js/day-night.js"></script>
-  <script src="js/navbar.js"></script>
-  <script src="js/swiper.js"></script>
+  <div class="text-center p-4 bg-black text-light">
+    © 2024 Copyright:
+    <a class="text-reset fw-bold link-light" th:href="@{'https://github.com/F-UMI'}">Shin Yun Seop</a>
+  </div>
 
-  <!--MDB-->
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.umd.min.js"
-  ></script>
-  <!--MDB-->
-  <!--Script-->
+</footer>
+<!--footer-->
+
+
+<!--Script-->
+<script th:src="@{'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js'}"></script>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/js/day-night.js}"></script>
+<script th:src="@{/js/navbar.js}"></script>
+<script th:src="@{/js/swiper.js}"></script>
+
+<!--MDB-->
+<script type="text/javascript" th:src="@{'https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.umd.min.js'}"></script>
+<!--MDB-->
+<!--Script-->
 
 
 </body>

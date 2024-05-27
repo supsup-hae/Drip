@@ -4,7 +4,7 @@ import com.univ.drip.entity.Product;
 import org.springframework.http.ResponseEntity;
 
 public interface ProductManageService {
-  ResponseEntity<String> registrationProduct(Product product);
+  String registrationProduct(Product product);
 
-  ResponseEntity<String> addProductToCart(Product product);
+  String addProductToCart(Product product);
 }

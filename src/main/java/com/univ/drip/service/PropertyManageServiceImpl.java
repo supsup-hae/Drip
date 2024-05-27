@@ -45,7 +45,7 @@ public class PropertyManageServiceImpl implements PropertyService {
 
   @Transactional
   @Override
-  public ResponseEntity<String> deletePropertyByRoadNameAddress(String roadNameAddress) {
+  public String deletePropertyByRoadNameAddress(String roadNameAddress) {
     List<Product> properties = repository.findByRoadNameAddress(roadNameAddress);
     if (properties.isEmpty()) {
       return new ResponseEntity<>("Property NOT FOUND!!", HttpStatus.NOT_FOUND);

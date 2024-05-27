@@ -5,14 +5,14 @@ import com.univ.drip.service.MemberManageService;
 import com.univ.drip.service.MemberManageServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
-@RestController
+@Controller
 @RequestMapping("/api/member")
 public class MemberController {
 
@@ -24,22 +24,29 @@ public class MemberController {
   }
 
   @PostMapping("/registration")
-  public ResponseEntity<String> registrationMember(@RequestBody Member member) {
+  public String registrationMember(@RequestBody Member member) {
     return memberManageService.registrationMember(member);
   }
 
   @PostMapping("/search")
-  public ResponseEntity<String> searchMemberSessionInfo(@RequestBody Member member) {
+  public String searchMemberSessionInfo(@RequestBody Member member) {
     return memberManageService.searchMemberSessionInfo(member);
   }
 
   @PostMapping("/update")
-  public ResponseEntity<String> updateMemberInfo(@RequestBody Member member) {
+  public String updateMemberInfo(@RequestBody Member member) {
     return memberManageService.updateMemberInfo(member);
   }
 
   @PostMapping("/login")
-  public ResponseEntity<String> loginMember(@RequestBody Member member) {
+  public String loginMember(@RequestBody Member member) {
     return memberManageService.loginMember(member);
   }
+
+  @GetMapping("/editProfile")
+  public String moveToEditProfile() {
+    return "editProfile";
+  }
+
+
 }
