@@ -15,37 +15,37 @@ import lombok.Setter;
 public class Product {
 
   @Id
-  @Column(name = "productId", nullable = false)
+  @Column(name = "product_id", nullable = false)
   private String productId;
 
-  @Column(name = "productCategory")
+  @Column(name = "product_category")
   private String productCategory;
 
-  @Column(name = "productName")
+  @Column(name = "product_name")
   private String productName;
 
-  @Column(name = "productPrice")
+  @Column(name = "product_price")
   private Integer productPrice;
 
   @Lob
-  @Column(name = "productDescription")
+  @Column(name = "product_description")
   private String productDescription;
 
-  @Column(name = "productRoastery")
+  @Column(name = "product_roastery")
   private String productRoastery;
 
-  @Column(name = "productsInStock")
+  @Column(name = "products_in_stock")
   private Long productsInStock;
 
-  @Column(name = "productCondition")
+  @Column(name = "product_condition")
   private String productCondition;
 
   @Lob
-  @Column(name = "cupNote")
+  @Column(name = "cup_note")
   private String cupNote;
 
   @Lob
-  @Column(name = "imgPath")
+  @Column(name = "img_path")
   private String imgPath;
 
   @Column(name = "quantity")

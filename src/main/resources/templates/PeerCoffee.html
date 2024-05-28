@@ -198,7 +198,7 @@
 <!--Nav-->
 
 <!-- Banner Section -->
-<div class="bg-image" th:style="|background-image: url('@{/static/images/peer/03.jpeg}'); height: 50vh;|">
+<div class="bg-image" th:style="|background-image: url('@{/images/peer/03.jpeg}'); height: 50vh;|">
   <div class="mask" style="background: linear-gradient(to bottom, hsla(0, 0%, 0%, 0) 0%, hsla(0, 0%, 0%, 1));">
     <p class="d-flex pt-4 mt-5 ps-4 ms-5 text-white">
       Peer Coffee Roasters
@@ -247,7 +247,7 @@
     </div>
     <div class="col-10 mb-5">
       <div class="row row-cols-auto g-4 mt-5">
-        <div th:each="product : ${peerCoffeeProductList}" class="col pd-col">
+        <div th:each="product : ${prodictList}" class="col pd-col">
           <div class="card bg-image roaster-card-img bg-dark text-white hover-overlay hover-zoom"
                data-mdb-ripple-init data-mdb-ripple-color="#525740">
             <img th:src="${product.imgPath[0]}" class="card-img" alt="..." style="width: 350px">

@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class WebPageManageServiceImpl {
+public class WebPageManageServiceImpl implements WebPageManageService {
 
 
 

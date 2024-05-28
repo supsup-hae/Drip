@@ -245,7 +245,7 @@
   </div>
   <div class="col-10 mb-5">
     <div class="row row-cols-auto g-4 mt-5">
-      <div th:each="product : ${lowkeyProductList}" class="col pd-col">
+      <div th:each="product : ${prodictList}" class="col pd-col">
         <div class="card bg-image roaster-card-img bg-dark text-white hover-overlay hover-zoom"
              data-mdb-ripple-init data-mdb-ripple-color="#525740">
           <img th:src="${product.imgPath[0]}" class="card-img" alt="..." style="width: 350px">

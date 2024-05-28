@@ -40,11 +40,6 @@ public class WebPageController {
     return "cart";
   }
 
-  @GetMapping("/coffeeHeureum")
-  public String moveToCoffeeHeureum(Model model) {
-    return "CoffeeHeureum";
-  }
-
   @GetMapping("/drip-bag")
   public String moveToDripBag(Model model) {
     return "drip-bag";
@@ -62,20 +57,28 @@ public class WebPageController {
 
   @GetMapping("/lowkey")
   public String moveToLowkey(Model model) {
-//    List<Product> lowkeyProductList = productRepository.getProductByRoastery("lowkey");
-//    model.addAttribute("lowkeyProductList", lowkeyProductList);
+    productManageService.getRoasteryProductList(model, "Lowkey");
     return "lowkey";
   }
 
   @GetMapping("/pastelCoffeeWorks")
   public String moveToPastelCoffeeWorks(Model model) {
+    productManageService.getRoasteryProductList(model, "PastelCoffeeWorks");
     return "PastelCoffeeWorks";
   }
 
   @GetMapping("/peerCoffee")
   public String moveToPeerCoffee(Model model) {
+    productManageService.getRoasteryProductList(model, "PeerCoffee");
     return "PeerCoffee";
   }
+
+  @GetMapping("/coffeeHeureum")
+  public String moveToCoffeeHeureum(Model model) {
+    productManageService.getRoasteryProductList(model, "CoffeeHeureum");
+    return "CoffeeHeureum";
+  }
+
 
   @GetMapping("/productInfo")
   public String productInfo(Model model) {
