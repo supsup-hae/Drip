@@ -30,4 +30,26 @@ public class ProductManageServiceImpl implements ProductManageService {
     List<Product> productList = productRepository.findByProductRoastery(roastertyName);
     model.addAttribute("prodictList", productList);
   }
+
+  @Override
+  public void getCategoryProductList(Model model, String categoryName) {
+    List<Product> productList = productRepository.findByProductCategory(categoryName);
+    model.addAttribute(categoryName + "ProductList", productList);
+  }
+
+  @Override
+  public void getConditionProductList(Model model, String conditionName) {
+    List<Product> productList = productRepository.findByProductCondition(conditionName);
+    if (conditionName.equals("AllSeason")) {
+      model.addAttribute("AllSeasonProductList", productList);
+    } else {
+      model.addAttribute("SeasonalProductList", productList);
+    }
+  }
+
+  @Override
+  public void getIdProductProduct(Model model, String id) {
+    Product product = productRepository.findByProductId(id);
+    model.addAttribute("product", product);
+  }
 }

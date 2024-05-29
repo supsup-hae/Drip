@@ -6,11 +6,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 import lombok.Getter;
-import lombok.Setter;
 
-@Getter
-@Setter
 @Entity
+@Getter
 @Table(name = "product")
 public class Product {
 

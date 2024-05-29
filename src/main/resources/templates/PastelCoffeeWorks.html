@@ -258,7 +258,7 @@
                   <span th:text="${product.cupNote}"></span>
                 </p>
               </div>
-              <a th:href="@{/productInfo.html(id=${product.productId})}" class="stretched-link"></a>
+              <a th:href="@{productInfo/{id}(id = ${product.productId})}" class="stretched-link"></a>
             </div>
           </div>
         </div>

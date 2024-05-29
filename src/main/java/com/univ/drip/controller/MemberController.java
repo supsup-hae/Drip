@@ -17,19 +17,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MemberController {
 
   private final MemberManageService memberManageService;
-
   @Autowired
   public MemberController(MemberManageServiceImpl memberManageService) {
     this.memberManageService = memberManageService;
   }
 
   @PostMapping("/registration")
-  public String registrationMember(@RequestBody Member member) {
+  public String registrationMember( Member member) {
     return memberManageService.registrationMember(member);
   }
 
   @PostMapping("/search")
-  public String searchMemberSessionInfo(@RequestBody Member member) {
+  public String searchMemberSessionInfo( Member member) {
     return memberManageService.searchMemberSessionInfo(member);
   }
 

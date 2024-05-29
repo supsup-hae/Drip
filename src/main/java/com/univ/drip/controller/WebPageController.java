@@ -1,14 +1,12 @@
 package com.univ.drip.controller;
 
-import com.univ.drip.service.MemberManageService;
-import com.univ.drip.service.MemberManageServiceImpl;
 import com.univ.drip.service.ProductManageService;
-import com.univ.drip.service.ProductManageServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Slf4j
@@ -17,16 +15,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class WebPageController {
 
   private final ProductManageService productManageService;
-  private final MemberManageService memberManageService;
 
   @Autowired
-  public WebPageController(ProductManageServiceImpl productManageService, MemberManageServiceImpl memberManageService) {
+  public WebPageController(ProductManageService productManageService) {
     this.productManageService = productManageService;
-    this.memberManageService = memberManageService;
   }
 
   @GetMapping("/index")
   public String moveToIndex(Model model) {
+    productManageService.getConditionProductList(model, "AllSeason");
+    productManageService.getConditionProductList(model, "Seasonal");
     return "index";
   }
 
@@ -80,8 +78,9 @@ public class WebPageController {
   }
 
 
-  @GetMapping("/productInfo")
-  public String productInfo(Model model) {
+  @GetMapping("/productInfo/{id}")
+  public String productInfo(Model model, @PathVariable String id) {
+    productManageService.getIdProductProduct(model, id);
     return "productInfo";
   }
 

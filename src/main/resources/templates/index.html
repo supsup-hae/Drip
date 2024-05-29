@@ -228,17 +228,25 @@
   <p id="custom-h3">매월 새롭게 소개하는 시즈널 커피</p>
   <div class="row w-100">
     <div class="row row-cols-auto g-5 mt-5 ms-3">
-      <div th:each="product : ${seasonalProducts}">
+      <div th:each="product : ${SeasonalProductList}">
         <div class="col pd-col ms-5">
           <div class="card bg-image roaster-card-img bg-dark text-white hover-overlay hover-zoom" data-mdb-ripple-init
                data-mdb-ripple-color="#525740">
-            <img th:src="@{${product.imgPath[0]}}" class="img-fluid">
-            <div class="card-img-overlay d-flex align-items-center justify-content-center">
-              <div class="text-center">
-                <h5 class="card-title" th:text="${product.name}">Drip Bag Coffee</h5>
-                <p class="card-text" th:text="${product.description}">간단한 설명</p>
-                <a th:href="@{{productPath}(productPath=${product.productPath})}" class="btn btn-outline-light">BUY NOW</a>
+            <img th:src="@{${product.imgPath}}" class="card-img" alt="..." style="width: 350px">
+            <div class="mask" style="background-color: hsla(0, 0%, 2%, 0.8)">
+              <div class="card-img-overlay d-flex flex-column justify-content-between">
+                <div>
+                  <h3 class="card-title" th:text="${product.productName}">Product Name</h3>
+                  <p class="card-text mb-5" th:text="${product.productDescription}">Product Description</p>
+                </div>
+                <div>
+                  <p class="card-text">
+                    Cup Note : <br>
+                    <span th:text="${product.cupNote}">Cup Note</span>
+                  </p>
+                </div>
               </div>
+              <a th:href="@{productInfo/{id}(id = ${product.productId})}" class="stretched-link"></a>
             </div>
           </div>
         </div>
@@ -259,11 +267,11 @@
   <div>
     <div class="row w-100">
       <div class="row row-cols-auto g-5 ms-3 mt-5">
-        <div th:each="product : ${seasonlessCoffeeProductList}">
+        <div th:each="product : ${AllSeasonProductList}">
           <div class="col pd-col ms-5">
             <div class="card bg-image roaster-card-img bg-dark text-white hover-overlay hover-zoom" data-mdb-ripple-init
                  data-mdb-ripple-color="#525740">
-              <img th:src="@{${product.imgPath[0]}}" class="card-img" alt="..." style="width: 350px">
+              <img th:src="@{${product.imgPath}}" class="card-img" alt="..." style="width: 350px">
               <div class="mask" style="background-color: hsla(0, 0%, 2%, 0.8)">
                 <div class="card-img-overlay d-flex flex-column justify-content-between">
                   <div>
@@ -277,7 +285,7 @@
                     </p>
                   </div>
                 </div>
-                <a th:href="@{productInfo(id=${product.productId})}" class="stretched-link"></a>
+                <a th:href="@{productInfo/{id}(id = ${product.productId})}" class="stretched-link"></a>
               </div>
             </div>
           </div>
