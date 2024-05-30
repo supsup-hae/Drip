@@ -16,10 +16,7 @@
   <link rel="stylesheet" th:href="@{/css/theme.css}"/>
   <link rel="stylesheet" th:href="@{/css/roster-page.css}"/>
 
-  <link
-      th:href="@{'https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.min.css'}"
-      rel="stylesheet"
-  />
+  <link rel="stylesheet" th:href="@{/css/mdb.min.css}"/>
 
   <!--Fonts-->
   <link rel="preconnect" th:href="@{'https://fonts.googleapis.com'}"/>
@@ -167,7 +164,7 @@
           </a>
         </li>
         <li class="nav-user ms-1">
-          <a class="nav-link icons" href="/api/page/profile"
+          <a class="nav-link icons" href="/api/page/login"
              tabindex="-1"
              data-bs-toggle-theme="true"
              data-bs-toggle="tooltip" data-bs-placement="bottom"
@@ -359,7 +356,7 @@
 <script th:src="@{/js/navbar.js}"></script>
 <script th:src="@{/js/swiper.js}"></script>
 <!-- MDB -->
-<script type="text/javascript" th:src="@{'https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.umd.min.js'}"></script>
+<script type="text/javascript" th:src="@{'https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.0/mdb.umd.min.js'}"></script>
 </body>
 </html>
 

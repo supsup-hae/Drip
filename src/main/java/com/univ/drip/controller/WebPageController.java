@@ -1,5 +1,7 @@
 package com.univ.drip.controller;
 
+import com.univ.drip.service.MemberManageService;
+import com.univ.drip.service.MemberManageServiceImpl;
 import com.univ.drip.service.ProductManageService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,16 +17,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class WebPageController {
 
   private final ProductManageService productManageService;
+  private final MemberManageService memberManageService;
 
   @Autowired
-  public WebPageController(ProductManageService productManageService) {
+  public WebPageController(ProductManageService productManageService, MemberManageServiceImpl memberManageService) {
     this.productManageService = productManageService;
+    this.memberManageService = memberManageService;
   }
 
   @GetMapping("/index")
   public String moveToIndex(Model model) {
     productManageService.getConditionProductList(model, "AllSeason");
     productManageService.getConditionProductList(model, "Seasonal");
+    memberManageService.generateDefaultMemberAttribute(model);
     return "index";
   }
 
@@ -50,7 +55,7 @@ public class WebPageController {
 
   @GetMapping("/login")
   public String moveToLogin(Model model) {
-    return "addProduct";
+    return "login";
   }
 
   @GetMapping("/lowkey")
@@ -91,6 +96,7 @@ public class WebPageController {
 
   @GetMapping("/register")
   public String moveToRegister(Model model) {
+    memberManageService.generateDefaultMemberAttribute(model);
     return "register";
   }
 

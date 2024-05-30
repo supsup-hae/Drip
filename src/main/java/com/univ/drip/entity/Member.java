@@ -2,8 +2,11 @@ package com.univ.drip.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.Builder;
 import lombok.Getter;
 
 @Getter
@@ -13,7 +16,7 @@ public class Member {
 
   @Id
   @Column(name = "id", nullable = false)
-  private Long id;
+  private String id;
 
   @Column(name = "password")
   private String password;
@@ -45,7 +48,29 @@ public class Member {
   @Column(name = "status")
   private Boolean status;
 
-  @Column(name = "role", length = 50)
-  private String role;
+  @Enumerated(EnumType.STRING)
+  @Column(name = "role", length = 50, nullable = false)
+  private Role role;
 
+  @Builder
+  public Member(String id, String password, String email, String name, String gender, String phoneNumber, String zipCode, String address,
+      String detailedAddress, String extraAddress, Boolean status, Role role) {
+    this.id = id;
+    this.password = password;
+    this.email = email;
+    this.name = name;
+    this.gender = gender;
+    this.phoneNumber = phoneNumber;
+    this.zipCode = zipCode;
+    this.address = address;
+    this.detailedAddress = detailedAddress;
+    this.extraAddress = extraAddress;
+    this.status = status;
+    this.role = role;
+  }
+
+
+
+  public Member() {
+  }
 }

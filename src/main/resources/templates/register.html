@@ -13,10 +13,8 @@
   <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap.css}"/>
   <link rel="stylesheet" th:href="@{/css/navbar.css}"/>
   <link rel="stylesheet" th:href="@{/css/register-page.css}"/>
-  <link
-      th:href="@{'https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.min.css'}"
-      rel="stylesheet"
-  />
+
+  <link rel="stylesheet" th:href="@{/css/mdb.min.css}"/>
 
   <!--Fonts-->
   <link rel="preconnect" th:href="@{'https://fonts.googleapis.com'}"/>
@@ -162,7 +160,7 @@
           </a>
         </li>
         <li class="nav-user ms-1">
-          <a class="nav-link icons" href="/api/page/profile"
+          <a class="nav-link icons" href="/api/page/login"
              tabindex="-1"
              data-bs-toggle-theme="true"
              data-bs-toggle="tooltip" data-bs-placement="bottom"
@@ -204,70 +202,71 @@
     <div class="card-body py-5 px-md-5 w-100 m-auto">
       <div class="row d-flex justify-content-center">
         <div class="col-lg-8">
-          <h2 class="fw-bold mb-3">- Modify User Info -</h2>
-          <form class="needs-validation" novalidate id="updateMember" method="post" th:action="@{/registration}">
-            <div class="data-mdb-input-init form-outline mb-5">
+          <h2 class="fw-bold mb-3">- Registration -</h2>
+          <form class="needs-validation" novalidate id="updateMember" method="post" th:action="@{/api/member/register}">
+            <div class="t form-outline mb-5" data-mdb-input-init>
               <input type="text" id="inputIdForm" class="form-control" name="id" required/>
               <label class="form-label" for="inputIdForm">ID</label>
               <div class="invalid-feedback">아이디를 입력해주세요</div>
             </div>
-            <div class="data-mdb-input-init form-outline mb-5">
-              <input type="password" id="inputPasswordForm" name="password" class="form-control" required/>
+            <div class="form-outline mb-5" data-mdb-input-init>
+              <input type="password" id="inputPasswordForm" name="password" class="form-control" th:value="${member.password}" required/>
               <label class="form-label" for="inputPasswordForm">Password</label>
               <div class="invalid-feedback">비밀번호를 입력해주세요</div>
             </div>
-            <div class="data-mdb-input-init form-outline mb-5">
+            <div class="form-outline mb-5" data-mdb-input-init>
               <input type="password" id="inputPasswordVerifiedForm" class="form-control" required/>
               <label class="form-label" for="inputPasswordVerifiedForm">Password Verified</label>
               <div class="invalid-feedback">동일한 비밀번호를 입력해주세요</div>
             </div>
             <div class="row mb-5">
               <div class="col-md-6 m-auto">
-                <div class="data-mdb-input-init form-outline">
-                  <input type="text" id="inputNameForm" name="name" class="form-control" required/>
+                <div class="form-outline" data-mdb-input-init>
+                  <input type="text" id="inputNameForm" name="name" class="form-control" th:value="${member.name}" required/>
                   <label class="form-label" for="inputNameForm">이름</label>
                   <div class="invalid-feedback">이름을 입력해주세요</div>
                 </div>
               </div>
               <div class="col-md-6 m-auto">
                 <h6 class="mb-2 pb-1">Gender: </h6>
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="gender" id="femaleGender" value="여성" checked/>
+                <div class="form-check form-check-inline" data-mdb-input-init>
+                  <input class="form-check-input" type="radio" name="gender" id="femaleGender" value="여성" th:checked="${member.gender.equals('여성')}"/>
                   <label class="form-check-label" for="femaleGender">Female</label>
                 </div>
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="gender" id="maleGender" value="남성"/>
+                <div class="form-check form-check-inline" data-mdb-input-init>
+                  <input class="form-check-input" type="radio" name="gender" id="maleGender" value="남성" th:checked="${member.gender.equals('남성')}"/>
                   <label class="form-check-label" for="maleGender">Male</label>
                 </div>
               </div>
             </div>
-            <div class="data-mdb-input-init form-outline mb-4">
-              <input type="email" id="inputEmailForm" name="email" class="form-control" required/>
+            <div class="form-outline mb-4" data-mdb-input-init>
+              <input type="email" id="inputEmailForm" name="email" class="form-control" th:value="${member.email}" required/>
               <label class="form-label" for="inputEmailForm">Email</label>
               <div class="invalid-feedback">정확한 이메일을 입력해주세요</div>
             </div>
             <!-- Checkbox -->
-            <div class="form-check mb-3">
+            <div class="form-check mb-3" data-mdb-input-init>
               <input class="form-check-input" type="checkbox" value="" id="allowingSMSReceives"/>
               <label class="form-check-label" for="allowingSMSReceives">
                 정보/이벤트 메일 수신에 동의합니다.
               </label>
             </div>
-            <div class="data-mdb-input-init form-outline mb-4">
-              <input type="tel" id="inputPhoneNumberForm" name="phoneNumber" class="form-control" required/>
+            <div class="form-outline mb-4" data-mdb-input-init>
+              <input type="tel" id="inputPhoneNumberForm" name="phoneNumber" class="form-control" th:value="${member.phoneNumber}" required/>
               <label class="form-label" for="inputPhoneNumberForm">Phone</label>
               <div class="invalid-feedback">정확한 전화번호를 입력해주세요</div>
             </div>
             <!-- Checkbox -->
-            <div class="form-check mb-3">
+            <div class="form-check mb-3" data-mdb-input-init>
               <input class="form-check-input" type="checkbox" value="" id="allowingEmailReceives"/>
               <label class="form-check-label" for="allowingEmailReceives">
                 정보/이벤트 SMS 수신에 동의합니다.
               </label>
             </div>
             <div class="input-group mb-5" style="height: 34px">
-              <div class="data-mdb-input-init form-outline">
-                <input type="text" id="inputZipCodeForm" name="zipCode" class="form-control active" aria-describedby="button-addon" required/>
+              <div class=" form-outline" data-mdb-input-init>
+                <input type="text" id="inputZipCodeForm" name="zipCode" class="form-control active" th:value="${member.zipCode}"
+                       aria-describedby="button-addon" required/>
                 <label class="form-label" for="inputZipCodeForm">우편번호</label>
                 <div class="invalid-feedback" style="margin: 0">우편번호를 입력해주세요</div>
               </div>
@@ -276,31 +275,29 @@
                 <p class="m-auto">우편번호 찾기</p>
               </button>
             </div>
-            <div class="data-mdb-input-init form-outline mb-5">
-              <input type="text" id="inputAddressForm" name="address" class="form-control active" aria-describedby="button-addon" required/>
+            <div class="form-outline mb-5" data-mdb-input-init>
+              <input type="text" id="inputAddressForm" name="address" class="form-control active" th:value="${member.address}"
+                     aria-describedby="button-addon" required/>
               <label class="form-label" for="inputAddressForm">주소</label>
               <div class="invalid-feedback">주소를 입력해주세요</div>
             </div>
             <div class="input-group">
-              <div class="data-mdb-input-init form-outline mb-5">
-                <input type="text" id="inputDetailedAddressForm" name="detailedAddress" class="form-control" aria-describedby="button-addon"
-                       required/>
+              <div class="form-outline mb-5" data-mdb-input-init>
+                <input type="text" id="inputDetailedAddressForm" name="detailedAddress" class="form-control" th:value="${member.detailedAddress}"
+                       aria-describedby="button-addon" required/>
                 <label class="form-label" for="inputDetailedAddressForm">상세주소</label>
-                <div class="invalid-feedback" style="margin: 0">상세주소를 입력해주세요</div>
+                <div class="invalid-feedback">상세주소를 입력해주세요</div>
               </div>
-              <div class="row-cols-10">
-                <div class="data-mdb-input-init form-outline mb-5">
-                  <input type="text" id="inputExtraAddressForm" name="extraAddress" class="form-control active" aria-describedby="button-addon"/>
-                  <label class="form-label" for="inputExtraAddressForm">참고항목</label>
-                </div>
+              <div class="form-outline mb-5" data-mdb-input-init>
+                <input type="text" id="inputExtraAddressForm" name="extraAddress" class="form-control" th:value="${member.extraAddress}"
+                       aria-describedby="button-addon" required/>
+                <label class="form-label" for="inputExtraAddressForm">참고항목</label>
+                <div class="invalid-feedback">참고항목을 입력해주세요</div>
               </div>
             </div>
+            <button class="btn btn-primary btn-block mb-4" type="submit">등록</button>
           </form>
-          <div class="col-12">
-            <button class="btn btn-primary" type="submit" form="updateMember" data-mdb-ripple-init>회원 가입</button>
-          </div>
         </div>
-        <!--User Input Form-->
       </div>
     </div>
   </div>
@@ -393,7 +390,7 @@
 <!--API-->
 <script th:src="@{'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js'}"></script>
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
-<script type="text/javascript" th:src="@{'https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.umd.min.js'}"></script>
+<script type="text/javascript" th:src="@{'https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.0/mdb.umd.min.js'}"></script>
 <script th:src="@{'https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js'}"></script>
 
 <!--CUSTOM-->
@@ -401,6 +398,7 @@
 <script th:src="@{/js/swiper.js}"></script>
 <script th:src="@{/js/form-validate.js}"></script>
 <script th:src="@{/js/kakao-find-address.js}"></script>
+<script th:src="@{/js/form-outline.js}"></script>
 
 </body>
 </html>
