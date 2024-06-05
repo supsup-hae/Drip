@@ -5,20 +5,26 @@ import com.univ.drip.entity.Product;
 import com.univ.drip.service.CartManageService;
 import com.univ.drip.service.MemberManageService;
 import com.univ.drip.service.ProductManageService;
+import com.univ.drip.service.WebPageManageService;
 import com.univ.drip.service.impl.CartManageServiceImpl;
 import com.univ.drip.service.impl.MemberManageServiceImpl;
 import com.univ.drip.service.impl.ProductManageServiceImpl;
+import com.univ.drip.service.impl.WebPageManageServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Slf4j
-@RestController
+@Controller
 @RequestMapping("/api/product")
 public class ProductController {
 
@@ -26,12 +32,15 @@ public class ProductController {
   private final MemberManageService memberManageService;
   private final CartManageService cartManageService;
 
+  private final WebPageManageService webPageManageService;
+
   @Autowired
   public ProductController(ProductManageServiceImpl productManageService, MemberManageServiceImpl memberManageService,
-      CartManageServiceImpl cartManageService) {
+      CartManageServiceImpl cartManageService, WebPageManageServiceImpl webPageManageService) {
     this.productManageService = productManageService;
     this.memberManageService = memberManageService;
     this.cartManageService = cartManageService;
+    this.webPageManageService = webPageManageService;
   }
 
   @PostMapping("/register")
@@ -40,12 +49,13 @@ public class ProductController {
   }
 
   @PostMapping("/cart/{id}/{itemId}")
-  public String addCartItem(@PathVariable("id") String memberId, @PathVariable("itemId") String productId, int amount) {
+  public String addCartItem(@PathVariable("id") String memberId, @PathVariable("itemId") String productId, @RequestParam("amount") int amount, Model model) {
     Member member = memberManageService.findMemberById(memberId);
     Product product = productManageService.findProductById(productId);
     cartManageService.addCart(product, member, amount);
-
-    return "redirect:/api/product/productInfo/{itemId}";
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    webPageManageService.getAuthInfo(authentication, model);
+    return "redirect:/api/page/cart/" + memberId;
   }
 
   @GetMapping("/productInfo")

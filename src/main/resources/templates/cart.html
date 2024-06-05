@@ -203,11 +203,11 @@
 
   <div class="d-flex card mx-4 mx-md-5 shadow-5-strong w-75 position-absolute"
        style="
-        margin-top: -900px;
-        left: 10%;
-        background: hsla(0, 0%, 100%, 1);
-        backdrop-filter: blur(30px);
-        ">
+            margin-top: -900px;
+            left: 10%;
+            background: hsla(0, 0%, 100%, 1);
+            backdrop-filter: blur(30px);
+            ">
     <div class="card-body py-5 px-md-5 w-75 m-auto">
       <div class="row d-flex align-items-center justify-content-center">
         <div class="">
@@ -224,7 +224,7 @@
             </tr>
             </thead>
             <tbody class="table-group-divider table-divider-color">
-            <tr th:each="product : ${session.cartList}">
+            <tr th:each="item : ${cartItems}">
               <th scope="row">
                 <div class="form-check m-auto">
                   <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
@@ -232,38 +232,37 @@
               </th>
               <td>
                 <div class="d-flex align-items-center">
-                  <img th:src="${product.imgPath[0]}" alt="" style="width: 45px; height: 45px"/>
+                  <img th:src="${item.product.imgPath}" alt="" style="width: 45px; height: 45px"/>
                   <div class="ms-3">
                     <p class="fw-bold mb-1">
-                      <a th:href="@{/productInfo(id=${product.productId})}" class="link-dark" th:text="${product.productName}"></a>
+                      <a th:href="@{api/page/productInfo/{productId}(productId=${item.product.productId})}" class="link-dark"
+                         th:text="${item.product.productName}"></a>
                     </p>
                   </div>
                 </div>
               </td>
               <td>
                 <p class="fw-normal mb-1">
-                  <a th:href="@{/${product.productRoastery}.html}" class="link-dark" th:text="${product.productRoastery}"></a>
+                  <a th:href="@{/api/page/{productRoastery} (productRoastery = ${item.product.productRoastery})}" class="link-dark"
+                     th:text="${item.product.productRoastery}"></a>
                 </p>
               </td>
               <td>
-                <span class="ms-2" th:text="${product.quantity}"></span>
+                <span class="ms-2" th:text="${item.count}"></span>
               </td>
               <td class="ms-2">
-                <span class="ms-2" th:text="${product.productPrice}"></span>
+                <span class="ms-2" th:text="|${#numbers.formatInteger(item.product.productPrice * item.count, 0, 'COMMA')}원|"></span>
               </td>
               <td>
                 <span>3,000</span>
               </td>
               <td>
-                <form class="m-auto" id="deleteFromCart" th:action="@{/deleteFromCart}" method="post">
-                  <button type="submit" class="btn btn-link btn-sm px-3 w-auto delete-btn" data-mdb-ripple-init data-ripple-color="primary"
-                          form="deleteFromCart">
+                <form class="m-auto" th:action="@{/api/page/cart/{id}/{cartItemId}/delete(id=${member.id}, cartItemId=${item.id})}" method="post">
+                  <button type="submit" class="btn btn-link btn-sm px-3 w-auto delete-btn" data-mdb-ripple-init data-ripple-color="primary">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-square text-black"
                          viewBox="0 0 16 16">
-                      <path
-                          d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
-                      <path
-                          d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                      <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
+                      <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
                     </svg>
                   </button>
                 </form>
@@ -285,18 +284,18 @@
               <td class="text-center">
                 <figure class="text-center mt-2">
                   <blockquote class="blockquote">
-                    <p th:text="${productsPrice} + ' 원'"></p>
+                    <p th:text="|${#numbers.formatInteger(totalPrice, 0, 'COMMA')}원|"></p>
                   </blockquote>
                   <figcaption class="blockquote-footer">
-                    총 <span th:text="${numberOfProduct}"></span> 개
+                    총 <span th:text="${totalCount}"></span> 개
                   </figcaption>
                 </figure>
               </td>
               <td class="text-center">
-                <h5 class="ms-2 text-center" th:text="${shippingCost} + ' 원'"></h5>
+                <h5 class="ms-2 text-center" th:text="|${#numbers.formatInteger(shoppingCost, 0, 'COMMA')}원|"></h5>
               </td>
               <td class="text-center">
-                <h5 class="text-center" th:text="${totalBill} + ' 원'"></h5>
+                <h5 class="text-center" th:text="|${#numbers.formatInteger(totalPrice+shoppingCost, 0, 'COMMA')}원|"></h5>
               </td>
             </tr>
             </tbody>
@@ -317,8 +316,7 @@
       </div>
     </div>
   </div>
-</section>
-<!-- Section: Design Block -->
+</section><!-- Section: Design Block -->
 
 
 <!--Footer-->

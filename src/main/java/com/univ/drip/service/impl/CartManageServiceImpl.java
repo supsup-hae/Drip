@@ -8,9 +8,11 @@ import com.univ.drip.repository.CartItemRepository;
 import com.univ.drip.repository.CartRepository;
 import com.univ.drip.repository.ProductRepository;
 import com.univ.drip.service.CartManageService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 @Service
 public class CartManageServiceImpl implements CartManageService {
 
@@ -51,5 +53,25 @@ public class CartManageServiceImpl implements CartManageService {
 
     // 카트 상품 총 개수 증가
     cart.setCount(cart.getCount() + amount);
+  }
+
+  @Override
+  public Cart findByMemberId(String memberId) {
+    return cartRepository.findByMember_Id(memberId);
+  }
+
+  @Override
+  public CartItem findByProductId(String productId) {
+    return cartItemRepository.findByProduct_ProductId(productId);
+  }
+
+  @Override
+  public List<CartItem> findAllCartItems(Cart cart) {
+    return cartItemRepository.findByCart(cart);
+  }
+
+  @Override
+  public void deleteCartItem(String productId) {
+    cartItemRepository.deleteByProduct(cartItemRepository.findByProduct_ProductId(productId).getProduct());
   }
 }
