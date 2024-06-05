@@ -6,16 +6,19 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "member")
 public class Member {
 
   @Id
-  @Column(name = "id", nullable = false)
+  @Column(name = "member_id", nullable = false)
   private String id;
 
   @Column(name = "password")
@@ -70,7 +73,4 @@ public class Member {
   }
 
 
-
-  public Member() {
-  }
 }

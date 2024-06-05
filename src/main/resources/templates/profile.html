@@ -142,9 +142,10 @@
       </ul>
       <ul class="navbar-nav ms-auto">
         <li class="user-info ms-2 m-auto">
-          <div th:if="${member != null}">
+          <div>
             <p class="m-0">
-              <span th:text="${member.name}">User</span> 님 어서오세요!
+              <span th:if="${member != null}" th:text="${member.name}">Guest</span>
+              <span th:unless="${member != null}">Guest</span> 님 어서오세요!
             </p>
           </div>
         </li>
@@ -259,8 +260,8 @@
             </div>
           </div>
           <div class="mt-5">
-            <a class="btn btn-primary ms-5" th:href="@{/editProfile}" role="button">회원 정보 수정</a>
-            <a class="btn btn-danger ms-5" th:href="@{/logout}" role="button">로그아웃</a>
+            <a class="btn btn-primary ms-5" th:href="@{/api/page/edit}" role="button">회원 정보 수정</a>
+            <a class="btn btn-danger ms-5" th:href="@{/api/page/logout}" role="button">로그아웃</a>
           </div>
         </div>
       </div>

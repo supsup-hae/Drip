@@ -3,15 +3,15 @@ package com.univ.drip.controller;
 import com.univ.drip.dto.MemberDto;
 import com.univ.drip.entity.Member;
 import com.univ.drip.service.MemberManageService;
-import com.univ.drip.service.MemberManageServiceImpl;
+import com.univ.drip.service.impl.MemberManageServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Slf4j
@@ -29,7 +29,7 @@ public class MemberController {
   }
 
   @PostMapping("/register")
-  public String registrationMember(@ModelAttribute MemberDto memberDto) {
+  public String registrationMember(@ModelAttribute MemberDto memberDto, Model model) {
     memberManageService.registrationMember(memberDto);
     return "redirect:/api/page/login";
   }
@@ -40,19 +40,23 @@ public class MemberController {
   }
 
   @PostMapping("/update")
-  public String updateMemberInfo(@RequestBody Member member) {
-    return memberManageService.updateMemberInfo(member);
+  public String updateMemberInfo(@ModelAttribute Member member, Model model) {
+    return memberManageService.updateMemberInfo(member, model);
   }
 
-  @PostMapping("/login")
-  public String loginMember(@RequestBody Member member) {
-    return memberManageService.loginMember(member);
+  @GetMapping("/login")
+  public String loginMember(Model model) {
+    return "login";
+  }
+
+  @GetMapping("/logout")
+  public String logoutMember() {
+    return "redirect:api/page/index";
   }
 
   @GetMapping("/editProfile")
   public String moveToEditProfile() {
     return "editProfile";
   }
-
 
 }

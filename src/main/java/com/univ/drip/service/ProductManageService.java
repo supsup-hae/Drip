@@ -15,4 +15,6 @@ public interface ProductManageService {
   void getConditionProductList(Model model, String conditionName);
 
   void getIdProductProduct(Model model, String id);
+
+  Product findProductById(String id);
 }

@@ -1,12 +1,17 @@
 package com.univ.drip.controller;
 
+import com.univ.drip.entity.Member;
 import com.univ.drip.entity.Product;
+import com.univ.drip.service.CartManageService;
+import com.univ.drip.service.MemberManageService;
 import com.univ.drip.service.ProductManageService;
-import com.univ.drip.service.ProductManageServiceImpl;
+import com.univ.drip.service.impl.CartManageServiceImpl;
+import com.univ.drip.service.impl.MemberManageServiceImpl;
+import com.univ.drip.service.impl.ProductManageServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,10 +23,15 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProductController {
 
   private final ProductManageService productManageService;
+  private final MemberManageService memberManageService;
+  private final CartManageService cartManageService;
 
   @Autowired
-  public ProductController(ProductManageServiceImpl productManageService) {
+  public ProductController(ProductManageServiceImpl productManageService, MemberManageServiceImpl memberManageService,
+      CartManageServiceImpl cartManageService) {
     this.productManageService = productManageService;
+    this.memberManageService = memberManageService;
+    this.cartManageService = cartManageService;
   }
 
   @PostMapping("/register")
@@ -29,9 +39,13 @@ public class ProductController {
     return productManageService.registrationProduct(product);
   }
 
-  @PostMapping("/cart/add")
-  public String addProductToCart(@RequestBody Product product) {
-    return productManageService.addProductToCart(product);
+  @PostMapping("/cart/{id}/{itemId}")
+  public String addCartItem(@PathVariable("id") String memberId, @PathVariable("itemId") String productId, int amount) {
+    Member member = memberManageService.findMemberById(memberId);
+    Product product = productManageService.findProductById(productId);
+    cartManageService.addCart(product, member, amount);
+
+    return "redirect:/api/product/productInfo/{itemId}";
   }
 
   @GetMapping("/productInfo")

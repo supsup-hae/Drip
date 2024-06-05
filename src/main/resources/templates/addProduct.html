@@ -155,6 +155,9 @@
               <span th:text="${member.name}">User</span> 님 어서오세요!
             </p>
           </div>
+          <div th:unless="${member != null}">
+            <p class="m-0">Guest 님 어서오세요!</p>
+          </div>
         </li>
         <li class="nav-theme ms-2">
           <a class="nav-link icons" href="#" tabindex="-1" data-bs-toggle-theme="true"

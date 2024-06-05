@@ -1,7 +1,8 @@
-package com.univ.drip.service;
+package com.univ.drip.service.impl;
 
 import com.univ.drip.entity.Product;
 import com.univ.drip.repository.ProductRepository;
+import com.univ.drip.service.ProductManageService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,8 @@ public class ProductManageServiceImpl implements ProductManageService {
   public String addProductToCart(Product product) {
     return null;
   }
+
+
 
   @Override
   public void getRoasteryProductList(Model model, String roastertyName) {
@@ -51,5 +54,10 @@ public class ProductManageServiceImpl implements ProductManageService {
   public void getIdProductProduct(Model model, String id) {
     Product product = productRepository.findByProductId(id);
     model.addAttribute("product", product);
+  }
+
+  @Override
+  public Product findProductById(String id) {
+    return productRepository.findById(id).orElseThrow();
   }
 }

@@ -1,9 +1,10 @@
-package com.univ.drip.service;
+package com.univ.drip.service.impl;
 
 import com.univ.drip.dto.MemberDto;
 import com.univ.drip.entity.Member;
 import com.univ.drip.entity.Role;
 import com.univ.drip.repository.MemberRepository;
+import com.univ.drip.service.MemberManageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -42,18 +43,39 @@ public class MemberManageServiceImpl implements MemberManageService {
     memberRepository.save(member);
   }
 
+  public Member findMemberById(String id) {
+    return memberRepository.findById(id).orElseThrow();
+  }
+
   @Override
   public String searchMemberSessionInfo(Member member) {
     return null;
   }
 
   @Override
-  public String updateMemberInfo(Member member) {
-    return null;
+  public String updateMemberInfo(Member member, Model model) {
+    String encodePassword = passwordEncoder.encode(member.getPassword());
+    Member updateMember = Member.builder()
+        .id(member.getId())
+        .password(encodePassword)
+        .email(member.getEmail())
+        .name(member.getName())
+        .gender(member.getGender())
+        .phoneNumber(member.getPhoneNumber())
+        .zipCode(member.getZipCode())
+        .address(member.getAddress())
+        .detailedAddress(member.getDetailedAddress())
+        .extraAddress(member.getExtraAddress())
+        .role(member.getRole())
+        .status(member.getStatus())
+        .build();
+    memberRepository.save(updateMember);
+    model.addAttribute("member", member);
+    return "redirect:/api/page/profile";
   }
 
   @Override
-  public String loginMember(Member member) {
+  public String loginMember(Model model) {
     return null;
   }
 
@@ -61,4 +83,5 @@ public class MemberManageServiceImpl implements MemberManageService {
   public void generateDefaultMemberAttribute(Model model) {
     model.addAttribute("member", new MemberDto(null, "", "", "", "", "", "", "", "", "", true, Role.GUEST));
   }
+
 }

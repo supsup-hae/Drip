@@ -147,6 +147,9 @@
               <span th:text="${member.name}">User</span> 님 어서오세요!
             </p>
           </div>
+          <div th:unless="${member != null}">
+            <p class="m-0">Guest 님 어서오세요!</p>
+          </div>
         </li>
         <li class="nav-theme ms-2">
           <a class="nav-link icons" href="#" tabindex="-1" data-bs-toggle-theme="true"
@@ -200,7 +203,7 @@
       <div class="row d-flex align-items-center justify-content-center">
         <div class="col-lg-8">
           <h2 class="fw-bold mb-5">- Login -</h2>
-          <form class="needs-validation" action="api/member/login" method="post" novalidate>
+          <form class="needs-validation" th:action="@{/api/page/login}" method="post" novalidate>
             <!-- Email input -->
             <div data-mdb-input-init class="form-outline mb-5">
               <input type="text" id="loginId" class="form-control" name="id" required/>
@@ -223,10 +226,6 @@
                   <label class="form-check-label" for="form2Example31">Remember me</label>
                 </div>
               </div>
-              <!-- Uncomment and update the link if needed -->
-              <!-- <div class="col">
-                  <a href="#!">Forgot password?</a>
-              </div> -->
             </div>
 
             <!-- Submit button -->
@@ -234,9 +233,13 @@
 
             <!-- Register buttons -->
             <div class="text-center">
-              <p>Not a member? <a href="/api/page/register">Register</a></p>
+              <p>Not a member? <a th:href="@{/api/page/register}">Register</a></p>
             </div>
           </form>
+          <div>
+            <p th:if="${param.error}" style="color: red;">Invalid username or password</p>
+            <p th:if="${param.logout}" style="color: green;">You have been logged out</p>
+          </div>
         </div>
       </div>
     </div>

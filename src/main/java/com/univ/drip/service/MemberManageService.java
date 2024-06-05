@@ -9,10 +9,11 @@ public interface MemberManageService {
 
   String searchMemberSessionInfo(Member member);
 
-  String updateMemberInfo(Member member);
+  String updateMemberInfo(Member member, Model model);
 
-  String loginMember(Member member);
+  String loginMember(Model model);
 
   void generateDefaultMemberAttribute(Model model);
 
+  Member findMemberById(String id);
 }
