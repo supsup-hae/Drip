@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -31,7 +31,7 @@
 <!--Nav-->
 <nav class="navbar navbar-expand-lg shadow sticky-top ">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/api/page/index">
+    <a class="navbar-brand" th:href="@{/api/page/index}">
       <img th:src="@{/images/logo.png}" alt="Drips" width="64" height="60">
     </a>
     <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
@@ -65,7 +65,7 @@
                           <figcaption
                               class="blockquote-footer text-center">
                             서울특별시 성동구 연무장3길 6 <br>
-                            <a href="/api/page/Lowkey"
+                            <a th:href="@{/api/page/Lowkey}"
                                class="stretched-link"></a>
                           </figcaption>
                         </figure>
@@ -84,7 +84,7 @@
                           <figcaption
                               class="blockquote-footer text-center">
                             서울특별시 마포구 성지길 58 1층
-                            <a href=/api/page//PastelCoffeeWorks
+                            <a th:href="@{/api/page/PastelCoffeeWorks}"
                                class="stretched-link"></a>
                           </figcaption>
                         </figure>
@@ -103,7 +103,7 @@
                           <figcaption
                               class="blockquote-footer text-center">
                             서울특별시 성동구 연무장3길 6
-                            <a href="/api/page/PeerCoffee"
+                            <a th:href="@{/api/page/PeerCoffee}"
                                class="stretched-link"></a>
                           </figcaption>
                         </figure>
@@ -122,7 +122,7 @@
                           <figcaption
                               class="blockquote-footer text-center">
                             경기도 수원시 영통구 하동 975-2
-                            <a href="/api/page/CoffeeHeureum"
+                            <a th:href="@{/api/page/CoffeeHeureum}"
                                class="stretched-link"></a>
                           </figcaption>
                         </figure>
@@ -138,8 +138,8 @@
           <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"
              data-bs-auto-close="outside">Products</a>
           <ul class="dropdown-menu shadow">
-            <li><a class="dropdown-item" href="/api/page/drip-bag">DripBag</a></li>
-            <li><a class="dropdown-item" href="/api/page/supplies">Supplies</a></li>
+            <li><a class="dropdown-item" th:href="@{/api/page/drip-bag}">DripBag</a></li>
+            <li><a class="dropdown-item" th:href="@{/api/page/supplies}">Supplies</a></li>
           </ul>
         </li>
         <li class="nav-item">
@@ -167,7 +167,7 @@
           </a>
         </li>
         <li class="nav-user ms-1">
-          <a class="nav-link icons" href="/api/page/login"
+          <a class="nav-link icons" th:href="@{/api/page/login}"
              tabindex="-1"
              data-bs-toggle-theme="true"
              data-bs-toggle="tooltip" data-bs-placement="bottom"
@@ -182,7 +182,7 @@
           </a>
         </li>
         <li class="nav-cart ms-1">
-          <a class="nav-link icons" href="/api/page/cart" tabindex="-1" data-bs-toggle-theme="true"
+          <a class="nav-link icons" th:href="@{/api/page/cart}"  tabindex="-1" data-bs-toggle-theme="true"
              aria-disabled="true">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                  fill="currentColor" class="bi bi-bag-fill" viewBox="0 0 16 16">
@@ -297,16 +297,16 @@
             Roastery
           </h6>
           <p>
-            <a href="/api/page/Lowkey" class="text-reset">lowkey</a>
+            <a th:href="@{/api/page/Lowkey}"  class="text-reset">lowkey</a>
           </p>
           <p>
-            <a href="/api/page//PastelCoffeeWorks" class="text-reset">Pastel Coffee Works</a>
+            <a th:href="@{/api/page/PastelCoffeeWorks}" class="text-reset">Pastel Coffee Works</a>
           </p>
           <p>
-            <a href="/api/page/PeerCoffee" class="text-reset">Peer Coffee</a>
+            <a th:href="@{/api/page/PeerCoffee}"  class="text-reset">Peer Coffee</a>
           </p>
           <p>
-            <a href="/api/page/CoffeeHeureum" class="text-reset">Coffee Heureum</a>
+            <a th:href="@{/api/page/CoffeeHeureum}"  class="text-reset">Coffee Heureum</a>
           </p>
         </div>
         <!-- Grid column -->
@@ -318,10 +318,10 @@
             Products
           </h6>
           <p>
-            <a href="/api/page/drip-bag" class="text-reset">Drip Bag</a>
+            <a th:href="@{/api/page/drip-bag}" class="text-reset">Drip Bag</a>
           </p>
           <p>
-            <a href="/api/page/supplies" class="text-reset">Supplies</a>
+            <a th:href="@{/api/page/supplies}" class="text-reset">Supplies</a>
           </p>
         </div>
         <!-- Grid column -->

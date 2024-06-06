@@ -32,8 +32,6 @@ public class Product {
   @Column(name = "product_roastery")
   private String productRoastery;
 
-  @Column(name = "products_in_stock")
-  private Long productsInStock;
 
   @Column(name = "product_condition")
   private String productCondition;

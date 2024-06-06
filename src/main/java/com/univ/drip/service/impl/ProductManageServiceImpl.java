@@ -27,7 +27,6 @@ public class ProductManageServiceImpl implements ProductManageService {
   }
 
 
-
   @Override
   public void getRoasteryProductList(Model model, String roastertyName) {
     List<Product> productList = productRepository.findByProductRoastery(roastertyName);
@@ -57,7 +56,17 @@ public class ProductManageServiceImpl implements ProductManageService {
   }
 
   @Override
+  public List<Product> getRoasteryProductList(String roastery) {
+    return productRepository.findByProductRoastery(roastery);
+  }
+
+  @Override
   public Product findProductById(String id) {
     return productRepository.findById(id).orElseThrow();
+  }
+
+  @Override
+  public void deleteProductById(String id) {
+    productRepository.deleteById(id);
   }
 }

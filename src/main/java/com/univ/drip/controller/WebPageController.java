@@ -3,6 +3,7 @@ package com.univ.drip.controller;
 import com.univ.drip.entity.Cart;
 import com.univ.drip.entity.CartItem;
 import com.univ.drip.entity.Member;
+import com.univ.drip.entity.Role;
 import com.univ.drip.repository.CartItemRepository;
 import com.univ.drip.security.DripUserDetails;
 import com.univ.drip.service.CartManageService;
@@ -72,7 +73,11 @@ public class WebPageController {
   @GetMapping("/cart")
   public String moveToCartPage(Authentication authentication) {
     DripUserDetails userDetails = (DripUserDetails) authentication.getPrincipal();
-    return "redirect:/api/page/cart/" + userDetails.getMember().getId();
+    if (userDetails.getMember().getRole().equals(Role.ADMIN)) {
+      return "redirect:/api/admin/productList/" + userDetails.getMember().getId();
+    } else {
+      return "redirect:/api/page/cart/" + userDetails.getMember().getId();
+    }
   }
 
   @GetMapping("/cart/{id}")
@@ -154,7 +159,6 @@ public class WebPageController {
 
   @GetMapping("/profile")
   public String profile() {
-
     return "profile";
   }
 
@@ -196,10 +200,16 @@ public class WebPageController {
   }
 
   @GetMapping("/register")
-  public String moveToRegister(Model model, HttpSession session) {
+  public String moveToRegister(HttpSession session) {
     memberManageService.generateDefaultMemberAttribute(session);
     return "register";
   }
+
+//  @GetMapping("/add")
+//  public String moveToAddProduct(HttpSession session) {
+//    return "addProduct";
+//  }
+
 
   private String setCartPageAttribute(Model model, @AuthenticationPrincipal DripUserDetails dripUserDetails,
       Cart userCart, List<CartItem> cartItemList, int totalPrice) {

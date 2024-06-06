@@ -1,6 +1,7 @@
 package com.univ.drip.service;
 
 import com.univ.drip.entity.Product;
+import java.util.List;
 import org.springframework.ui.Model;
 
 public interface ProductManageService {
@@ -16,5 +17,11 @@ public interface ProductManageService {
 
   void getIdProductProduct(Model model, String id);
 
+  List<Product> getRoasteryProductList(String id);
+
   Product findProductById(String id);
+
+  void deleteProductById(String id);
+
+
 }
