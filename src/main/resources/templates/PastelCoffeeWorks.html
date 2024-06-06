@@ -56,7 +56,7 @@
                 <div class="row">
                   <div class="col-12 col-sm-4 col-md-3 py-4">
                     <div class="card">
-                      <img th:src="@{/images/lowkey/logo.jpg}"
+                      <img th:src="@{/images/Lowkey/logo.jpg}"
                            class="img-fluid rounded-top " alt="image">
                       <div class="card-body">
                         <figure>
@@ -66,7 +66,7 @@
                           <figcaption
                               class="blockquote-footer text-center">
                             서울특별시 성동구 연무장3길 6 <br>
-                            <a href="/api/page/lowkey"
+                            <a href="/api/page/Lowkey"
                                class="stretched-link"></a>
                           </figcaption>
                         </figure>
@@ -85,7 +85,7 @@
                           <figcaption
                               class="blockquote-footer text-center">
                             서울특별시 마포구 성지길 58 1층
-                            <a href=/api/page/pastelCoffeeWorks
+                            <a href=/api/page//PastelCoffeeWorks
                                class="stretched-link"></a>
                           </figcaption>
                         </figure>
@@ -104,7 +104,7 @@
                           <figcaption
                               class="blockquote-footer text-center">
                             서울특별시 성동구 연무장3길 6
-                            <a href="/api/page/peerCoffee"
+                            <a href="/api/page/PeerCoffee"
                                class="stretched-link"></a>
                           </figcaption>
                         </figure>
@@ -123,7 +123,7 @@
                           <figcaption
                               class="blockquote-footer text-center">
                             경기도 수원시 영통구 하동 975-2
-                            <a href="/api/page/coffeeHeureum"
+                            <a href="/api/page/CoffeeHeureum"
                                class="stretched-link"></a>
                           </figcaption>
                         </figure>
@@ -149,12 +149,12 @@
       </ul>
       <ul class="navbar-nav ms-auto">
         <li class="user-info ms-2 m-auto">
-          <div th:if="${member != null}">
+          <div th:if="${session.member != null}">
             <p class="m-0">
-              <span th:text="${member.name}">User</span> 님 어서오세요!
+              <span th:text="${session.member.name}">User</span> 님 어서오세요!
             </p>
           </div>
-          <div th:unless="${member != null}">
+          <div th:unless="${session.member != null}">
             <p class="m-0">Guest 님 어서오세요!</p>
           </div>
         </li>
@@ -293,16 +293,16 @@
             Roastery
           </h6>
           <p>
-            <a href="/api/page/lowkey" class="text-reset">lowkey</a>
+            <a href="/api/page/Lowkey" class="text-reset">lowkey</a>
           </p>
           <p>
-            <a href="/api/page/pastelCoffeeWorks" class="text-reset">Pastel Coffee Works</a>
+            <a href="/api/page//PastelCoffeeWorks" class="text-reset">Pastel Coffee Works</a>
           </p>
           <p>
-            <a href="/api/page/peerCoffee" class="text-reset">Peer Coffee</a>
+            <a href="/api/page/PeerCoffee" class="text-reset">Peer Coffee</a>
           </p>
           <p>
-            <a href="/api/page/coffeeHeureum" class="text-reset">Coffee Heureum</a>
+            <a href="/api/page/CoffeeHeureum" class="text-reset">Coffee Heureum</a>
           </p>
         </div>
         <!-- Grid column -->

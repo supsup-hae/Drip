@@ -118,16 +118,6 @@
     }
   })
 
-  // -------------------------------
-  // Links
-  // -------------------------------
-  // Disable empty links in docs examples only
-  document.querySelectorAll('.bd-content [th:href="@{#}"]')
-  .forEach(link => {
-    link.addEventListener('click', event => {
-      event.preventDefault()
-    })
-  })
 
   // -------------------------------
   // Modal

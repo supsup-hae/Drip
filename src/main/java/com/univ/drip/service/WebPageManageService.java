@@ -1,11 +1,11 @@
 package com.univ.drip.service;
 
+import jakarta.servlet.http.HttpSession;
 import org.springframework.security.core.Authentication;
-import org.springframework.ui.Model;
 
 
 public interface WebPageManageService {
 
-  void getAuthInfo(Authentication authentication, Model model);
+  void getAuthInfo(Authentication authentication, HttpSession session);
 
 }

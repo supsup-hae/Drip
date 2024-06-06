@@ -56,22 +56,33 @@ public class CartManageServiceImpl implements CartManageService {
   }
 
   @Override
+  @Transactional
   public Cart findByMemberId(String memberId) {
     return cartRepository.findByMember_Id(memberId);
   }
 
   @Override
+  @Transactional
   public CartItem findByProductId(String productId) {
     return cartItemRepository.findByProduct_ProductId(productId);
   }
 
   @Override
+  @Transactional
   public List<CartItem> findAllCartItems(Cart cart) {
     return cartItemRepository.findByCart(cart);
   }
 
   @Override
+  @Transactional
   public void deleteCartItem(String productId) {
-    cartItemRepository.deleteByProduct(cartItemRepository.findByProduct_ProductId(productId).getProduct());
+    cartItemRepository.deleteByProduct(productRepository.findByProductId(productId));
   }
+
+  @Override
+  @Transactional
+  public void updateCartInfo(Cart userCart) {
+    cartRepository.updateCountByCartId(userCart.getCount(), userCart.getCartId());
+  }
+
 }

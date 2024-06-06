@@ -49,7 +49,7 @@
                 <div class="row">
                   <div class="col-12 col-sm-4 col-md-3 py-4">
                     <div class="card">
-                      <img th:src="@{/images/lowkey/logo.jpg}"
+                      <img th:src="@{/images/Lowkey/logo.jpg}"
                            class="img-fluid rounded-top " alt="image">
                       <div class="card-body">
                         <figure>
@@ -59,7 +59,7 @@
                           <figcaption
                               class="blockquote-footer text-center">
                             서울특별시 성동구 연무장3길 6 <br>
-                            <a href="/api/page/lowkey"
+                            <a href="/api/page/Lowkey"
                                class="stretched-link"></a>
                           </figcaption>
                         </figure>
@@ -78,7 +78,7 @@
                           <figcaption
                               class="blockquote-footer text-center">
                             서울특별시 마포구 성지길 58 1층
-                            <a href=/api/page/pastelCoffeeWorks
+                            <a href=/api/page//PastelCoffeeWorks
                                class="stretched-link"></a>
                           </figcaption>
                         </figure>
@@ -97,7 +97,7 @@
                           <figcaption
                               class="blockquote-footer text-center">
                             서울특별시 성동구 연무장3길 6
-                            <a href="/api/page/peerCoffee"
+                            <a href="/api/page/PeerCoffee"
                                class="stretched-link"></a>
                           </figcaption>
                         </figure>
@@ -116,7 +116,7 @@
                           <figcaption
                               class="blockquote-footer text-center">
                             경기도 수원시 영통구 하동 975-2
-                            <a href="/api/page/coffeeHeureum"
+                            <a href="/api/page/CoffeeHeureum"
                                class="stretched-link"></a>
                           </figcaption>
                         </figure>
@@ -144,8 +144,8 @@
         <li class="user-info ms-2 m-auto">
           <div>
             <p class="m-0">
-              <span th:if="${member != null}" th:text="${member.name}">Guest</span>
-              <span th:unless="${member != null}">Guest</span> 님 어서오세요!
+              <span th:if="${session.member != null}" th:text="${session.member.name}">Guest</span>
+              <span th:unless="${session.member != null}">Guest</span> 님 어서오세요!
             </p>
           </div>
         </li>
@@ -193,7 +193,7 @@
 <!-- Section: Design Block -->
 <section class="text-center">
   <!-- Background image -->
-  <div class="p-5 bg-image object-cover" th:style="|background-image: url('@{/images/lowkey/swiper.jpg}'); height: 91vh;|"></div>
+  <div class="p-5 bg-image object-cover" th:style="|background-image: url('@{/images/Lowkey/swiper.jpg}'); height: 91vh;|"></div>
   <!-- Background image -->
 
   <div class="d-flex card mx-4 mx-md-5 shadow-5-strong align-items-center justify-content-md-center w-50 position-absolute"
@@ -207,7 +207,7 @@
               <p class="mb-0">이름</p>
             </div>
             <div class="col-sm-9">
-              <p class="text-muted mb-0" th:text="${member.name}"></p>
+              <p class="text-muted mb-0" th:text="${session.member.name}"></p>
             </div>
           </div>
           <hr>
@@ -216,7 +216,7 @@
               <p class="mb-0">Email</p>
             </div>
             <div class="col-sm-9">
-              <p class="text-muted mb-0" th:text="${member.email}"></p>
+              <p class="text-muted mb-0" th:text="${session.member.email}"></p>
             </div>
           </div>
           <hr>
@@ -225,7 +225,7 @@
               <p class="mb-0">성별</p>
             </div>
             <div class="col-sm-9">
-              <p class="text-muted mb-0" th:text="${member.gender}"></p>
+              <p class="text-muted mb-0" th:text="${session.member.gender}"></p>
             </div>
           </div>
           <hr>
@@ -234,7 +234,7 @@
               <p class="mb-0">전화번호</p>
             </div>
             <div class="col-sm-9">
-              <p class="text-muted mb-0" th:text="${member.phoneNumber}"></p>
+              <p class="text-muted mb-0" th:text="${session.member.phoneNumber}"></p>
             </div>
           </div>
           <hr>
@@ -243,7 +243,7 @@
               <p class="mb-0">우편 번호</p>
             </div>
             <div class="col-sm-9">
-              <p class="text-muted mb-0" th:text="${member.zipCode}"></p>
+              <p class="text-muted mb-0" th:text="${session.member.zipCode}"></p>
             </div>
           </div>
           <hr>
@@ -253,9 +253,9 @@
             </div>
             <div class="col-sm-9">
               <p class="text-muted mb-0">
-                <span th:text="${member.address}"></span><br>
-                <span th:text="${member.detailedAddress}"></span>
-                <span th:text="${member.extraAddress}"></span>
+                <span th:text="${session.member.address}"></span><br>
+                <span th:text="${session.member.detailedAddress}"></span>
+                <span th:text="${session.member.extraAddress}"></span>
               </p>
             </div>
           </div>
@@ -297,16 +297,16 @@
             Roastery
           </h6>
           <p>
-            <a href="/api/page/lowkey" class="text-reset">lowkey</a>
+            <a href="/api/page/Lowkey" class="text-reset">lowkey</a>
           </p>
           <p>
-            <a href="/api/page/pastelCoffeeWorks" class="text-reset">Pastel Coffee Works</a>
+            <a href="/api/page//PastelCoffeeWorks" class="text-reset">Pastel Coffee Works</a>
           </p>
           <p>
-            <a href="/api/page/peerCoffee" class="text-reset">Peer Coffee</a>
+            <a href="/api/page/PeerCoffee" class="text-reset">Peer Coffee</a>
           </p>
           <p>
-            <a href="/api/page/coffeeHeureum" class="text-reset">Coffee Heureum</a>
+            <a href="/api/page/CoffeeHeureum" class="text-reset">Coffee Heureum</a>
           </p>
         </div>
         <!-- Grid column -->

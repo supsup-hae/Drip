@@ -4,6 +4,7 @@ import com.univ.drip.dto.MemberDto;
 import com.univ.drip.entity.Member;
 import com.univ.drip.service.MemberManageService;
 import com.univ.drip.service.impl.MemberManageServiceImpl;
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -40,8 +41,8 @@ public class MemberController {
   }
 
   @PostMapping("/update")
-  public String updateMemberInfo(@ModelAttribute Member member, Model model) {
-    return memberManageService.updateMemberInfo(member, model);
+  public String updateMemberInfo(@ModelAttribute Member member, HttpSession session) {
+    return memberManageService.updateMemberInfo(member, session);
   }
 
   @GetMapping("/login")

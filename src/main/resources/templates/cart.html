@@ -50,7 +50,7 @@
                 <div class="row">
                   <div class="col-12 col-sm-4 col-md-3 py-4">
                     <div class="card">
-                      <img th:src="@{/images/lowkey/logo.jpg}"
+                      <img th:src="@{/images/Lowkey/logo.jpg}"
                            class="img-fluid rounded-top " alt="image">
                       <div class="card-body">
                         <figure>
@@ -60,7 +60,7 @@
                           <figcaption
                               class="blockquote-footer text-center">
                             서울특별시 성동구 연무장3길 6 <br>
-                            <a href="/api/page/lowkey"
+                            <a href="/api/page/Lowkey"
                                class="stretched-link"></a>
                           </figcaption>
                         </figure>
@@ -79,7 +79,7 @@
                           <figcaption
                               class="blockquote-footer text-center">
                             서울특별시 마포구 성지길 58 1층
-                            <a href=/api/page/pastelCoffeeWorks
+                            <a href=/api/page//PastelCoffeeWorks
                                class="stretched-link"></a>
                           </figcaption>
                         </figure>
@@ -98,7 +98,7 @@
                           <figcaption
                               class="blockquote-footer text-center">
                             서울특별시 성동구 연무장3길 6
-                            <a href="/api/page/peerCoffee"
+                            <a href="/api/page/PeerCoffee"
                                class="stretched-link"></a>
                           </figcaption>
                         </figure>
@@ -117,7 +117,7 @@
                           <figcaption
                               class="blockquote-footer text-center">
                             경기도 수원시 영통구 하동 975-2
-                            <a href="/api/page/coffeeHeureum"
+                            <a href="/api/page/CoffeeHeureum"
                                class="stretched-link"></a>
                           </figcaption>
                         </figure>
@@ -144,12 +144,12 @@
       </ul>
       <ul class="navbar-nav ms-auto">
         <li class="user-info ms-2 m-auto">
-          <div th:if="${member != null}">
+          <div th:if="${session.member != null}">
             <p class="m-0">
-              <span th:text="${member.name}">User</span> 님 어서오세요!
+              <span th:text="${session.member.name}">User</span> 님 어서오세요!
             </p>
           </div>
-          <div th:unless="${member != null}">
+          <div th:unless="${session.member != null}">
             <p class="m-0">Guest 님 어서오세요!</p>
           </div>
         </li>
@@ -235,7 +235,7 @@
                   <img th:src="${item.product.imgPath}" alt="" style="width: 45px; height: 45px"/>
                   <div class="ms-3">
                     <p class="fw-bold mb-1">
-                      <a th:href="@{api/page/productInfo/{productId}(productId=${item.product.productId})}" class="link-dark"
+                      <a th:href="@{/api/page/productInfo/{productId}(productId=${item.product.productId})}" class="link-dark"
                          th:text="${item.product.productName}"></a>
                     </p>
                   </div>
@@ -243,7 +243,7 @@
               </td>
               <td>
                 <p class="fw-normal mb-1">
-                  <a th:href="@{/api/page/{productRoastery} (productRoastery = ${item.product.productRoastery})}" class="link-dark"
+                  <a th:href="@{/api/page/{productRoastery}(productRoastery = ${item.product.productRoastery})}" class="link-dark"
                      th:text="${item.product.productRoastery}"></a>
                 </p>
               </td>
@@ -257,7 +257,7 @@
                 <span>3,000</span>
               </td>
               <td>
-                <form class="m-auto" th:action="@{/api/page/cart/{id}/{cartItemId}/delete(id=${member.id}, cartItemId=${item.id})}" method="post">
+                <form class="m-auto" th:action="@{/api/page/cart/{id}/{cartItemId}/delete(id=${session.member.id}, cartItemId=${item.product.productId})}" method="get">
                   <button type="submit" class="btn btn-link btn-sm px-3 w-auto delete-btn" data-mdb-ripple-init data-ripple-color="primary">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-square text-black"
                          viewBox="0 0 16 16">
@@ -345,16 +345,16 @@
             Roastery
           </h6>
           <p>
-            <a href="/api/page/lowkey" class="text-reset">lowkey</a>
+            <a href="/api/page/Lowkey" class="text-reset">lowkey</a>
           </p>
           <p>
-            <a href="/api/page/pastelCoffeeWorks" class="text-reset">Pastel Coffee Works</a>
+            <a href="/api/page//PastelCoffeeWorks" class="text-reset">Pastel Coffee Works</a>
           </p>
           <p>
-            <a href="/api/page/peerCoffee" class="text-reset">Peer Coffee</a>
+            <a href="/api/page/PeerCoffee" class="text-reset">Peer Coffee</a>
           </p>
           <p>
-            <a href="/api/page/coffeeHeureum" class="text-reset">Coffee Heureum</a>
+            <a href="/api/page/CoffeeHeureum" class="text-reset">Coffee Heureum</a>
           </p>
         </div>
         <!-- Grid column -->
@@ -411,8 +411,7 @@
 <script th:src="@{/js/navbar.js}"></script>
 <script th:src="@{/js/swiper.js}"></script>
 <script th:src="@{/js/snippets.js}"></script>
-<script th:src="@{/js/delete-from-cart.js}"></script>
-<script th:src="@{/js/navbar.js}"></script>
+<!--<script th:src="@{/js/delete-from-cart.js}"></script>-->
 
 <!-- MDB -->
 <script type="text/javascript" th:src="@{'https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.0/mdb.umd.min.js'}"></script>

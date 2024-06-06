@@ -5,6 +5,7 @@ import com.univ.drip.entity.Member;
 import com.univ.drip.entity.Role;
 import com.univ.drip.repository.MemberRepository;
 import com.univ.drip.service.MemberManageService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -53,7 +54,7 @@ public class MemberManageServiceImpl implements MemberManageService {
   }
 
   @Override
-  public String updateMemberInfo(Member member, Model model) {
+  public String updateMemberInfo(Member member, HttpSession session) {
     String encodePassword = passwordEncoder.encode(member.getPassword());
     Member updateMember = Member.builder()
         .id(member.getId())
@@ -70,7 +71,7 @@ public class MemberManageServiceImpl implements MemberManageService {
         .status(member.getStatus())
         .build();
     memberRepository.save(updateMember);
-    model.addAttribute("member", member);
+    session.setAttribute("member", member);
     return "redirect:/api/page/profile";
   }
 
@@ -80,8 +81,8 @@ public class MemberManageServiceImpl implements MemberManageService {
   }
 
   @Override
-  public void generateDefaultMemberAttribute(Model model) {
-    model.addAttribute("member", new MemberDto(null, "", "", "", "", "", "", "", "", "", true, Role.GUEST));
+  public void generateDefaultMemberAttribute(HttpSession session) {
+    session.setAttribute("member", new MemberDto(null, "", "", "", "", "", "", "", "", "", true, Role.GUEST));
   }
 
 }

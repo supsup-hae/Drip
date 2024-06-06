@@ -53,7 +53,7 @@
                 <div class="row">
                   <div class="col-12 col-sm-4 col-md-3 py-4">
                     <div class="card">
-                      <img th:src="@{/images/lowkey/logo.jpg}"
+                      <img th:src="@{/images/Lowkey/logo.jpg}"
                            class="img-fluid rounded-top " alt="image">
                       <div class="card-body">
                         <figure>
@@ -63,7 +63,7 @@
                           <figcaption
                               class="blockquote-footer text-center">
                             서울특별시 성동구 연무장3길 6 <br>
-                            <a href="/api/page/lowkey"
+                            <a href="/api/page/Lowkey"
                                class="stretched-link"></a>
                           </figcaption>
                         </figure>
@@ -82,7 +82,7 @@
                           <figcaption
                               class="blockquote-footer text-center">
                             서울특별시 마포구 성지길 58 1층
-                            <a href=/api/page/pastelCoffeeWorks
+                            <a href=/api/page//PastelCoffeeWorks
                                class="stretched-link"></a>
                           </figcaption>
                         </figure>
@@ -101,7 +101,7 @@
                           <figcaption
                               class="blockquote-footer text-center">
                             서울특별시 성동구 연무장3길 6
-                            <a href="/api/page/peerCoffee"
+                            <a href="/api/page/PeerCoffee"
                                class="stretched-link"></a>
                           </figcaption>
                         </figure>
@@ -120,7 +120,7 @@
                           <figcaption
                               class="blockquote-footer text-center">
                             경기도 수원시 영통구 하동 975-2
-                            <a href="/api/page/coffeeHeureum"
+                            <a href="/api/page/CoffeeHeureum"
                                class="stretched-link"></a>
                           </figcaption>
                         </figure>
@@ -146,12 +146,12 @@
       </ul>
       <ul class="navbar-nav ms-auto">
         <li class="user-info ms-2 m-auto">
-          <div th:if="${member != null}">
+          <div th:if="${session.member != null}">
             <p class="m-0">
-              <span th:text="${member.name}">User</span> 님 어서오세요!
+              <span th:text="${session.member.name}">User</span> 님 어서오세요!
             </p>
           </div>
-          <div th:unless="${member != null}">
+          <div th:unless="${session.member != null}">
             <p class="m-0">Guest 님 어서오세요!</p>
           </div>
         </li>
@@ -210,7 +210,7 @@
           <h2 class="fw-bold mb-3">- Modify User Info -</h2>
           <form class="needs-validation" novalidate id="updateMember" method="post" th:action="@{/api/member/update}">
             <div class="form-outline mb-5">
-              <input type="text" id="inputIdForm" class="form-control" name="id" th:value="${member.id}" readonly required/>
+              <input type="text" id="inputIdForm" class="form-control" name="id" th:value="${session.member.id}" readonly required/>
               <label class="form-label" for="inputIdForm">ID</label>
               <div class="invalid-feedback">아이디를 입력해주세요</div>
             </div>
@@ -227,7 +227,7 @@
             <div class="row mb-5">
               <div class="col-md-6 m-auto">
                 <div class="form-outline">
-                  <input type="text" id="inputNameForm" name="name" class="form-control" th:value="${member.name}" required/>
+                  <input type="text" id="inputNameForm" name="name" class="form-control" th:value="${session.member.name}" required/>
                   <label class="form-label" for="inputNameForm">이름</label>
                   <div class="invalid-feedback">이름을 입력해주세요</div>
                 </div>
@@ -236,30 +236,30 @@
                 <h6 class="mb-2 pb-1">Gender: </h6>
                 <div class="form-check form-check-inline">
                   <input class="form-check-input" type="radio" name="gender" id="femaleGender" value="여성"
-                         th:checked="${member.gender == '여성'}"/>
+                         th:checked="${session.member.gender == '여성'}"/>
                   <label class="form-check-label" for="femaleGender">Female</label>
                 </div>
                 <div class="form-check form-check-inline">
                   <input class="form-check-input" type="radio" name="gender" id="maleGender" value="남성"
-                         th:checked="${member.gender == '남성'}"/>
+                         th:checked="${session.member.gender == '남성'}"/>
                   <label class="form-check-label" for="maleGender">Male</label>
                 </div>
               </div>
             </div>
             <div class="form-outline mb-4">
-              <input type="email" id="inputEmailForm" name="email" class="form-control" th:value="${member.email}" required/>
+              <input type="email" id="inputEmailForm" name="email" class="form-control" th:value="${session.member.email}" required/>
               <label class="form-label" for="inputEmailForm">Email</label>
               <div class="invalid-feedback">정확한 이메일을 입력해주세요</div>
             </div>
             <!-- Checkbox -->
             <div class="form-outline mb-4">
-              <input type="tel" id="inputPhoneNumberForm" name="phoneNumber" class="form-control" th:value="${member.phoneNumber}" required/>
+              <input type="tel" id="inputPhoneNumberForm" name="phoneNumber" class="form-control" th:value="${session.member.phoneNumber}" required/>
               <label class="form-label" for="inputPhoneNumberForm">Phone</label>
               <div class="invalid-feedback">정확한 전화번호를 입력해주세요</div>
             </div>
             <div class="input-group mb-5" style="height: 34px">
               <div class="form-outline">
-                <input type="text" id="inputZipCodeForm" name="zipCode" class="form-control active" th:value="${member.zipCode}"
+                <input type="text" id="inputZipCodeForm" name="zipCode" class="form-control active" th:value="${session.member.zipCode}"
                        aria-describedby="button-addon" required/>
                 <label class="form-label" for="inputZipCodeForm">우편번호</label>
                 <div class="invalid-feedback" style="margin: 0">우편번호를 입력해주세요</div>
@@ -272,28 +272,28 @@
               </button>
             </div>
             <div class="form-outline mb-5">
-              <input type="text" id="inputAddressForm" name="address" class="form-control active" th:value="${member.address}"
+              <input type="text" id="inputAddressForm" name="address" class="form-control active" th:value="${session.member.address}"
                      aria-describedby="button-addon" required/>
               <label class="form-label" for="inputAddressForm">주소</label>
               <div class="invalid-feedback">주소를 입력해주세요</div>
             </div>
             <div class="input-group">
               <div class="form-outline mb-5">
-                <input type="text" id="inputDetailedAddressForm" name="detailedAddress" class="form-control" th:value="${member.detailedAddress}"
+                <input type="text" id="inputDetailedAddressForm" name="detailedAddress" class="form-control" th:value="${session.member.detailedAddress}"
                        aria-describedby="button-addon" required/>
                 <label class="form-label" for="inputDetailedAddressForm">상세주소</label>
                 <div class="invalid-feedback" style="margin: 0">상세주소를 입력해주세요</div>
               </div>
               <div class="row-cols-10">
                 <div class="form-outline mb-5">
-                  <input type="text" id="inputExtraAddressForm" name="extraAddress" class="form-control active" th:value="${member.extraAddress}"
+                  <input type="text" id="inputExtraAddressForm" name="extraAddress" class="form-control active" th:value="${session.member.extraAddress}"
                          aria-describedby="button-addon"/>
                   <label class="form-label" for="inputExtraAddressForm">참고항목</label>
                 </div>
               </div>
             </div>
-            <input type="hidden" name="status" th:value="${member.status}"/>
-            <input type="hidden" name="role" th:value="${member.role}"/>
+            <input type="hidden" name="status" th:value="${session.member.status}"/>
+            <input type="hidden" name="role" th:value="${session.member.role}"/>
           </form>
           <div class="col-12">
             <button class="btn btn-primary" type="submit" form="updateMember" data-mdb-ripple-init>수정하기</button>
@@ -333,16 +333,16 @@
             Roastery
           </h6>
           <p>
-            <a href="/api/page/lowkey" class="text-reset">lowkey</a>
+            <a href="/api/page/Lowkey" class="text-reset">lowkey</a>
           </p>
           <p>
-            <a href="/api/page/pastelCoffeeWorks" class="text-reset">Pastel Coffee Works</a>
+            <a href="/api/page//PastelCoffeeWorks" class="text-reset">Pastel Coffee Works</a>
           </p>
           <p>
-            <a href="/api/page/peerCoffee" class="text-reset">Peer Coffee</a>
+            <a href="/api/page/PeerCoffee" class="text-reset">Peer Coffee</a>
           </p>
           <p>
-            <a href="/api/page/coffeeHeureum" class="text-reset">Coffee Heureum</a>
+            <a href="/api/page/CoffeeHeureum" class="text-reset">Coffee Heureum</a>
           </p>
         </div>
         <!-- Grid column -->

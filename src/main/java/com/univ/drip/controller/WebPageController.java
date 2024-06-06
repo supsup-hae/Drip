@@ -3,6 +3,7 @@ package com.univ.drip.controller;
 import com.univ.drip.entity.Cart;
 import com.univ.drip.entity.CartItem;
 import com.univ.drip.entity.Member;
+import com.univ.drip.repository.CartItemRepository;
 import com.univ.drip.security.DripUserDetails;
 import com.univ.drip.service.CartManageService;
 import com.univ.drip.service.MemberManageService;
@@ -32,6 +33,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/api/page")
 public class WebPageController {
 
+  private final CartItemRepository cartItemRepository;
+
   private final ProductManageService productManageService;
   private final MemberManageService memberManageService;
   private final WebPageManageService webPageManageService;
@@ -39,24 +42,30 @@ public class WebPageController {
 
   @Autowired
   public WebPageController(ProductManageService productManageService, MemberManageServiceImpl memberManageService,
-      WebPageManageServiceImpl webPageManageService, CartManageServiceImpl cartManageService) {
+      WebPageManageServiceImpl webPageManageService, CartManageServiceImpl cartManageService,
+      CartItemRepository cartItemRepository) {
     this.productManageService = productManageService;
     this.memberManageService = memberManageService;
     this.webPageManageService = webPageManageService;
     this.cartManageService = cartManageService;
+    this.cartItemRepository = cartItemRepository;
   }
 
   @GetMapping("/index")
-  public String moveToIndex(Authentication authentication, Model model) {
+  public String moveToIndex(Model model, HttpSession session) {
     productManageService.getConditionProductList(model, "AllSeason");
     productManageService.getConditionProductList(model, "Seasonal");
-    webPageManageService.getAuthInfo(authentication, model);
+    Member member = (Member) session.getAttribute("member");
+    if (member != null) {
+      session.setAttribute("member", member);
+      log.info("Member 활성화");
+    }
     return "index";
   }
 
   @GetMapping("/addProduct")
-  public String addProduct(Authentication authentication, Model model) {
-    webPageManageService.getAuthInfo(authentication, model);
+  public String addProduct() {
+
     return "addProduct";
   }
 
@@ -80,9 +89,8 @@ public class WebPageController {
         totalPrice += cartitem.getCount() * cartitem.getProduct().getProductPrice();
       }
       return setCartPageAttribute(model, dripUserDetails, userCart, cartItemList, totalPrice);
-    }
-    else {
-      return "redirect:/main";
+    } else {
+      return "redirect:/api/page/index";
     }
   }
 
@@ -91,11 +99,9 @@ public class WebPageController {
       @AuthenticationPrincipal DripUserDetails dripUserDetails) {
     if (dripUserDetails.getMember().getId().equals(id)) {
       CartItem cartItem = cartManageService.findByProductId(productId);
-
       cartManageService.deleteCartItem(productId);
 
       Cart userCart = cartManageService.findByMemberId(dripUserDetails.getMember().getId());
-
       List<CartItem> cartItemList = cartManageService.findAllCartItems(userCart);
 
       int totalPrice = 0;
@@ -104,24 +110,22 @@ public class WebPageController {
       }
 
       userCart.setCount(userCart.getCount() - cartItem.getCount());
-
+      cartManageService.updateCartInfo(userCart);
       return setCartPageAttribute(model, dripUserDetails, userCart, cartItemList, totalPrice);
     }
     // 로그인 id와 장바구니 삭제하려는 유저의 id가 같지 않는 경우
     else {
-      return "redirect:/main";
+      return "redirect:/api/page/index";
     }
   }
 
   @GetMapping("/drip-bag")
-  public String moveToDripBag(Authentication authentication, Model model) {
-    webPageManageService.getAuthInfo(authentication, model);
+  public String moveToDripBag() {
     return "drip-bag";
   }
 
   @GetMapping("/edit")
-  public String moveToEditProfil(Authentication authentication, Model model) {
-    webPageManageService.getAuthInfo(authentication, model);
+  public String moveToEditProfile() {
     return "editProfile";
   }
 
@@ -146,51 +150,51 @@ public class WebPageController {
   }
 
   @GetMapping("/profile")
-  public String profile(Authentication authentication, Model model) {
-    webPageManageService.getAuthInfo(authentication, model);
+  public String profile() {
+
     return "profile";
   }
 
-  @GetMapping("/lowkey")
-  public String moveToLowkey(Authentication authentication, Model model) {
-    webPageManageService.getAuthInfo(authentication, model);
+  @GetMapping("/Lowkey")
+  public String moveToLowkey(Model model) {
     productManageService.getRoasteryProductList(model, "Lowkey");
     return "lowkey";
   }
 
-  @GetMapping("/pastelCoffeeWorks")
-  public String moveToPastelCoffeeWorks(Authentication authentication, Model model) {
-    webPageManageService.getAuthInfo(authentication, model);
+  @GetMapping("/PastelCoffeeWorks")
+  public String moveToPastelCoffeeWorks(Model model) {
     productManageService.getRoasteryProductList(model, "PastelCoffeeWorks");
     return "PastelCoffeeWorks";
   }
 
-  @GetMapping("/peerCoffee")
-  public String moveToPeerCoffee(Authentication authentication, Model model) {
-    webPageManageService.getAuthInfo(authentication, model);
+  @GetMapping("/PeerCoffee")
+  public String moveToPeerCoffee(Model model) {
     productManageService.getRoasteryProductList(model, "PeerCoffee");
     return "PeerCoffee";
   }
 
-  @GetMapping("/coffeeHeureum")
-  public String moveToCoffeeHeureum(Authentication authentication, Model model) {
-    webPageManageService.getAuthInfo(authentication, model);
+  @GetMapping("/CoffeeHeureum")
+  public String moveToCoffeeHeureum(Model model) {
     productManageService.getRoasteryProductList(model, "CoffeeHeureum");
     return "CoffeeHeureum";
   }
 
 
   @GetMapping("/productInfo/{id}")
-  public String productInfo(Model model, @PathVariable String id, Authentication authentication) {
-    webPageManageService.getAuthInfo(authentication, model);
+  public String productInfo(Model model, @PathVariable String id, HttpSession session) {
+    Member member = (Member) session.getAttribute("member");
+    if (member == null) {
+      memberManageService.generateDefaultMemberAttribute(session);
+    } else {
+      session.setAttribute("member", member);
+    }
     productManageService.getIdProductProduct(model, id);
     return "productInfo";
   }
 
   @GetMapping("/register")
-  public String moveToRegister(Authentication authentication, Model model) {
-    webPageManageService.getAuthInfo(authentication, model);
-    memberManageService.generateDefaultMemberAttribute(model);
+  public String moveToRegister(Model model, HttpSession session) {
+    memberManageService.generateDefaultMemberAttribute(session);
     return "register";
   }
 

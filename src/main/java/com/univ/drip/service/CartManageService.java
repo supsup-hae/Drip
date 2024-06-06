@@ -17,4 +17,6 @@ public interface CartManageService {
   List<CartItem> findAllCartItems(Cart cart);
 
   void deleteCartItem(String productId);
+
+  void updateCartInfo(Cart userCart);
 }

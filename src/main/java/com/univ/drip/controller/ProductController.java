@@ -10,12 +10,12 @@ import com.univ.drip.service.impl.CartManageServiceImpl;
 import com.univ.drip.service.impl.MemberManageServiceImpl;
 import com.univ.drip.service.impl.ProductManageServiceImpl;
 import com.univ.drip.service.impl.WebPageManageServiceImpl;
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -49,12 +49,12 @@ public class ProductController {
   }
 
   @PostMapping("/cart/{id}/{itemId}")
-  public String addCartItem(@PathVariable("id") String memberId, @PathVariable("itemId") String productId, @RequestParam("amount") int amount, Model model) {
+  public String addCartItem(@PathVariable("id") String memberId, @PathVariable("itemId") String productId, @RequestParam("amount") int amount, HttpSession session) {
     Member member = memberManageService.findMemberById(memberId);
     Product product = productManageService.findProductById(productId);
     cartManageService.addCart(product, member, amount);
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    webPageManageService.getAuthInfo(authentication, model);
+
     return "redirect:/api/page/cart/" + memberId;
   }
 
@@ -67,4 +67,5 @@ public class ProductController {
   public String moveToCart() {
     return "cart";
   }
+
 }
