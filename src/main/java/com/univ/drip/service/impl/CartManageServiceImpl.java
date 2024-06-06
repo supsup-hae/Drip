@@ -30,14 +30,7 @@ public class CartManageServiceImpl implements CartManageService {
   @Override
   @Transactional
   public void addCart(Product newProduct, Member member, int amount) {
-    // 유저 id로 해당 유저의 장바구니 찾기
-    Cart cart = cartRepository.findByMember_Id(member.getId());
-
-    // 장바구니가 존재하지 않는다면
-    if (cart == null) {
-      cart = Cart.createCart(member);
-      cartRepository.save(cart);
-    }
+    Cart cart = getCartByMember(member);
 
     Product product = productRepository.findByProductId(newProduct.getProductId());
     CartItem cartItem = cartItemRepository.findByCart_CartIdAndProduct_ProductId(cart.getCartId(), product.getProductId());
@@ -53,6 +46,18 @@ public class CartManageServiceImpl implements CartManageService {
 
     // 카트 상품 총 개수 증가
     cart.setCount(cart.getCount() + amount);
+  }
+
+  private Cart getCartByMember(Member member) {
+    // 유저 id로 해당 유저의 장바구니 찾기
+    Cart cart = cartRepository.findByMember_Id(member.getId());
+
+    // 장바구니가 존재하지 않는다면
+    if (cart == null) {
+      cart = Cart.createCart(member);
+      cartRepository.save(cart);
+    }
+    return cart;
   }
 
   @Override
@@ -77,6 +82,11 @@ public class CartManageServiceImpl implements CartManageService {
   @Transactional
   public void deleteCartItem(String productId) {
     cartItemRepository.deleteByProduct(productRepository.findByProductId(productId));
+  }
+
+  @Override
+  public void saveCartInfo(Cart cart) {
+    cartRepository.save(cart);
   }
 
   @Override

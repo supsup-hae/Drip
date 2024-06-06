@@ -7,7 +7,6 @@ import com.univ.drip.service.impl.MemberManageServiceImpl;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,18 +20,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MemberController {
 
   private final MemberManageService memberManageService;
-  private final PasswordEncoder passwordEncoder;
 
   @Autowired
-  public MemberController(MemberManageServiceImpl memberManageService, PasswordEncoder passwordEncoder) {
+  public MemberController(MemberManageServiceImpl memberManageService) {
     this.memberManageService = memberManageService;
-    this.passwordEncoder = passwordEncoder;
   }
 
   @PostMapping("/register")
-  public String registrationMember(@ModelAttribute MemberDto memberDto, Model model) {
-    memberManageService.registrationMember(memberDto);
-    return "redirect:/api/page/login";
+  public String registrationMember(@ModelAttribute MemberDto memberDto) {
+    log.info("registrationMember method called with memberDto: " + memberDto);
+     return memberManageService.registrationMember(memberDto);
   }
 
   @PostMapping("/search")
@@ -41,8 +38,8 @@ public class MemberController {
   }
 
   @PostMapping("/update")
-  public String updateMemberInfo(@ModelAttribute Member member, HttpSession session) {
-    return memberManageService.updateMemberInfo(member, session);
+  public String updateMemberInfo(@ModelAttribute MemberDto memberDto, HttpSession session) {
+    return memberManageService.updateMemberInfo(memberDto, session);
   }
 
   @GetMapping("/login")

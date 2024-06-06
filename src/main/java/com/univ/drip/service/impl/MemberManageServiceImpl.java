@@ -6,14 +6,15 @@ import com.univ.drip.entity.Role;
 import com.univ.drip.repository.MemberRepository;
 import com.univ.drip.service.MemberManageService;
 import jakarta.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
+@Slf4j
 @Service
-@Transactional
 public class MemberManageServiceImpl implements MemberManageService {
 
   private final MemberRepository memberRepository;
@@ -26,7 +27,8 @@ public class MemberManageServiceImpl implements MemberManageService {
   }
 
   @Override
-  public void registrationMember(MemberDto memberDto) {
+  @Transactional
+  public String registrationMember(MemberDto memberDto) {
     Member member = Member.builder()
         .id(memberDto.id())
         .password(passwordEncoder.encode(memberDto.password()))
@@ -41,37 +43,43 @@ public class MemberManageServiceImpl implements MemberManageService {
         .role(Role.USER)
         .status(true)
         .build();
+    log.info("memberDto =" + memberDto);
+    log.info("member =" + member.toString());
     memberRepository.save(member);
+    return "redirect:/api/page/login";
   }
 
+  @Transactional
   public Member findMemberById(String id) {
     return memberRepository.findById(id).orElseThrow();
   }
 
+  @Transactional
   @Override
   public String searchMemberSessionInfo(Member member) {
     return null;
   }
 
+  @Transactional
   @Override
-  public String updateMemberInfo(Member member, HttpSession session) {
-    String encodePassword = passwordEncoder.encode(member.getPassword());
+  public String updateMemberInfo(MemberDto memberDto, HttpSession session) {
+    String encodePassword = passwordEncoder.encode(memberDto.password());
     Member updateMember = Member.builder()
-        .id(member.getId())
+        .id(memberDto.id())
         .password(encodePassword)
-        .email(member.getEmail())
-        .name(member.getName())
-        .gender(member.getGender())
-        .phoneNumber(member.getPhoneNumber())
-        .zipCode(member.getZipCode())
-        .address(member.getAddress())
-        .detailedAddress(member.getDetailedAddress())
-        .extraAddress(member.getExtraAddress())
-        .role(member.getRole())
-        .status(member.getStatus())
+        .email(memberDto.email())
+        .name(memberDto.name())
+        .gender(memberDto.gender())
+        .phoneNumber(memberDto.phoneNumber())
+        .zipCode(memberDto.zipCode())
+        .address(memberDto.address())
+        .detailedAddress(memberDto.detailedAddress())
+        .extraAddress(memberDto.extraAddress())
+        .role(memberDto.role())
+        .status(memberDto.status())
         .build();
     memberRepository.save(updateMember);
-    session.setAttribute("member", member);
+    session.setAttribute("member", updateMember);
     return "redirect:/api/page/profile";
   }
 
@@ -80,9 +88,10 @@ public class MemberManageServiceImpl implements MemberManageService {
     return null;
   }
 
+  @Transactional
   @Override
   public void generateDefaultMemberAttribute(HttpSession session) {
-    session.setAttribute("member", new MemberDto(null, "", "", "", "", "", "", "", "", "", true, Role.GUEST));
+    session.setAttribute("memberDto", new MemberDto(null, "", "", "", "", "", "", "", "", "", true, Role.GUEST));
   }
 
 }

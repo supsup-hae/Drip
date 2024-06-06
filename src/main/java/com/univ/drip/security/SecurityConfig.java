@@ -31,7 +31,7 @@ public class SecurityConfig {
         .authorizeHttpRequests(authorizeRequests ->
             authorizeRequests
                 .requestMatchers("/api/page/**", "/", "/css/**", "/js/**", "/fonts/**", "/images/**", "/scss/**", "https**",
-                    "/api/member/register")
+                    "/api/page/register", "api/member/register")
                 .permitAll() // 로그인 페이지는 누구나 접근 가능
                 .requestMatchers("/api/page/profile").authenticated()
                 .anyRequest().authenticated()    // 나머지 요청은 인증 필요

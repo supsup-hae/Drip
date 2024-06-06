@@ -81,7 +81,10 @@ public class WebPageController {
 
       Member member = memberManageService.findMemberById(id);
       Cart userCart = cartManageService.findByMemberId(member.getId());
-
+      if (userCart == null) {
+        userCart = Cart.createCart(member);
+        cartManageService.saveCartInfo(userCart);
+      }
       List<CartItem> cartItemList = cartManageService.findAllCartItems(userCart);
 
       int totalPrice = 0;

@@ -18,5 +18,7 @@ public interface CartManageService {
 
   void deleteCartItem(String productId);
 
+  void saveCartInfo(Cart cart);
+
   void updateCartInfo(Cart userCart);
 }

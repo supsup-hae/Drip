@@ -6,11 +6,11 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.ui.Model;
 
 public interface MemberManageService {
-  void registrationMember(MemberDto memberDto);
+  String registrationMember(MemberDto memberDto);
 
   String searchMemberSessionInfo(Member member);
 
-  String updateMemberInfo(Member member, HttpSession session);
+  String updateMemberInfo(MemberDto memberDto, HttpSession session);
 
   String loginMember(Model model);
 
