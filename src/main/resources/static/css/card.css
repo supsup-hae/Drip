@@ -1,0 +1,27 @@
+.bg-image {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+}
+
+.card-body {
+  padding: 2rem;
+}
+
+@media (min-width: 768px) {
+  .card {
+    width: 75%;
+  }
+}
+
+@media (max-width: 767px) {
+  .card {
+    width: 100%;
+    margin: 0 15px;
+  }
+}

@@ -81,22 +81,22 @@ public class WebPageController {
   }
 
   @GetMapping("/cart/{id}")
-  public String userCartPage(@PathVariable("id") String id, Model model, @AuthenticationPrincipal DripUserDetails dripUserDetails) {
+  public String memberCartPage(@PathVariable("id") String id, Model model, @AuthenticationPrincipal DripUserDetails dripUserDetails) {
     if (dripUserDetails.getMember().getId().equals(id)) {
 
       Member member = memberManageService.findMemberById(id);
-      Cart userCart = cartManageService.findByMemberId(member.getId());
-      if (userCart == null) {
-        userCart = Cart.createCart(member);
-        cartManageService.saveCartInfo(userCart);
+      Cart memberCart = cartManageService.findByMemberId(member.getId());
+      if (memberCart == null) {
+        memberCart = Cart.createCart(member);
+        cartManageService.saveCartInfo(memberCart);
       }
-      List<CartItem> cartItemList = cartManageService.findAllCartItems(userCart);
+      List<CartItem> cartItemList = cartManageService.findAllCartItems(memberCart);
 
       int totalPrice = 0;
       for (CartItem cartitem : cartItemList) {
         totalPrice += cartitem.getCount() * cartitem.getProduct().getProductPrice();
       }
-      return setCartPageAttribute(model, dripUserDetails, userCart, cartItemList, totalPrice);
+      return setCartPageAttribute(model, dripUserDetails, memberCart, cartItemList, totalPrice);
     } else {
       return "redirect:/api/page/index";
     }
@@ -109,23 +109,24 @@ public class WebPageController {
       CartItem cartItem = cartManageService.findByProductId(productId);
       cartManageService.deleteCartItem(productId);
 
-      Cart userCart = cartManageService.findByMemberId(dripUserDetails.getMember().getId());
-      List<CartItem> cartItemList = cartManageService.findAllCartItems(userCart);
+      Cart memberCart = cartManageService.findByMemberId(dripUserDetails.getMember().getId());
+      List<CartItem> cartItemList = cartManageService.findAllCartItems(memberCart);
 
       int totalPrice = 0;
       for (CartItem cartitem : cartItemList) {
         totalPrice += cartitem.getCount() * cartitem.getProduct().getProductPrice();
       }
 
-      userCart.setCount(userCart.getCount() - cartItem.getCount());
-      cartManageService.updateCartInfo(userCart);
-      return setCartPageAttribute(model, dripUserDetails, userCart, cartItemList, totalPrice);
+      memberCart.setCount(memberCart.getCount() - cartItem.getCount());
+      cartManageService.updateCartInfo(memberCart);
+      return setCartPageAttribute(model, dripUserDetails, memberCart, cartItemList, totalPrice);
     }
     // 로그인 id와 장바구니 삭제하려는 유저의 id가 같지 않는 경우
     else {
       return "redirect:/api/page/index";
     }
   }
+
   @GetMapping("/edit")
   public String moveToEditProfile() {
     return "editProfile";
@@ -214,10 +215,26 @@ public class WebPageController {
     return "register";
   }
 
-  private String setCartPageAttribute(Model model, @AuthenticationPrincipal DripUserDetails dripUserDetails,
-      Cart userCart, List<CartItem> cartItemList, int totalPrice) {
+  @GetMapping("/order")
+  public String moveToOrder(Model model,  @AuthenticationPrincipal DripUserDetails dripUserDetails) {
+    Member member = memberManageService.findMemberById(dripUserDetails.getMember().getId());
+    Cart memberCart = cartManageService.findByMemberId(member.getId());
+    List<CartItem> cartItemList = cartManageService.findAllCartItems(memberCart);
+    int totalPrice = 0;
+    for (CartItem cartitem : cartItemList) {
+      totalPrice += cartitem.getCount() * cartitem.getProduct().getProductPrice();
+    }
     model.addAttribute("totalPrice", totalPrice);
-    model.addAttribute("totalCount", userCart.getCount());
+    model.addAttribute("cartItems", cartItemList);
+    model.addAttribute("shoppingCost", cartItemList.stream().map(item -> item.getProduct().getProductRoastery()).distinct().count() * 3000);
+    return "order";
+  }
+
+
+  private String setCartPageAttribute(Model model, @AuthenticationPrincipal DripUserDetails dripUserDetails,
+      Cart memberCart, List<CartItem> cartItemList, int totalPrice) {
+    model.addAttribute("totalPrice", totalPrice);
+    model.addAttribute("totalCount", memberCart.getCount());
     model.addAttribute("cartItems", cartItemList);
     model.addAttribute("shoppingCost", cartItemList.stream().map(item -> item.getProduct().getProductRoastery()).distinct().count() * 3000);
     model.addAttribute("member", dripUserDetails.getMember());

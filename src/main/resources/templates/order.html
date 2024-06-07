@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Drips</title>
+  <!--API-->
+  <link rel="stylesheet" th:href="@{'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css'}"/>
+
+  <!--Styles-->
+  <link rel="stylesheet" th:href="@{/css/carousel.css}"/>
+  <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap.css}"/>
+  <link rel="stylesheet" th:href="@{/css/navbar.css}"/>
+  <link rel="stylesheet" th:href="@{/css/index-page.css}"/>
+  <link rel="stylesheet" th:href="@{/css/theme.css}"/>
+  <link rel="stylesheet" th:href="@{/css/mdb.min.css}"/>
+  <!---->
+  <!--Fonts-->
+  <link rel="preconnect" th:href="@{'https://fonts.googleapis.com'}"/>
+  <link rel="preconnect" th:href="@{'https://fonts.gstatic.com'}" crossorigin/>
+  <link rel="stylesheet" th:href="@{/css/fonts.css}"/>
+  <link rel="stylesheet" th:href="@{'https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap'}"/>
+</head>
+<body>
+
+<!--Nav-->
+<nav class="navbar navbar-expand-lg shadow sticky-top ">
+  <div class="container-fluid">
+    <a class="navbar-brand" th:href="@{/api/page/index}">
+      <img th:src="@{/images/logo.png}" alt="Drips" width="64" height="60">
+    </a>
+    <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbar-content">
+      <div class="hamburger-toggle">
+        <div class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </button>
+    <div class="collapse navbar-collapse" id="navbar-content">
+      <ul class="navbar-nav nav-underline mr-auto mb-2 mb-lg-0">
+        <li class="nav-item dropdown dropdown-mega position-static">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"
+             data-bs-auto-close="outside">Roasters</a>
+          <div class="dropdown-menu shadow">
+            <div class="mega-content px-4">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-12 col-sm-4 col-md-3 py-4">
+                    <div class="card">
+                      <img th:src="@{/images/Lowkey/logo.jpg}"
+                           class="img-fluid rounded-top " alt="image">
+                      <div class="card-body">
+                        <figure>
+                          <blockquote class="blockquote text-center py-2">
+                            <p>lowkey</p>
+                          </blockquote>
+                          <figcaption
+                              class="blockquote-footer text-center">
+                            서울특별시 성동구 연무장3길 6 <br>
+                            <a th:href="@{/api/page/Lowkey}"
+                               class="stretched-link"></a>
+                          </figcaption>
+                        </figure>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-sm-4 col-md-3 py-4">
+                    <div class="card">
+                      <img th:src="@{/images/pastel/logo.jpg}"
+                           class="img-fluid rounded-top" alt="image">
+                      <div class="card-body">
+                        <figure>
+                          <blockquote class="blockquote text-center py-2">
+                            <p>Pastel Coffee Works</p>
+                          </blockquote>
+                          <figcaption
+                              class="blockquote-footer text-center">
+                            서울특별시 마포구 성지길 58 1층
+                            <a th:href="@{/api/page/PastelCoffeeWorks}"
+                               class="stretched-link"></a>
+                          </figcaption>
+                        </figure>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-sm-4 col-md-3 py-4">
+                    <div class="card">
+                      <img th:src="@{/images/peer/logo.jpg}"
+                           class="img-fluid rounded-top" alt="image">
+                      <div class="card-body">
+                        <figure>
+                          <blockquote class="blockquote text-center py-2">
+                            <p>Peer Coffee</p>
+                          </blockquote>
+                          <figcaption
+                              class="blockquote-footer text-center">
+                            서울특별시 성동구 연무장3길 6
+                            <a th:href="@{/api/page/PeerCoffee}"
+                               class="stretched-link"></a>
+                          </figcaption>
+                        </figure>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-sm-12 col-md-3 py-4">
+                    <div class="card">
+                      <img th:src="@{/images/heureum/logo.jpg}"
+                           class="img-fluid rounded-top" alt="image">
+                      <div class="card-body">
+                        <figure>
+                          <blockquote class="blockquote text-center py-2">
+                            <p>커피흐름</p>
+                          </blockquote>
+                          <figcaption
+                              class="blockquote-footer text-center">
+                            경기도 수원시 영통구 하동 975-2
+                            <a th:href="@{/api/page/CoffeeHeureum}"
+                               class="stretched-link"></a>
+                          </figcaption>
+                        </figure>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"
+             data-bs-auto-close="outside">Products</a>
+          <ul class="dropdown-menu shadow">
+
+            <li><a class="dropdown-item" th:href="@{/api/page/drip-bag}">DripBag</a></li>
+            <li><a class="dropdown-item" th:href="@{/api/page/supplies}">Supplies</a></li>
+          </ul>
+        </li>
+
+      </ul>
+      <ul class="navbar-nav ms-auto">
+        <li class="user-info ms-2 m-auto">
+          <div th:if="${session.member != null}">
+            <p class="m-0">
+              <span th:text="${session.member.name}">User</span> 님 어서오세요!
+            </p>
+          </div>
+          <div th:unless="${session.member != null}">
+            <p class="m-0">Guest 님 어서오세요!</p>
+          </div>
+        </li>
+        <li class="nav-theme ms-2">
+          <a class="nav-link icons" href="#" tabindex="-1" data-bs-toggle-theme="true"
+             aria-disabled="true">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                 fill="currentColor" class="bi bi-circle-half" viewBox="0 0 16 16">
+              <path d="M8 15A7 7 0 1 0 8 1zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16"/>
+            </svg>
+          </a>
+        </li>
+        <li class="nav-user ms-1">
+          <a class="nav-link icons" th:href="@{/api/page/login}"
+             tabindex="-1"
+             data-bs-toggle-theme="true"
+             data-bs-toggle="tooltip" data-bs-placement="bottom"
+             data-bs-title="Login"
+             aria-disabled="true">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                 fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+              <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+              <path fill-rule="evenodd"
+                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+            </svg>
+          </a>
+        </li>
+        <li class="nav-cart ms-1">
+          <a class="nav-link icons" th:href="@{/api/page/cart}" tabindex="-1" data-bs-toggle-theme="true"
+             aria-disabled="true">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                 fill="currentColor" class="bi bi-bag-fill" viewBox="0 0 16 16">
+              <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4z"/>
+            </svg>
+          </a>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</nav>
+<!--Nav-->
+
+
+<!-- Section: Design Block -->
+<section class="text-center position-relative">
+  <div id="liveAlertPlaceholder" class="position-absolute top-0 start-50 translate-middle-x z-1 mt-1"></div>
+  <!-- Background image -->
+  <div class="p-5 bg-image object-cover" th:style="|background-image: url('@{/images/lowkey/swiper.jpg}'); height: 140vh;|"></div>
+  <!-- Background image -->
+
+  <div class="d-flex card mx-4 mx-md-5 shadow-5-strong w-75 position-absolute"
+       th:style="'margin-top: -1250px; left: 10%; background: hsla(0, 0%, 100%, 0.8); backdrop-filter: blur(30px);'">
+    <div class="card-body py-5 px-md-5 w-100 m-auto">
+      <div class="row d-flex align-items-center justify-content-center">
+        <div class="container">
+          <h2 class="text-center mb-5">주문하기</h2>
+          <div class="row">
+            <!-- Order Information -->
+            <div class="col-lg-6 mb-4">
+              <div class="card">
+                <div class="card-header bg-transparent">
+                  <h5>주문인 정보</h5>
+                </div>
+                <div class="card-body">
+                  <form>
+                    <div class="input-group mb-5">
+                      <div class="form-outline" data-mdb-input-init>
+                        <input type="text" id="inputNameForm" name="name" class="form-control" th:value="${session.member.name}" required/>
+                        <label class="form-label" for="inputNameForm">이름</label>
+                        <div class="invalid-feedback">이름을 입력해주세요</div>
+                      </div>
+                      <div class="form-outline" data-mdb-input-init>
+                        <input type="tel" id="inputPhoneNumberForm" name="phoneNumber" class="form-control" th:value="${session.member.phoneNumber}"
+                               required/>
+                        <label class="form-label" for="inputPhoneNumberForm">전화번호</label>
+                        <div class="invalid-feedback">정확한 전화번호를 입력해주세요</div>
+                      </div>
+                    </div>
+                    <div class="input-group mb-5" style="height: 34px">
+                      <div class=" form-outline" data-mdb-input-init>
+                        <input type="text" id="inputZipCodeForm" name="zipCode" class="form-control active" th:value="${session.member.zipCode}"
+                               aria-describedby="button-addon" required/>
+                        <label class="form-label" for="inputZipCodeForm">우편번호</label>
+                        <div class="invalid-feedback" style="margin: 0">우편번호를 입력해주세요</div>
+                      </div>
+                      <button class="btn btn-primary btn-sm col-2 text-center p-0" type="button" id="button-addon" onclick="find_address()"
+                              data-mdb-ripple-init data-mdb-ripple-color="dark">
+                        <p class="m-auto">우편번호 찾기</p>
+                      </button>
+                    </div>
+                    <div class="form-outline mb-5" data-mdb-input-init>
+                      <input type="text" id="inputAddressForm" name="address" class="form-control active" th:value="${session.member.address}"
+                             aria-describedby="button-addon" required/>
+                      <label class="form-label" for="inputAddressForm">주소</label>
+                      <div class="invalid-feedback">주소를 입력해주세요</div>
+                    </div>
+                    <div class="input-group">
+                      <div class="form-outline mb-5" data-mdb-input-init>
+                        <input type="text" id="inputDetailedAddressForm" name="detailedAddress" class="form-control"
+                               th:value="${session.member.detailedAddress}"
+                               aria-describedby="button-addon" required/>
+                        <label class="form-label" for="inputDetailedAddressForm">상세주소</label>
+                        <div class="invalid-feedback">상세주소를 입력해주세요</div>
+                      </div>
+                      <div class="form-outline mb-5" data-mdb-input-init>
+                        <input type="text" id="inputExtraAddressForm" name="extraAddress" class="form-control"
+                               th:value="${session.member.extraAddress}"
+                               aria-describedby="button-addon" required/>
+                        <label class="form-label" for="inputExtraAddressForm">참고항목</label>
+                        <div class="invalid-feedback">참고항목을 입력해주세요</div>
+                      </div>
+                    </div>
+                    <div class="form-outline mb-4" data-mdb-input-init>
+                      <input type="email" id="email" name="emile" class="form-control"/>
+                      <label class="form-label" for="email">email</label>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+            <!-- Cart -->
+            <div class="col-lg-6 mb-4">
+              <div class="card">
+                <div class="card-header bg-transparent">
+                  <h5>장바구니</h5>
+                </div>
+                <div class="card-body">
+                  <div th:each="item : ${cartItems}">
+                    <div class="d-flex align-items-center mb-3">
+                      <img th:src="${item.product.imgPath}" class="img-fluid" alt="Product Image" style="width: 100px; width: 100px">
+                      <div class="ms-3">
+                        <h6 class="text-start" th:text="${item.product.productName}">Product Name</h6>
+                        <p class="fw-bold text-start" th:text="${#numbers.formatInteger(item.product.productPrice, 0)} + '원'">Product Price</p>
+                        <p class="fw-bold text-start" th:text="${item.product.quantity} + '개'">Product Price</p>
+                      </div>
+                    </div>
+                    <hr>
+                  </div>
+                  <div class="d-flex justify-content-between">
+                    <span>배송비</span>
+                    <span th:text="|${#numbers.formatInteger(shoppingCost, 0, 'COMMA')}원|">3,000원</span>
+                  </div>
+                  <div class="d-flex justify-content-between">
+                    <span>포인트</span>
+                    <span>0원</span>
+                  </div>
+                  <hr>
+                  <div class="d-flex justify-content-between">
+                    <span class="fw-bold">합계</span>
+                    <span class="fw-bold" th:text="|${#numbers.formatInteger(totalPrice+shoppingCost, 0, 'COMMA')}원|">Total Price</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Delivery Information -->
+            <div class="col-lg-12 mb-4">
+              <div class="card w-100 d-flex align-items-center justify-content-center">
+                <div class="card-header bg-transparent">
+                  <h5>배송지 정보</h5>
+                </div>
+                <div class="card-body w-75">
+                  <form>
+                    <ul class="nav nav-tabs text-dark" id="myTab" role="tablist">
+                      <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="existing-address-tab" data-bs-toggle="tab" data-bs-target="#existing-address"
+                                type="button" role="tab" aria-controls="existing-address" aria-selected="true">주문자 정보로 등록
+                        </button>
+                      </li>
+                      <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="new-address-tab" data-bs-toggle="tab" data-bs-target="#new-address" type="button" role="tab"
+                                aria-controls="new-address" aria-selected="false">신규배송지
+                        </button>
+                      </li>
+                    </ul>
+                    <div class="tab-content mt-3" id="myTabContent">
+                      <div class="tab-pane fade show active" id="existing-address" role="tabpanel" aria-labelledby="existing-address-tab">
+                        <div class="input-group mb-5">
+                          <div class="form-outline" data-mdb-input-init>
+                            <input type="text" id="existingDeliveryName" name="name" class="form-control" th:value="${session.member.name}" required/>
+                            <label class="form-label" for="inputNameForm">이름</label>
+                            <div class="invalid-feedback">이름을 입력해주세요</div>
+                          </div>
+                          <div class="form-outline" data-mdb-input-init>
+                            <input type="tel" id="existingDeliveryNamePhoneNumberForm" name="phoneNumber" class="form-control"
+                                   th:value="${session.member.phoneNumber}"
+                                   required/>
+                            <label class="form-label" for="inputPhoneNumberForm">전화번호</label>
+                            <div class="invalid-feedback">정확한 전화번호를 입력해주세요</div>
+                          </div>
+                        </div>
+                        <div class="input-group mb-5" style="height: 34px">
+                          <div class=" form-outline" data-mdb-input-init>
+                            <input type="text" id="existingDeliveryNameZipCodeForm" name="zipCode" class="form-control active"
+                                   th:value="${session.member.zipCode}"
+                                   aria-describedby="button-addon" required/>
+                            <label class="form-label" for="inputZipCodeForm">우편번호</label>
+                            <div class="invalid-feedback" style="margin: 0">우편번호를 입력해주세요</div>
+                          </div>
+                          <button class="btn btn-primary btn-sm col-2 text-center p-0" type="button" id="button-addon2" onclick="find_address()"
+                                  data-mdb-ripple-init data-mdb-ripple-color="dark">
+                            <p class="m-auto">우편번호 찾기</p>
+                          </button>
+                        </div>
+                        <div class="form-outline mb-5" data-mdb-input-init>
+                          <input type="text" id="existingDeliveryNameAddressForm" name="address" class="form-control active"
+                                 th:value="${session.member.address}"
+                                 aria-describedby="button-addon" required/>
+                          <label class="form-label" for="inputAddressForm">주소</label>
+                          <div class="invalid-feedback">주소를 입력해주세요</div>
+                        </div>
+                        <div class="input-group">
+                          <div class="form-outline mb-5" data-mdb-input-init>
+                            <input type="text" id="existingDeliveryNameDetailedAddressForm" name="detailedAddress" class="form-control"
+                                   th:value="${session.member.detailedAddress}"
+                                   aria-describedby="button-addon" required/>
+                            <label class="form-label" for="inputDetailedAddressForm">상세주소</label>
+                            <div class="invalid-feedback">상세주소를 입력해주세요</div>
+                          </div>
+                          <div class="form-outline mb-5" data-mdb-input-init>
+                            <input type="text" id="existingDeliveryNameExtraAddressForm" name="extraAddress" class="form-control"
+                                   th:value="${session.member.extraAddress}"
+                                   aria-describedby="button-addon" required/>
+                            <label class="form-label" for="inputExtraAddressForm">참고항목</label>
+                            <div class="invalid-feedback">참고항목을 입력해주세요</div>
+                          </div>
+                        </div>
+                        <div class="form-outline mb-4" data-mdb-input-init>
+                          <input type="text" id="existingDeliveryRequest" name="existingDeliveryRequest" class="form-control"/>
+                          <label class="form-label" for="existingDeliveryRequest">배송요청사항</label>
+                        </div>
+                      </div>
+                      <div class="tab-pane fade" id="new-address" role="tabpanel" aria-labelledby="new-address-tab">
+                        <div class="input-group mb-5">
+                          <div class="form-outline" data-mdb-input-init>
+                            <input type="text" id="deliveryName" name="name" class="form-control" required/>
+                            <label class="form-label" for="inputNameForm">이름</label>
+                            <div class="invalid-feedback">이름을 입력해주세요</div>
+                          </div>
+                          <div class="form-outline" data-mdb-input-init>
+                            <input type="tel" id="deliveryNamePhoneNumberForm" name="phoneNumber" class="form-control"
+                                   required/>
+                            <label class="form-label" for="inputPhoneNumberForm">전화번호</label>
+                            <div class="invalid-feedback">정확한 전화번호를 입력해주세요</div>
+                          </div>
+                        </div>
+                        <div class="input-group mb-5" style="height: 34px">
+                          <div class=" form-outline" data-mdb-input-init>
+                            <input type="text" id="deliveryNameZipCodeForm" name="zipCode" class="form-control active"
+                                   aria-describedby="button-addon" required/>
+                            <label class="form-label" for="inputZipCodeForm">우편번호</label>
+                            <div class="invalid-feedback" style="margin: 0">우편번호를 입력해주세요</div>
+                          </div>
+                          <button class="btn btn-primary btn-sm col-2 text-center p-0" type="button" id="button-addon3" onclick="find_address()"
+                                  data-mdb-ripple-init data-mdb-ripple-color="dark">
+                            <p class="m-auto">우편번호 찾기</p>
+                          </button>
+                        </div>
+                        <div class="form-outline mb-5" data-mdb-input-init>
+                          <input type="text" id="deliveryNameAddressForm" name="address" class="form-control active"
+                                 aria-describedby="button-addon" required/>
+                          <label class="form-label" for="inputAddressForm">주소</label>
+                          <div class="invalid-feedback">주소를 입력해주세요</div>
+                        </div>
+                        <div class="input-group">
+                          <div class="form-outline mb-5" data-mdb-input-init>
+                            <input type="text" id="deliveryNameDetailedAddressForm" name="detailedAddress" class="form-control"
+                                   aria-describedby="button-addon" required/>
+                            <label class="form-label" for="inputDetailedAddressForm">상세주소</label>
+                            <div class="invalid-feedback">상세주소를 입력해주세요</div>
+                          </div>
+                          <div class="form-outline mb-5" data-mdb-input-init>
+                            <input type="text" id="deliveryNameExtraAddressForm" name="extraAddress" class="form-control"
+                                   aria-describedby="button-addon" required/>
+                            <label class="form-label" for="inputExtraAddressForm">참고항목</label>
+                            <div class="invalid-feedback">참고항목을 입력해주세요</div>
+                          </div>
+                        </div>
+                        <div class="form-outline mb-4" data-mdb-input-init>
+                          <input type="text" id="deliveryRequest" name="deliveryRequest" class="form-control"/>
+                          <label class="form-label" for="deliveryRequest">배송요청사항</label>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <!-- Payment Methods -->
+            <div class="col-lg-12 mb-4">
+              <div class="card">
+                <div class="card-header bg-transparent">
+                  <h5>결제 방법</h5>
+                </div>
+                <div class="card-body">
+                  <form>
+                    <div class="form-check mb-3">
+                      <input class="form-check-input" type="radio" name="paymentMethod" id="creditCard" checked>
+                      <label class="form-check-label" for="creditCard">신용카드</label>
+                    </div>
+                    <div class="form-check mb-3">
+                      <input class="form-check-input" type="radio" name="paymentMethod" id="bankTransfer">
+                      <label class="form-check-label" for="bankTransfer">계좌이체</label>
+                    </div>
+                  </form>
+                  <button type="submit" class="btn btn-success w-100">주문하기</button>
+                  <button type="button" class="btn btn-secondary w-100 mt-2">취소</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</section><!-- Section: Design Block -->
+
+
+<!--Footer-->
+<footer class="text-center text-lg-start bg-body-tertiary text-muted pt-5">
+  <!-- Section: Links -->
+  <section class="">
+    <div class="container text-center text-md-start mt-5">
+      <!-- Grid row -->
+      <div class="row mt-3">
+        <!-- Grid column -->
+        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+          <!-- Content -->
+          <h6 class="text-uppercase fw-bold mb-4">
+            <i class="fas fa-gem me-3"></i> 201958110 신윤섭
+          </h6>
+          <p>
+            DataBase Programming
+          </p>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+          <!-- Links -->
+          <h6 class="text-uppercase fw-bold mb-4">
+            Roastery
+          </h6>
+          <p>
+            <a th:href="@{/api/page/Lowkey}" class="text-reset">lowkey</a>
+          </p>
+          <p>
+            <a th:href="@{/api/page/PastelCoffeeWorks}" class="text-reset">Pastel Coffee Works</a>
+          </p>
+          <p>
+            <a th:href="@{/api/page/PeerCoffee}" class="text-reset">Peer Coffee</a>
+          </p>
+          <p>
+            <a th:href="@{/api/page/CoffeeHeureum}" class="text-reset">Coffee Heureum</a>
+          </p>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+          <!-- Links -->
+          <h6 class="text-uppercase fw-bold mb-4">
+            Products
+          </h6>
+          <p>
+            <a th:href="@{/api/page/drip-bag}" class="text-reset">Drip Bag</a>
+          </p>
+          <p>
+            <a th:href="@{/api/page/supplies}" class="text-reset">Supplies</a>
+          </p>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+          <!-- Links -->
+          <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+          <p><i class="fas fa-home me-3"></i>한신대학교 장준하기념관 18201-1</p>
+          <p>
+            <i class="fas fa-envelope me-3"></i>
+            zksdbstjq@hs.ac.kr
+          </p>
+          <p><i class="fas fa-phone me-3"></i>010-1234-5679</p>
+        </div>
+        <!-- Grid column -->
+      </div>
+      <!-- Grid row -->
+    </div>
+  </section>
+  <!-- Section: Links -->
+
+  <!-- Copyright -->
+  <div class="text-center p-4 bg-black text-light">
+    © 2024 Copyright:
+    <a class="text-reset fw-bold link-light" th:href="@{'https://github.com/F-UMI'}">Shin Yun Seop</a>
+  </div>
+  <!-- Copyright -->
+</footer>
+<!--Footer-->
+<!--Script-->
+<script th:src="@{'https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js'}"></script>
+<script>
+
+</script>
+<script th:src="@{'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js'}"></script>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/js/day-night.js}"></script>
+<script th:src="@{/js/navbar.js}"></script>
+<script th:src="@{/js/swiper.js}"></script>
+<script th:src="@{/js/snippets.js}"></script>
+<script th:src="@{/js/kakao-find-address.js}"></script>
+<script th:src="@{/js/form-outline.js}"></script>
+
+<!--<script th:src="@{/js/delete-from-cart.js}"></script>-->
+
+<!-- MDB -->
+<script type="text/javascript" th:src="@{'https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.0/mdb.umd.min.js'}"></script>
+
+</body>
+</html>`

@@ -74,7 +74,6 @@ public class ProductController {
     Product product = productManageService.findProductById(productId);
     cartManageService.addCart(product, member, amount);
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
     return "redirect:/api/page/cart/" + memberId;
   }
 

@@ -1,6 +1,6 @@
 .login-body {
   margin-top: -50%;
-  background: hsla(0, 0%, 100%, 0.2);
+  background: hsla(0, 0%, 100%, 0.1);
   backdrop-filter: blur(30px);
 }
 
