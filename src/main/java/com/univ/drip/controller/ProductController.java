@@ -1,5 +1,6 @@
 package com.univ.drip.controller;
 
+import com.univ.drip.dto.ProductDto;
 import com.univ.drip.entity.Member;
 import com.univ.drip.entity.Product;
 import com.univ.drip.service.CartManageService;
@@ -11,6 +12,8 @@ import com.univ.drip.service.impl.MemberManageServiceImpl;
 import com.univ.drip.service.impl.ProductManageServiceImpl;
 import com.univ.drip.service.impl.WebPageManageServiceImpl;
 import jakarta.servlet.http.HttpSession;
+import java.io.IOException;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -22,6 +25,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 @Slf4j
 @Controller
@@ -43,15 +47,26 @@ public class ProductController {
     this.webPageManageService = webPageManageService;
   }
 
-  @PostMapping("/addProduct")
-  public String addProduct(Product product, HttpSession session) {
+  @PostMapping("/add")
+  public String addProduct(ProductDto productDto, @RequestParam("imgFile") MultipartFile imgFile,Model model, HttpSession session) throws IOException {
     Member member = (Member) session.getAttribute("member");
-    productManageService.registrationProduct(product);
+    productManageService.saveProduct(productDto, imgFile);
+    List<Product> roasteryProductList = productManageService.getRoasteryProductList(member.getId());
+    model.addAttribute("roasteryProductList", roasteryProductList);
+    return "redirect:/api/admin/productList/" + member.getId();
+  }
+
+  @PostMapping("/edit")
+  public String editProduct(ProductDto productDto, @RequestParam("imgFile") MultipartFile imgFile,Model model, HttpSession session) throws IOException {
+    Member member = (Member) session.getAttribute("member");
+    productManageService.updateProduct(productDto, imgFile);
+    List<Product> roasteryProductList = productManageService.getRoasteryProductList(member.getId());
+    model.addAttribute("roasteryProductList", roasteryProductList);
     return "redirect:/api/admin/productList/" + member.getId();
   }
 
   @PostMapping("/cart/{id}/{itemId}")
-  public String addCartItem(@PathVariable("id") String memberId, @PathVariable("itemId") String productId, @RequestParam("amount") int amount,
+  public String addCartItem(@PathVariable("id") String memberId, @PathVariable("itemId") Long productId, @RequestParam("amount") int amount,
       HttpSession session) {
     Member member = memberManageService.findMemberById(memberId);
     Product product = productManageService.findProductById(productId);
@@ -62,14 +77,14 @@ public class ProductController {
   }
 
   @PostMapping("/edit/{productId}")
-  public String editProduct(@PathVariable String productId, Model model) {
+  public String editProduct(@PathVariable Long productId, Model model) {
     Product product = productManageService.findProductById(productId);
     model.addAttribute("product", product);
     return "editProduct";
   }
 
   @PostMapping("/delete/{productId}")
-  public String deleteProduct(@PathVariable String productId, HttpSession session) {
+  public String deleteProduct(@PathVariable Long productId, HttpSession session) {
     productManageService.deleteProductById(productId);
     Member member = (Member) session.getAttribute("member");
     return "redirect:/api/admin/productList/" + member.getId();

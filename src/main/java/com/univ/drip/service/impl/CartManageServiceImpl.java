@@ -68,7 +68,7 @@ public class CartManageServiceImpl implements CartManageService {
 
   @Override
   @Transactional
-  public CartItem findByProductId(String productId) {
+  public CartItem findByProductId(Long productId) {
     return cartItemRepository.findByProduct_ProductId(productId);
   }
 
@@ -80,7 +80,7 @@ public class CartManageServiceImpl implements CartManageService {
 
   @Override
   @Transactional
-  public void deleteCartItem(String productId) {
+  public void deleteCartItem(Long productId) {
     cartItemRepository.deleteByProduct(productRepository.findByProductId(productId));
   }
 

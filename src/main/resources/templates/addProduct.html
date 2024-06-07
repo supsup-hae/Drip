@@ -1,13 +1,5 @@
-<!--
-  Created by IntelliJ IDEA.
-  User: USER
-  Date: 2024-04-06
-  Time: 오후 2:05
-  To change this template use File | Settings | File Templates.
--->
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com.html/jstl/core" %>
-<html>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -217,7 +209,7 @@
       <div class="row d-flex align-items-center justify-content-center">
         <div class="col-lg-8 ">
           <h2 class="fw-bold mb-5">- 상품 등록 -</h2>
-          <form class="needs-validation" th:action="@{/api/product/addProduct}" enctype="multipart/form-data" method="post" novalidate>
+          <form class="needs-validation" th:action="@{/api/product/add}" enctype="multipart/form-data" method="post" novalidate>
             <input type="hidden" th:name="productRoastery" th:value="${session.member.getId()}"/>
             <div data-mdb-input-init class="form-outline mb-3 ">
               <h6 class="mb-2 pb-1">Category</h6>
@@ -248,7 +240,7 @@
                        name="productCondition" id="Seasonal" value="Seasonal"
                        checked
                 />
-                <label class="form-check-label" for="SingleOrigin">Seasonal</label>
+                <label class="form-check-label" for="Seasonal">Seasonal</label>
               </div>
               <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio"
@@ -293,11 +285,11 @@
               <div class="invalid-feedback">CupNote를 입력해주세요</div>
             </div>
             <div data-mdb-input-init class="form-outline mb-5">
-              <input type="file" class="form-control" aria-label="productImage"/>
+              <input type="file" id="imgFile" name="imgFile" class="form-control" aria-label="imgFile" multiple="multiple"/>
               <div class="invalid-feedback">상품 사진을 넣어주세요!</div>
             </div>
             <!-- Submit button -->
-            <button type="submit" class="btn btn-primary btn-block mb-4 data-mdb-ripple-init">등록하기
+            <button type="submit" class="btn btn-primary btn-block mb-4 data-mdb-ripple-init">상품 등록하기
             </button>
           </form>
         </div>

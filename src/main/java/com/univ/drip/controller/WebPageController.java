@@ -66,7 +66,6 @@ public class WebPageController {
 
   @GetMapping("/addProduct")
   public String addProduct() {
-
     return "addProduct";
   }
 
@@ -103,7 +102,7 @@ public class WebPageController {
   }
 
   @GetMapping("/cart/{id}/{cartItemId}/delete")
-  public String deleteCartItem(@PathVariable("id") String id, @PathVariable("cartItemId") String productId, Model model,
+  public String deleteCartItem(@PathVariable("id") String id, @PathVariable("cartItemId") Long productId, Model model,
       @AuthenticationPrincipal DripUserDetails dripUserDetails) {
     if (dripUserDetails.getMember().getId().equals(id)) {
       CartItem cartItem = cartManageService.findByProductId(productId);
@@ -188,7 +187,7 @@ public class WebPageController {
 
 
   @GetMapping("/productInfo/{id}")
-  public String productInfo(Model model, @PathVariable String id, HttpSession session) {
+  public String productInfo(Model model, @PathVariable Long id, HttpSession session) {
     Member member = (Member) session.getAttribute("member");
     if (member == null) {
       memberManageService.generateDefaultMemberAttribute(session);
@@ -204,12 +203,6 @@ public class WebPageController {
     memberManageService.generateDefaultMemberAttribute(session);
     return "register";
   }
-
-//  @GetMapping("/add")
-//  public String moveToAddProduct(HttpSession session) {
-//    return "addProduct";
-//  }
-
 
   private String setCartPageAttribute(Model model, @AuthenticationPrincipal DripUserDetails dripUserDetails,
       Cart userCart, List<CartItem> cartItemList, int totalPrice) {

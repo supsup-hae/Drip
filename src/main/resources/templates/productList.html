@@ -226,7 +226,7 @@
               </th>
               <td>
                 <div class="d-flex align-items-center">
-                  <img th:src="${product.imgPath}" alt="" style="width: 45px; height: 45px"/>
+                  <img th:src="@{${product.imgPath}}" alt="" style="width: 45px; height: 45px"/>
                   <div class="ms-3">
                     <p class="text-start fw-bold mb-1">
                       <a th:href="@{/api/page/productInfo/{productId}(productId=${product.productId})}" class="link-dark"
@@ -245,15 +245,18 @@
                 <span class="ms-2" th:text="${product.quantity}"></span>
               </td>
               <td>
-                <a th:href="@{/api/product/edit/{productId}(productId=${product.productId})}" class="link-dark">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square text-black"
-                       viewBox="0 0 16 16">
-                    <path
-                        d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                    <path fill-rule="evenodd"
-                          d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
-                  </svg>
-                </a>
+                <form class="m-auto" th:action="@{/api/product/edit/{productId}(productId=${product.productId})}"
+                      method="post">
+                  <button type="submit" class="btn btn-link btn-sm px-3 w-auto delete-btn" data-mdb-ripple-init data-ripple-color="primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square text-black"
+                         viewBox="0 0 16 16">
+                      <path
+                          d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                      <path fill-rule="evenodd"
+                            d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+                    </svg>
+                  </button>
+                </form>
               </td>
               <td>
                 <form class="m-auto" th:action="@{/api/product/delete/{id}(id=${product.productId})}"
@@ -279,7 +282,7 @@
                   <p class="btn-text m-auto"><a class="link-dark" th:href="@{/api/page/index}">돌아가기</a></p>
                 </button>
                 <button type="button" class="btn btn-outline-dark w-100" data-mdb-color="dark" data-mdb-ripple-init id="liveAlertBtn">
-                  <p class="btn-text m-auto">저장하기</p>
+                  <p class="btn-text m-auto"><a class="link-dark" th:href="@{/api/page/addProduct}">상품 추가</a></p>
                 </button>
               </div>
             </div>

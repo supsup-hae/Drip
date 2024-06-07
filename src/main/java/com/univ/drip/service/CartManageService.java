@@ -12,11 +12,11 @@ public interface CartManageService {
 
   Cart findByMemberId(String memberId);
 
-  CartItem findByProductId(String productId);
+  CartItem findByProductId(Long productId);
 
   List<CartItem> findAllCartItems(Cart cart);
 
-  void deleteCartItem(String productId);
+  void deleteCartItem(Long productId);
 
   void saveCartInfo(Cart cart);
 
