@@ -28,4 +28,5 @@ public interface ProductManageService {
 
   void updateProduct(ProductDto productDto, MultipartFile multipartFile) throws IOException;
 
+  List<Product> getFilteredProducts(String category, String condition, String roastery);
 }

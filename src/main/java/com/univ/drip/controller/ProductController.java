@@ -48,7 +48,8 @@ public class ProductController {
   }
 
   @PostMapping("/add")
-  public String addProduct(ProductDto productDto, @RequestParam("imgFile") MultipartFile imgFile,Model model, HttpSession session) throws IOException {
+  public String addProduct(ProductDto productDto, @RequestParam("imgFile") MultipartFile imgFile, Model model, HttpSession session)
+      throws IOException {
     Member member = (Member) session.getAttribute("member");
     productManageService.saveProduct(productDto, imgFile);
     List<Product> roasteryProductList = productManageService.getRoasteryProductList(member.getId());
@@ -57,7 +58,8 @@ public class ProductController {
   }
 
   @PostMapping("/edit")
-  public String editProduct(ProductDto productDto, @RequestParam("imgFile") MultipartFile imgFile,Model model, HttpSession session) throws IOException {
+  public String editProduct(ProductDto productDto, @RequestParam("imgFile") MultipartFile imgFile, Model model, HttpSession session)
+      throws IOException {
     Member member = (Member) session.getAttribute("member");
     productManageService.updateProduct(productDto, imgFile);
     List<Product> roasteryProductList = productManageService.getRoasteryProductList(member.getId());
@@ -88,6 +90,26 @@ public class ProductController {
     productManageService.deleteProductById(productId);
     Member member = (Member) session.getAttribute("member");
     return "redirect:/api/admin/productList/" + member.getId();
+  }
+
+  @GetMapping("/filter/{roastery}")
+  public String getProducts(@RequestParam(required = false) String category,
+      @RequestParam(required = false) String condition,
+      Model model, @PathVariable String roastery) {
+    List<Product> products = productManageService.getFilteredProducts(category, condition, roastery);
+    model.addAttribute("productList", products);
+    model.addAttribute("selectedCategory", category);
+    model.addAttribute("selectedCondition", condition);
+    return "/" + roastery;
+  }
+
+  @GetMapping("/filter/drip-bag")
+  public String getDripBagProducts(@RequestParam(required = false) String condition,
+      Model model) {
+    List<Product> products = productManageService.getFilteredProducts("drip-bag", condition, null);
+    model.addAttribute("productList", products);
+    model.addAttribute("selectedCondition", condition);
+    return "/drip-bag";
   }
 
   @GetMapping("/cart")

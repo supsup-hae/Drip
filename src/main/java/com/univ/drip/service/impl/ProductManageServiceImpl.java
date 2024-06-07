@@ -6,7 +6,9 @@ import com.univ.drip.repository.ProductRepository;
 import com.univ.drip.service.ProductManageService;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,7 +26,7 @@ public class ProductManageServiceImpl implements ProductManageService {
   @Transactional
   public void getRoasteryProductList(Model model, String roastertyName) {
     List<Product> productList = productRepository.findByProductRoastery(roastertyName);
-    model.addAttribute("prodictList", productList);
+    model.addAttribute("productList", productList);
   }
 
   @Override
@@ -123,6 +125,25 @@ public class ProductManageServiceImpl implements ProductManageService {
         .imgName(imgName)
         .build();
     productRepository.save(product);
+  }
+
+  @Override
+  public List<Product> getFilteredProducts(String category, String condition, String roastery) {
+    List<Product> productList = new ArrayList<>();
+    if (category != null && condition != null) {
+      productList = productRepository.findByProductCategoryAndProductCondition(category, condition);
+    } else if (category != null) {
+      productList = productRepository.findByProductCategory(category);
+    } else if (condition != null) {
+      productList = productRepository.findByProductCondition(condition);
+    } else {
+      productList = productRepository.findAll();
+    }
+    if (roastery != null) {
+      return productList.stream().filter(product -> product.getProductRoastery().equals(roastery)).collect(Collectors.toList());
+    } else {
+      return productList;
+    }
   }
 }
 

@@ -12,6 +12,7 @@ import com.univ.drip.service.ProductManageService;
 import com.univ.drip.service.WebPageManageService;
 import com.univ.drip.service.impl.CartManageServiceImpl;
 import com.univ.drip.service.impl.MemberManageServiceImpl;
+import com.univ.drip.service.impl.ProductManageServiceImpl;
 import com.univ.drip.service.impl.WebPageManageServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -42,7 +43,7 @@ public class WebPageController {
   private final CartManageService cartManageService;
 
   @Autowired
-  public WebPageController(ProductManageService productManageService, MemberManageServiceImpl memberManageService,
+  public WebPageController(ProductManageServiceImpl productManageService, MemberManageServiceImpl memberManageService,
       WebPageManageServiceImpl webPageManageService, CartManageServiceImpl cartManageService,
       CartItemRepository cartItemRepository) {
     this.productManageService = productManageService;
@@ -125,12 +126,6 @@ public class WebPageController {
       return "redirect:/api/page/index";
     }
   }
-
-  @GetMapping("/drip-bag")
-  public String moveToDripBag() {
-    return "drip-bag";
-  }
-
   @GetMapping("/edit")
   public String moveToEditProfile() {
     return "editProfile";
@@ -164,25 +159,40 @@ public class WebPageController {
   @GetMapping("/Lowkey")
   public String moveToLowkey(Model model) {
     productManageService.getRoasteryProductList(model, "Lowkey");
+    model.addAttribute("roastery", "Lowkey");
     return "lowkey";
   }
 
   @GetMapping("/PastelCoffeeWorks")
   public String moveToPastelCoffeeWorks(Model model) {
     productManageService.getRoasteryProductList(model, "PastelCoffeeWorks");
+    model.addAttribute("roastery", "PastelCoffeeWorks");
     return "PastelCoffeeWorks";
   }
 
   @GetMapping("/PeerCoffee")
   public String moveToPeerCoffee(Model model) {
     productManageService.getRoasteryProductList(model, "PeerCoffee");
+    model.addAttribute("roastery", "PeerCoffee");
     return "PeerCoffee";
   }
 
   @GetMapping("/CoffeeHeureum")
   public String moveToCoffeeHeureum(Model model) {
-    productManageService.getRoasteryProductList(model, "CoffeeHeureum");
+    if (model.getAttribute("productList") == null) {
+      productManageService.getRoasteryProductList(model, "CoffeeHeureum");
+    }
+    model.addAttribute("roastery", "CoffeeHeureum");
     return "CoffeeHeureum";
+  }
+
+  @GetMapping("/drip-bag")
+  public String moveToDripBag(Model model) {
+    if (model.getAttribute("productList") == null) {
+      productManageService.getCategoryProductList(model, "drip-bag");
+    }
+    model.addAttribute("roastery", "CoffeeHeureum");
+    return "drip-bag";
   }
 
 
