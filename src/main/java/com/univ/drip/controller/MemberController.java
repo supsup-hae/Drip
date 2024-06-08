@@ -8,11 +8,11 @@ import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Slf4j
 @Controller
@@ -27,9 +27,8 @@ public class MemberController {
   }
 
   @PostMapping("/register")
-  public String registrationMember(@ModelAttribute MemberDto memberDto) {
-    log.info("registrationMember method called with memberDto: " + memberDto);
-     return memberManageService.registrationMember(memberDto);
+  public String registrationMember(@ModelAttribute MemberDto memberDto, RedirectAttributes redirectAttributes) {
+     return memberManageService.registrationMember(memberDto, redirectAttributes);
   }
 
   @PostMapping("/search")
@@ -43,7 +42,7 @@ public class MemberController {
   }
 
   @GetMapping("/login")
-  public String loginMember(Model model) {
+  public String loginMember() {
     return "login";
   }
 

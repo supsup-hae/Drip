@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Slf4j
 @Service
@@ -28,7 +28,7 @@ public class MemberManageServiceImpl implements MemberManageService {
 
   @Override
   @Transactional
-  public String registrationMember(MemberDto memberDto) {
+  public String registrationMember(MemberDto memberDto, RedirectAttributes redirectAttributes) {
     Member member = Member.builder()
         .id(memberDto.id())
         .password(passwordEncoder.encode(memberDto.password()))
@@ -45,8 +45,15 @@ public class MemberManageServiceImpl implements MemberManageService {
         .build();
     log.info("memberDto =" + memberDto);
     log.info("member =" + member.toString());
-    memberRepository.save(member);
-    return "redirect:/api/page/login";
+    if (!memberRepository.existsById(memberDto.id())) {
+      memberRepository.save(member);
+      return "redirect:/api/page/login";
+    } else {
+      log.error("이미 존재하는 아이디 입니다!");
+      redirectAttributes.addFlashAttribute("message", "이미 존재하는 아이디 입니다!");
+      redirectAttributes.addFlashAttribute("alertType", "danger");
+      return "redirect:/api/page/register";
+    }
   }
 
   @Transactional
@@ -81,11 +88,6 @@ public class MemberManageServiceImpl implements MemberManageService {
     memberRepository.save(updateMember);
     session.setAttribute("member", updateMember);
     return "redirect:/api/page/profile";
-  }
-
-  @Override
-  public String loginMember(Model model) {
-    return null;
   }
 
   @Transactional

@@ -3,16 +3,14 @@ package com.univ.drip.service;
 import com.univ.drip.dto.MemberDto;
 import com.univ.drip.entity.Member;
 import jakarta.servlet.http.HttpSession;
-import org.springframework.ui.Model;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 public interface MemberManageService {
-  String registrationMember(MemberDto memberDto);
+  String registrationMember(MemberDto memberDto, RedirectAttributes redirectAttributes);
 
   String searchMemberSessionInfo(Member member);
 
   String updateMemberInfo(MemberDto memberDto, HttpSession session);
-
-  String loginMember(Model model);
 
   void generateDefaultMemberAttribute(HttpSession session);
 

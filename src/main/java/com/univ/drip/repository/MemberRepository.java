@@ -10,4 +10,7 @@ public interface MemberRepository extends JpaRepository<Member, String> {
 
   @Override
   Optional<Member> findById(String id);
+
+  @Override
+  boolean existsById(String string);
 }

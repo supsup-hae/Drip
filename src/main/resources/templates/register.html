@@ -204,8 +204,17 @@
   <div class="d-flex card mx-4 mx-md-5 shadow-5-strong align-items-center justify-content-md-center w-50 position-absolute"
        style="margin-top: -55%; left: 22%; background: hsla(0, 0%, 100%, 0.1); backdrop-filter: blur(30px);">
     <div class="card-body py-5 px-md-5 w-100 m-auto">
-      <div class="row d-flex justify-content-center">
+      <div class="row d-flex justify-content-center ">
         <div class="col-lg-8">
+          <div id="liveAlertPlaceholder" class=" position-absolute text-bg-danger rounded top-0 start-50 translate-middle-x z-1"
+               style="margin-top: -70px">
+            <th:block th:if="${message}">
+              <div class="alert alert-[[${alertType}]] alert-dismissible pt-5 text-center"  role="alert">
+                <div th:text="${message}"></div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            </th:block>
+          </div>
           <h2 class="fw-bold mb-3">- Registration -</h2>
           <form class="needs-validation" novalidate id="updateMember" method="post" th:action="@{/api/member/register}">
             <div class="t form-outline mb-5" data-mdb-input-init>
@@ -398,6 +407,8 @@
 <script th:src="@{/js/form-validate.js}"></script>
 <script th:src="@{/js/kakao-find-address.js}"></script>
 <script th:src="@{/js/form-outline.js}"></script>
+<script th:src="@{/js/snippets.js}"></script>
+
 
 </body>
 </html>

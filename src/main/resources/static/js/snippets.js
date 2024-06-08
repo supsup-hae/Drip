@@ -93,7 +93,7 @@
   const alertTrigger = document.getElementById('liveAlertBtn')
   if (alertTrigger) {
     alertTrigger.addEventListener('click', () => {
-      appendAlert('구매하기 기능은 아직 미구현입니다! 다음 업데이트를 기대하세요!', 'danger')
+      appendAlert('이미 존재하는 아이디 입니다 다시 입력해주세요!', 'danger')
     })
   }
   // js-docs-end live-alert
