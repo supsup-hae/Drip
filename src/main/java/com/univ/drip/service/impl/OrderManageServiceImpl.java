@@ -3,6 +3,7 @@ package com.univ.drip.service.impl;
 import com.univ.drip.dto.OrderDto;
 import com.univ.drip.entity.Cart;
 import com.univ.drip.entity.CartItem;
+import com.univ.drip.entity.Member;
 import com.univ.drip.entity.Order;
 import com.univ.drip.entity.OrderItem;
 import com.univ.drip.repository.CartItemRepository;
@@ -54,5 +55,11 @@ public class OrderManageServiceImpl implements OrderManageService {
     cartRepository.save(cart);
 
     return order;
+  }
+
+  @Override
+  public List<Order> findOrderByMemberId(HttpSession session) {
+    Member member = (Member) session.getAttribute("member");
+    return orderRepository.findByMember_Id(member.getId());
   }
 }

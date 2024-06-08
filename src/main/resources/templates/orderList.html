@@ -152,11 +152,13 @@
           </div>
         </li>
         <li class="nav-theme ms-2">
-          <a class="nav-link icons" href="#" tabindex="-1" data-bs-toggle-theme="true"
+          <a class="nav-link icons" th:href="@{/api/order/orderList}" tabindex="-1" data-bs-toggle-theme="true"
              aria-disabled="true">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                 fill="currentColor" class="bi bi-circle-half" viewBox="0 0 16 16">
-              <path d="M8 15A7 7 0 1 0 8 1zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16"/>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
+              <path
+                  d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2z"/>
+              <path
+                  d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0M7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0"/>
             </svg>
           </a>
         </li>
@@ -176,7 +178,7 @@
           </a>
         </li>
         <li class="nav-cart ms-1">
-          <a class="nav-link icons" th:href="@{/api/page/cart}"  tabindex="-1" data-bs-toggle-theme="true"
+          <a class="nav-link icons" th:href="@{/api/page/cart}" tabindex="-1" data-bs-toggle-theme="true"
              aria-disabled="true">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                  fill="currentColor" class="bi bi-bag-fill" viewBox="0 0 16 16">
@@ -200,95 +202,48 @@
   <!-- Background image -->
 
   <div class="d-flex card mx-4 mx-md-5 shadow-5-strong w-75 position-absolute"
-th:style="'margin-top: -900px; left: 10%; background: hsla(0, 0%, 100%, 1); backdrop-filter: blur(30px);'">
+       th:style="'margin-top: -900px; left: 10%; background: hsla(0, 0%, 100%, 1); backdrop-filter: blur(30px);'">
     <div class="card-body py-5 px-md-5 w-75 m-auto">
       <div class="row d-flex align-items-center justify-content-center">
         <div class="">
-          <h2 class="fw-bold mb-5">- 장바구니 -</h2>
+          <h2 class="fw-bold mb-5">- 주문 정보 -</h2>
           <table class="table bg-transparent table-hover align-middle mb-0 w-100 bg-transparent mb-5">
             <thead>
             <tr>
-              <th scope="col"></th>
+              <th scope="col">주문 번호</th>
+              <th scope="col">주문 일시</th>
               <th scope="col">상품명</th>
               <th scope="col">로스터리</th>
               <th scope="col">수량</th>
-              <th scope="col">주문 금액</th>
-              <th scope="col">배송비</th>
             </tr>
             </thead>
             <tbody class="table-group-divider table-divider-color">
-            <tr th:each="item : ${cartItems}">
-              <th scope="row">
-                <div class="form-check m-auto">
-                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
-                </div>
-              </th>
+            <tr th:each="order : ${orders}">
+              <td th:text="${order.orderId}"></td>
+              <td th:text="${order.orderDate}"></td>
               <td>
-                <div class="d-flex align-items-center">
-                  <img th:src="${item.product.imgPath}" alt="" style="width: 45px; height: 45px"/>
+                <div th:each="orderItem : ${order.orderItems}" class="d-flex align-items-center mb-2">
+                  <img th:src="${orderItem.product.imgPath}" alt="" style="width: 45px; height: 45px"/>
                   <div class="ms-3">
                     <p class="fw-bold mb-1">
-                      <a th:href="@{/api/page/productInfo/{productId}(productId=${item.product.productId})}" class="link-dark"
-                         th:text="${item.product.productName}"></a>
+                      <a th:href="@{/api/page/productInfo/{productId}(productId=${orderItem.product.productId})}" class="link-dark"
+                         th:text="${orderItem.product.productName}"></a>
                     </p>
                   </div>
                 </div>
               </td>
               <td>
-                <p class="fw-normal mb-1">
-                  <a th:href="@{/api/page/{productRoastery}(productRoastery = ${item.product.productRoastery})}" class="link-dark"
-                     th:text="${item.product.productRoastery}"></a>
-                </p>
+                <div th:each="orderItem : ${order.orderItems}" class="d-flex align-items-center mb-2">
+                  <p class="fw-normal mt-2 mb-3">
+                    <a th:href="@{/api/page/{productRoastery}(productRoastery=${orderItem.product.productRoastery})}" class="link-dark"
+                       th:text="${orderItem.product.productRoastery}"></a>
+                  </p>
+                </div>
               </td>
               <td>
-                <span class="ms-2" th:text="${item.count}"></span>
-              </td>
-              <td class="ms-2">
-                <span class="ms-2" th:text="|${#numbers.formatInteger(item.product.productPrice * item.count, 0, 'COMMA')}원|"></span>
-              </td>
-              <td>
-                <span>3,000</span>
-              </td>
-              <td>
-                <form class="m-auto" th:action="@{/api/page/cart/{id}/{cartItemId}/delete(id=${session.member.id}, cartItemId=${item.product.productId})}" method="get">
-                  <button type="submit" class="btn btn-link btn-sm px-3 w-auto delete-btn" data-mdb-ripple-init data-ripple-color="primary">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-square text-black"
-                         viewBox="0 0 16 16">
-                      <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
-                      <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
-                    </svg>
-                  </button>
-                </form>
-              </td>
-            </tr>
-            </tbody>
-          </table>
-
-          <table class="table bg-transparent table-hover align-middle mb-0 w-100 bg-transparent mt-5">
-            <thead>
-            <tr>
-              <th scope="col" class="col-4 text-center">총 주문 금액</th>
-              <th scope="col" class="col-4 text-center">총 배송비</th>
-              <th scope="col" class="col-4 text-center">총 결제 금액</th>
-            </tr>
-            </thead>
-            <tbody class="table-group-divider table-divider-color">
-            <tr>
-              <td class="text-center">
-                <figure class="text-center mt-2">
-                  <blockquote class="blockquote">
-                    <p th:text="|${#numbers.formatInteger(totalPrice, 0, 'COMMA')}원|"></p>
-                  </blockquote>
-                  <figcaption class="blockquote-footer">
-                    총 <span th:text="${totalCount}"></span> 개
-                  </figcaption>
-                </figure>
-              </td>
-              <td class="text-center">
-                <h5 class="ms-2 text-center" th:text="|${#numbers.formatInteger(shoppingCost, 0, 'COMMA')}원|"></h5>
-              </td>
-              <td class="text-center">
-                <h5 class="text-center" th:text="|${#numbers.formatInteger(totalPrice+shoppingCost, 0, 'COMMA')}원|"></h5>
+                <div th:each="orderItem : ${order.orderItems}" class="d-flex align-items-center mb-2">
+                  <span class="ms-2 mt-2 mb-3" th:text="${orderItem.count}"></span>
+                </div>
               </td>
             </tr>
             </tbody>
@@ -298,9 +253,6 @@ th:style="'margin-top: -900px; left: 10%; background: hsla(0, 0%, 100%, 1); back
               <div class="btn-group shadow-0 d-flex" role="group" aria-label="Basic example">
                 <button type="button" class="btn btn-outline-dark w-100" data-mdb-color="dark" data-mdb-ripple-init>
                   <p class="btn-text m-auto"><a class="link-dark" th:href="@{/api/page/index}">돌아가기</a></p>
-                </button>
-                <button type="button" class="btn btn-outline-dark w-100" data-mdb-color="dark" data-mdb-ripple-init id="liveAlertBtn">
-                  <p class="btn-text m-auto"><a class="link-dark" th:href="@{/api/page/order}">구매하기</a></p>
                 </button>
               </div>
             </div>
@@ -338,16 +290,16 @@ th:style="'margin-top: -900px; left: 10%; background: hsla(0, 0%, 100%, 1); back
             Roastery
           </h6>
           <p>
-            <a th:href="@{/api/page/Lowkey}"  class="text-reset">lowkey</a>
+            <a th:href="@{/api/page/Lowkey}" class="text-reset">lowkey</a>
           </p>
           <p>
             <a th:href="@{/api/page/PastelCoffeeWorks}" class="text-reset">Pastel Coffee Works</a>
           </p>
           <p>
-            <a th:href="@{/api/page/PeerCoffee}"  class="text-reset">Peer Coffee</a>
+            <a th:href="@{/api/page/PeerCoffee}" class="text-reset">Peer Coffee</a>
           </p>
           <p>
-            <a th:href="@{/api/page/CoffeeHeureum}"  class="text-reset">Coffee Heureum</a>
+            <a th:href="@{/api/page/CoffeeHeureum}" class="text-reset">Coffee Heureum</a>
           </p>
         </div>
         <!-- Grid column -->
@@ -400,7 +352,6 @@ th:style="'margin-top: -900px; left: 10%; background: hsla(0, 0%, 100%, 1); back
 </script>
 <script th:src="@{'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js'}"></script>
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
-<script th:src="@{/js/day-night.js}"></script>
 <script th:src="@{/js/navbar.js}"></script>
 <script th:src="@{/js/swiper.js}"></script>
 <script th:src="@{/js/snippets.js}"></script>
