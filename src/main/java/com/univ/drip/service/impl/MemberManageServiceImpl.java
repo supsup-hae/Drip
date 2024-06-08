@@ -91,6 +91,7 @@ public class MemberManageServiceImpl implements MemberManageService {
   @Transactional
   @Override
   public void generateDefaultMemberAttribute(HttpSession session) {
+    session.setAttribute("member", new MemberDto(null, "", "", "", "", "", "", "", "", "", true, Role.GUEST));
     session.setAttribute("memberDto", new MemberDto(null, "", "", "", "", "", "", "", "", "", true, Role.GUEST));
   }
 

@@ -6,11 +6,9 @@ import com.univ.drip.entity.Product;
 import com.univ.drip.service.CartManageService;
 import com.univ.drip.service.MemberManageService;
 import com.univ.drip.service.ProductManageService;
-import com.univ.drip.service.WebPageManageService;
 import com.univ.drip.service.impl.CartManageServiceImpl;
 import com.univ.drip.service.impl.MemberManageServiceImpl;
 import com.univ.drip.service.impl.ProductManageServiceImpl;
-import com.univ.drip.service.impl.WebPageManageServiceImpl;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
@@ -36,15 +34,12 @@ public class ProductController {
   private final MemberManageService memberManageService;
   private final CartManageService cartManageService;
 
-  private final WebPageManageService webPageManageService;
-
   @Autowired
   public ProductController(ProductManageServiceImpl productManageService, MemberManageServiceImpl memberManageService,
-      CartManageServiceImpl cartManageService, WebPageManageServiceImpl webPageManageService) {
+      CartManageServiceImpl cartManageService) {
     this.productManageService = productManageService;
     this.memberManageService = memberManageService;
     this.cartManageService = cartManageService;
-    this.webPageManageService = webPageManageService;
   }
 
   @PostMapping("/add")

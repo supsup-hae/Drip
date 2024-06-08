@@ -4,16 +4,13 @@ import com.univ.drip.entity.Cart;
 import com.univ.drip.entity.CartItem;
 import com.univ.drip.entity.Member;
 import com.univ.drip.entity.Role;
-import com.univ.drip.repository.CartItemRepository;
 import com.univ.drip.security.DripUserDetails;
 import com.univ.drip.service.CartManageService;
 import com.univ.drip.service.MemberManageService;
 import com.univ.drip.service.ProductManageService;
-import com.univ.drip.service.WebPageManageService;
 import com.univ.drip.service.impl.CartManageServiceImpl;
 import com.univ.drip.service.impl.MemberManageServiceImpl;
 import com.univ.drip.service.impl.ProductManageServiceImpl;
-import com.univ.drip.service.impl.WebPageManageServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -35,22 +32,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/api/page")
 public class WebPageController {
 
-  private final CartItemRepository cartItemRepository;
-
   private final ProductManageService productManageService;
   private final MemberManageService memberManageService;
-  private final WebPageManageService webPageManageService;
   private final CartManageService cartManageService;
 
   @Autowired
   public WebPageController(ProductManageServiceImpl productManageService, MemberManageServiceImpl memberManageService,
-      WebPageManageServiceImpl webPageManageService, CartManageServiceImpl cartManageService,
-      CartItemRepository cartItemRepository) {
+      CartManageServiceImpl cartManageService) {
     this.productManageService = productManageService;
     this.memberManageService = memberManageService;
-    this.webPageManageService = webPageManageService;
     this.cartManageService = cartManageService;
-    this.cartItemRepository = cartItemRepository;
+  }
+
+  @GetMapping("/")
+  public String index() {
+    return "redirect:/api/page/index";
   }
 
   @GetMapping("/index")
@@ -216,14 +212,19 @@ public class WebPageController {
   }
 
   @GetMapping("/order")
-  public String moveToOrder(Model model,  @AuthenticationPrincipal DripUserDetails dripUserDetails) {
+  public String moveToOrder(Model model, @AuthenticationPrincipal DripUserDetails dripUserDetails) {
     Member member = memberManageService.findMemberById(dripUserDetails.getMember().getId());
     Cart memberCart = cartManageService.findByMemberId(member.getId());
     List<CartItem> cartItemList = cartManageService.findAllCartItems(memberCart);
+    if (cartItemList.isEmpty()) {
+      model.addAttribute("empty", true);
+      return "redirect:/api/page/cart";
+    }
     int totalPrice = 0;
     for (CartItem cartitem : cartItemList) {
       totalPrice += cartitem.getCount() * cartitem.getProduct().getProductPrice();
     }
+    model.addAttribute("cart", memberCart);
     model.addAttribute("totalPrice", totalPrice);
     model.addAttribute("cartItems", cartItemList);
     model.addAttribute("shoppingCost", cartItemList.stream().map(item -> item.getProduct().getProductRoastery()).distinct().count() * 3000);

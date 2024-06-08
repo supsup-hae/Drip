@@ -9,6 +9,7 @@ import com.univ.drip.repository.CartRepository;
 import com.univ.drip.repository.ProductRepository;
 import com.univ.drip.service.CartManageService;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -93,6 +94,11 @@ public class CartManageServiceImpl implements CartManageService {
   @Transactional
   public void updateCartInfo(Cart userCart) {
     cartRepository.updateCountByCartId(userCart.getCount(), userCart.getCartId());
+  }
+
+  @Override
+  public Optional<Cart> fintByCartId(String cartId) {
+    return cartRepository.findById(Integer.valueOf(cartId));
   }
 
 }
