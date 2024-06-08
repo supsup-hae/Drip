@@ -233,16 +233,16 @@
                 </div>
               </td>
               <td>
-                <div th:each="orderItem : ${order.orderItems}" class="d-flex align-items-center mb-2">
-                  <p class="fw-normal mt-2 mb-3">
+                <div th:each="orderItem : ${order.orderItems}" class="d-flex align-items-center mb-1">
+                  <p class="fw-normal mb-1 p-2">
                     <a th:href="@{/api/page/{productRoastery}(productRoastery=${orderItem.product.productRoastery})}" class="link-dark"
                        th:text="${orderItem.product.productRoastery}"></a>
                   </p>
                 </div>
               </td>
               <td>
-                <div th:each="orderItem : ${order.orderItems}" class="d-flex align-items-center mb-2">
-                  <span class="ms-2 mt-2 mb-3" th:text="${orderItem.count}"></span>
+                <div th:each="orderItem : ${order.orderItems}" class="d-flex align-items-center mb-1">
+                  <span class="ms-2 p-2" th:text="${orderItem.count}"></span>
                 </div>
               </td>
             </tr>
