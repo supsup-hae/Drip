@@ -100,7 +100,7 @@ public class ProductController {
   @GetMapping("/filter/drip-bag")
   public String getDripBagProducts(@RequestParam(required = false) String condition,
       Model model) {
-    List<Product> products = productManageService.getFilteredProducts("drip-bag", condition, null);
+    List<Product> products = productManageService.getFilteredProducts("DripBag", condition, null);
     model.addAttribute("productList", products);
     model.addAttribute("selectedCondition", condition);
     return "/drip-bag";

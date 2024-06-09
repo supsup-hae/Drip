@@ -135,7 +135,7 @@
              data-bs-auto-close="outside">Products</a>
           <ul class="dropdown-menu shadow">
             <li><a class="dropdown-item" th:href="@{/api/page/drip-bag}">DripBag</a></li>
-            <li><a class="dropdown-item" th:href="@{/api/page/supplies}">Supplies</a></li>
+
           </ul>
         </li>
 
@@ -198,10 +198,10 @@
 <!-- Section: Design Block -->
 <section class="text-center">
   <!-- Background image -->
-  <div class="p-5 bg-image object-cover" th:style="|background-image: url('@{/images/peer/swiper.jpg}'); height: 120vh;|"></div>
+  <div class="p-5 bg-image object-cover" th:style="|background-image: url('@{/images/pastel/logo.jpg}'); height: 120vh;|"></div>
   <!-- Background image -->
 
-  <div class="d-flex card mx-4 mx-md-5 shadow-5-strong align-items-center justify-content-md-center w-50 position-absolute"
+  <div class="d-flex card mx-4 mx-md-5 shadow-5-strong align-items-center justify-content-md-center w-50 position-absolute "
        style="margin-top: -55%; left: 22%; background: hsla(0, 0%, 100%, 0.1); backdrop-filter: blur(30px);">
     <div class="card-body py-5 px-md-5 w-100 m-auto">
       <div class="row d-flex justify-content-center ">
@@ -296,13 +296,13 @@
             </div>
             <div class="input-group">
               <div class="form-outline mb-5" data-mdb-input-init>
-                <input type="text" id="inputDetailedAddressForm" name="detailedAddress" class="form-control" th:value="${session.memberDto.detailedAddress}"
+                <input type="text" id="inputDetailedAddressForm" name="detailedAddress" class="form-control active" th:value="${session.memberDto.detailedAddress}"
                        aria-describedby="button-addon" required/>
                 <label class="form-label" for="inputDetailedAddressForm">상세주소</label>
                 <div class="invalid-feedback">상세주소를 입력해주세요</div>
               </div>
               <div class="form-outline mb-5" data-mdb-input-init>
-                <input type="text" id="inputExtraAddressForm" name="extraAddress" class="form-control" th:value="${session.memberDto.extraAddress}"
+                <input type="text" id="inputExtraAddressForm" name="extraAddress" class="form-control active" th:value="${session.memberDto.extraAddress}"
                        aria-describedby="button-addon" required/>
                 <label class="form-label" for="inputExtraAddressForm">참고항목</label>
                 <div class="invalid-feedback">참고항목을 입력해주세요</div>
@@ -322,11 +322,8 @@
 <footer class="text-center text-lg-start bg-body-tertiary text-muted pt-5">
   <section class="">
     <div class="container text-center text-md-start mt-5">
-
       <div class="row mt-3">
-
         <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-
           <h6 class="text-uppercase fw-bold mb-4">
             <i class="fas fa-gem me-3"></i> 201958110 신윤섭
           </h6>
@@ -334,10 +331,7 @@
             DataBase Programming
           </p>
         </div>
-
-
         <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-
           <h6 class="text-uppercase fw-bold mb-4">
             Roastery
           </h6>
@@ -354,24 +348,16 @@
             <a th:href="@{/api/page/CoffeeHeureum}" class="text-reset">Coffee Heureum</a>
           </p>
         </div>
-
-
         <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-
           <h6 class="text-uppercase fw-bold mb-4">
             Products
           </h6>
           <p>
             <a th:href="@{/api/page/drip-bag}" class="text-reset">Drip Bag</a>
           </p>
-          <p>
-            <a th:href="@{/api/page/supplies}" class="text-reset">Supplies</a>
-          </p>
+
         </div>
-
-
         <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-
           <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
           <p><i class="fas fa-home me-3"></i>한신대학교 장준하기념관 18201-1</p>
           <p>
@@ -380,18 +366,13 @@
           </p>
           <p><i class="fas fa-phone me-3"></i>010-1234-5679</p>
         </div>
-
       </div>
-
     </div>
   </section>
-
-
   <div class="text-center p-4 bg-black text-light">
     © 2024 Copyright:
     <a class="text-reset fw-bold link-light" th:href="@{'https://github.com/F-UMI'}">Shin Yun Seop</a>
   </div>
-
 </footer>
 <!--footer-->
 <!--Script-->
@@ -408,6 +389,7 @@
 <script th:src="@{/js/kakao-find-address.js}"></script>
 <script th:src="@{/js/form-outline.js}"></script>
 <script th:src="@{/js/snippets.js}"></script>
+<script th:src="@{/js/navbar.js}"></script>
 
 
 </body>

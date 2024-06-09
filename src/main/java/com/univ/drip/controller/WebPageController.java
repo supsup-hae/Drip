@@ -185,10 +185,7 @@ public class WebPageController {
 
   @GetMapping("/drip-bag")
   public String moveToDripBag(Model model) {
-    if (model.getAttribute("productList") == null) {
-      productManageService.getCategoryProductList(model, "drip-bag");
-    }
-    model.addAttribute("roastery", "CoffeeHeureum");
+    productManageService.getCategoryProductList(model, "DripBag");
     return "drip-bag";
   }
 

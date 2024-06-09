@@ -33,7 +33,7 @@ public class ProductManageServiceImpl implements ProductManageService {
   @Transactional
   public void getCategoryProductList(Model model, String categoryName) {
     List<Product> productList = productRepository.findByProductCategory(categoryName);
-    model.addAttribute(categoryName + "ProductList", productList);
+    model.addAttribute("productList", productList);  // Use a consistent attribute name
   }
 
   @Override
@@ -130,7 +130,7 @@ public class ProductManageServiceImpl implements ProductManageService {
   @Override
   public List<Product> getFilteredProducts(String category, String condition, String roastery) {
     List<Product> productList = new ArrayList<>();
-    if (category != null && condition != null) {
+    if ((category != null && condition != null) || roastery == null) {
       productList = productRepository.findByProductCategoryAndProductCondition(category, condition);
     } else if (category != null) {
       productList = productRepository.findByProductCategory(category);

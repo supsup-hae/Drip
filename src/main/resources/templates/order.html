@@ -135,7 +135,7 @@
           <ul class="dropdown-menu shadow">
 
             <li><a class="dropdown-item" th:href="@{/api/page/drip-bag}">DripBag</a></li>
-            <li><a class="dropdown-item" th:href="@{/api/page/supplies}">Supplies</a></li>
+
           </ul>
         </li>
 
@@ -198,40 +198,39 @@
 <section class="text-center position-relative">
   <div id="liveAlertPlaceholder" class="position-absolute top-0 start-50 translate-middle-x z-1 mt-1"></div>
   <!-- Background image -->
-  <div class="p-5 bg-image object-cover" th:style="|background-image: url('@{/images/lowkey/swiper.jpg}'); height: 140vh;|"></div>
+  <div class="p-5 bg-image object-cover" th:style="|background-image: url('@{/images/lowkey/swiper.jpg}'); height: 175vh;|"></div>
   <!-- Background image -->
-
-  <div class="d-flex card mx-4 mx-md-5 shadow-5-strong w-75 position-absolute"
-       th:style="'margin-top: -1250px; left: 10%; background: hsla(0, 0%, 100%, 0.8); backdrop-filter: blur(30px);'">
-    <div class="card-body py-5 px-md-5 w-100 m-auto">
-      <div class="row d-flex align-items-center justify-content-center">
-        <div class="container">
-          <h2 class="text-center mb-5">주문하기</h2>
-          <div class="row">
-            <!-- Order Information -->
-            <form th:action="@{/api/order/{cartId}(cartId=${cart.getCartId()})}" method="post">
-              <div class="col col-lg-6 mb-4">
+  <form th:action="@{/api/order/{cartId}(cartId=${cart.getCartId()})}" method="post">
+    <div class="d-flex card mx-4 mx-md-5 shadow-5-strong w-75 position-absolute"
+         th:style="'margin-top: -1600px; left: 10%; background: hsla(0, 0%, 100%, 0.8); backdrop-filter: blur(30px);'">
+      <div class="card-body py-5 px-md-5 w-100 m-auto">
+        <div class="row d-flex align-items-center justify-content-center">
+          <div class="container">
+            <h2 class="text-center mb-5">주문하기</h2>
+            <div class="row">
+              <!-- Order Information -->
+              <div class="col col-lg-8 mb-4">
                 <div class="card">
                   <div class="card-header bg-transparent">
                     <h5>주문인 정보</h5>
                   </div>
-                  <div class="card-body">
-                    <div class="input-group mb-5">
+                  <div class="card-body d-flex flex-column align-items-center w-100">
+                    <div class="input-group mb-5 w-75">
                       <div class="form-outline" data-mdb-input-init>
-                        <input type="text" id="inputNameForm" name="name" class="form-control" th:value="${session.member.name}" />
+                        <input type="text" id="inputNameForm" name="name" class="form-control" th:value="${session.member.name}"/>
                         <label class="form-label" for="inputNameForm">이름</label>
                         <div class="invalid-feedback">이름을 입력해주세요</div>
                       </div>
                       <div class="form-outline" data-mdb-input-init>
-                        <input type="tel" id="inputPhoneNumberForm" name="phoneNumber" class="form-control" th:value="${session.member.phoneNumber}" />
+                        <input type="tel" id="inputPhoneNumberForm" name="phoneNumber" class="form-control" th:value="${session.member.phoneNumber}"/>
                         <label class="form-label" for="inputPhoneNumberForm">전화번호</label>
                         <div class="invalid-feedback">정확한 전화번호를 입력해주세요</div>
                       </div>
                     </div>
-                    <div class="input-group mb-5" style="height: 34px">
+                    <div class="input-group mb-5 w-75" style="height: 34px">
                       <div class="form-outline" data-mdb-input-init>
                         <input type="text" id="inputZipCodeForm" name="zipCode" class="form-control active" th:value="${session.member.zipCode}"
-                               aria-describedby="button-addon" />
+                               aria-describedby="button-addon"/>
                         <label class="form-label" for="inputZipCodeForm">우편번호</label>
                         <div class="invalid-feedback" style="margin: 0">우편번호를 입력해주세요</div>
                       </div>
@@ -240,50 +239,49 @@
                         <p class="m-auto">우편번호 찾기</p>
                       </button>
                     </div>
-                    <div class="form-outline mb-5" data-mdb-input-init>
+                    <div class="form-outline mb-5 w-75" data-mdb-input-init>
                       <input type="text" id="inputAddressForm" name="address" class="form-control active" th:value="${session.member.address}"
-                             aria-describedby="button-addon" />
+                             aria-describedby="button-addon"/>
                       <label class="form-label" for="inputAddressForm">주소</label>
                       <div class="invalid-feedback">주소를 입력해주세요</div>
                     </div>
-                    <div class="input-group">
-                      <div class="form-outline mb-5" data-mdb-input-init>
+                    <div class="input-group w-75">
+                      <div class="form-outline mb-5 w-100" data-mdb-input-init>
                         <input type="text" id="inputDetailedAddressForm" name="detailedAddress" class="form-control"
                                th:value="${session.member.detailedAddress}"
-                               aria-describedby="button-addon" />
+                               aria-describedby="button-addon"/>
                         <label class="form-label" for="inputDetailedAddressForm">상세주소</label>
                         <div class="invalid-feedback">상세주소를 입력해주세요</div>
                       </div>
-                      <div class="form-outline mb-5" data-mdb-input-init>
+                      <div class="form-outline mb-5 w-100" data-mdb-input-init>
                         <input type="text" id="inputExtraAddressForm" name="extraAddress" class="form-control"
                                th:value="${session.member.extraAddress}"
-                               aria-describedby="button-addon" />
+                               aria-describedby="button-addon"/>
                         <label class="form-label" for="inputExtraAddressForm">참고항목</label>
                         <div class="invalid-feedback">참고항목을 입력해주세요</div>
                       </div>
                     </div>
-                    <div class="form-outline mb-4" data-mdb-input-init>
-                      <input type="email" id="email" name="email" class="form-control"/>
-                      <label class="form-label" for="email">email</label>
+                    <div class="form-outline mb-4 w-75" data-mdb-input-init>
+                      <input type="text" id="request" name="request" class="form-control"/>
+                      <label class="form-label" for="request">배송시 요청사항</label>
                     </div>
                   </div>
                 </div>
               </div>
-
               <!-- Cart -->
-              <div class="col col-lg-6 mb-4">
+              <div class="col col-lg-4 mb-4">
                 <div class="card">
                   <div class="card-header bg-transparent">
                     <h5>장바구니</h5>
                   </div>
                   <div class="card-body">
-                    <div th:each="item : ${cartItems}">
-                      <div class="d-flex align-items-center mb-3">
-                        <img th:src="${item.product.imgPath}" class="img-fluid" alt="Product Image" style="width: 100px; width: 100px">
-                        <div class="ms-3">
-                          <h6 class="text-start" th:text="${item.product.productName}">Product Name</h6>
-                          <p class="fw-bold text-start" th:text="${#numbers.formatInteger(item.product.productPrice, 0)} + '원'">Product Price</p>
-                          <p class="fw-bold text-start" th:text="${item.product.quantity} + '개'">Product Quantity</p>
+                    <div th:each="item : ${cartItems}" class="">
+                      <div class="d-flex justify-content-between" >
+                        <img th:src="${item.product.imgPath}" class="img-fluid" alt="Product Image" style="width: 100px; height: 100px">
+                        <div>
+                          <p class="fw-bolder text-end ms-4" th:text=" ${item.product.productName}">Product Name</p>
+                          <p class="fw-bold text-end ms-4" th:text="${#numbers.formatInteger(item.product.productPrice, 0, 'COMMA')} + '원'">Product Price</p>
+                          <p class="fw-bold text-end ms-4" th:text="${item.count} + '개'">Product Quantity</p>
                         </div>
                       </div>
                       <hr>
@@ -304,8 +302,10 @@
                   </div>
                 </div>
               </div>
+            </div>
 
-              <!-- Delivery Information -->
+            <!-- Delivery Information -->
+            <div class="container mt-5">
               <div class="col-lg-12 mb-4">
                 <div class="card w-100 d-flex align-items-center justify-content-center">
                   <div class="card-header bg-transparent">
@@ -328,13 +328,13 @@
                       <div class="tab-pane fade show active" id="existing-address" role="tabpanel" aria-labelledby="existing-address-tab">
                         <div class="input-group mb-5">
                           <div class="form-outline" data-mdb-input-init>
-                            <input type="text" id="existingDeliveryName" name="deliveryName" class="form-control" th:value="${session.member.name}" />
+                            <input type="text" id="existingDeliveryName" name="deliveryName" class="form-control" th:value="${session.member.name}"/>
                             <label class="form-label" for="existingDeliveryName">이름</label>
                             <div class="invalid-feedback">이름을 입력해주세요</div>
                           </div>
                           <div class="form-outline" data-mdb-input-init>
                             <input type="tel" id="existingDeliveryPhoneNumber" name="deliveryPhoneNumber" class="form-control"
-                                   th:value="${session.member.phoneNumber}" />
+                                   th:value="${session.member.phoneNumber}"/>
                             <label class="form-label" for="existingDeliveryPhoneNumber">전화번호</label>
                             <div class="invalid-feedback">정확한 전화번호를 입력해주세요</div>
                           </div>
@@ -343,7 +343,7 @@
                           <div class="form-outline" data-mdb-input-init>
                             <input type="text" id="existingDeliveryZipCode" name="deliveryZipCode" class="form-control active"
                                    th:value="${session.member.zipCode}"
-                                   aria-describedby="button-addon1" />
+                                   aria-describedby="button-addon1"/>
                             <label class="form-label" for="existingDeliveryZipCode">우편번호</label>
                             <div class="invalid-feedback" style="margin: 0">우편번호를 입력해주세요</div>
                           </div>
@@ -353,8 +353,9 @@
                           </button>
                         </div>
                         <div class="form-outline mb-5" data-mdb-input-init>
-                          <input type="text" id="existingDeliveryAddress" name="deliveryAddress" class="form-control active" th:value="${session.member.address}"
-                                 aria-describedby="button-addon" />
+                          <input type="text" id="existingDeliveryAddress" name="deliveryAddress" class="form-control active"
+                                 th:value="${session.member.address}"
+                                 aria-describedby="button-addon"/>
                           <label class="form-label" for="existingDeliveryAddress">주소</label>
                           <div class="invalid-feedback">주소를 입력해주세요</div>
                         </div>
@@ -362,14 +363,14 @@
                           <div class="form-outline mb-5" data-mdb-input-init>
                             <input type="text" id="existingDeliveryDetailedAddress" name="deliveryDetailedAddress" class="form-control"
                                    th:value="${session.member.detailedAddress}"
-                                   aria-describedby="button-addon" />
+                                   aria-describedby="button-addon"/>
                             <label class="form-label" for="existingDeliveryDetailedAddress">상세주소</label>
                             <div class="invalid-feedback">상세주소를 입력해주세요</div>
                           </div>
                           <div class="form-outline mb-5" data-mdb-input-init>
                             <input type="text" id="existingDeliveryExtraAddress" name="deliveryExtraAddress" class="form-control"
                                    th:value="${session.member.extraAddress}"
-                                   aria-describedby="button-addon" />
+                                   aria-describedby="button-addon"/>
                             <label class="form-label" for="existingDeliveryExtraAddress">참고항목</label>
                             <div class="invalid-feedback">참고항목을 입력해주세요</div>
                           </div>
@@ -378,12 +379,12 @@
                       <div class="tab-pane fade" id="new-address" role="tabpanel" aria-labelledby="new-address-tab">
                         <div class="input-group mb-5">
                           <div class="form-outline" data-mdb-input-init>
-                            <input type="text" id="inputNewDeliveryName" name="newDeliveryName" class="form-control" />
+                            <input type="text" id="inputNewDeliveryName" name="newDeliveryName" class="form-control"/>
                             <label class="form-label" for="inputNewDeliveryName">이름</label>
                             <div class="invalid-feedback">이름을 입력해주세요</div>
                           </div>
                           <div class="form-outline" data-mdb-input-init>
-                            <input type="tel" id="inputNewDeliveryPhoneNumber" name="newDeliveryPhoneNumber" class="form-control" />
+                            <input type="tel" id="inputNewDeliveryPhoneNumber" name="newDeliveryPhoneNumber" class="form-control"/>
                             <label class="form-label" for="inputNewDeliveryPhoneNumber">전화번호</label>
                             <div class="invalid-feedback">정확한 전화번호를 입력해주세요</div>
                           </div>
@@ -391,7 +392,7 @@
                         <div class="input-group mb-5" style="height: 34px">
                           <div class="form-outline" data-mdb-input-init>
                             <input type="text" id="inputNewDeliveryZipCode" name="newDeliveryZipCode" class="form-control active"
-                                   aria-describedby="button-addon2" />
+                                   aria-describedby="button-addon2"/>
                             <label class="form-label" for="inputNewDeliveryZipCode">우편번호</label>
                             <div class="invalid-feedback" style="margin: 0">우편번호를 입력해주세요</div>
                           </div>
@@ -402,20 +403,20 @@
                         </div>
                         <div class="form-outline mb-5" data-mdb-input-init>
                           <input type="text" id="inputNewDeliveryAddress" name="newDeliveryAddress" class="form-control active"
-                                 aria-describedby="button-addon" />
+                                 aria-describedby="button-addon"/>
                           <label class="form-label" for="inputNewDeliveryAddress">주소</label>
                           <div class="invalid-feedback">주소를 입력해주세요</div>
                         </div>
                         <div class="input-group">
                           <div class="form-outline mb-5" data-mdb-input-init>
                             <input type="text" id="inputNewDeliveryDetailedAddress" name="newDeliveryDetailedAddress" class="form-control"
-                                   aria-describedby="button-addon" />
+                                   aria-describedby="button-addon"/>
                             <label class="form-label" for="inputNewDeliveryDetailedAddress">상세주소</label>
                             <div class="invalid-feedback">상세주소를 입력해주세요</div>
                           </div>
                           <div class="form-outline mb-5" data-mdb-input-init>
                             <input type="text" id="inputNewDeliveryExtraAddress" name="newDeliveryExtraAddress" class="form-control"
-                                   aria-describedby="button-addon" />
+                                   aria-describedby="button-addon"/>
                             <label class="form-label" for="inputNewDeliveryExtraAddress">참고항목</label>
                             <div class="invalid-feedback">참고항목을 입력해주세요</div>
                           </div>
@@ -425,37 +426,36 @@
                   </div>
                 </div>
               </div>
-
-              <!-- Payment -->
-              <div class="col-lg-12 mb-4">
-                <div class="card w-100 d-flex align-items-center justify-content-center">
-                  <div class="card-header bg-transparent">
-                    <h5>결제 수단</h5>
+            </div>
+            <!-- Payment -->
+            <div class="col-lg-12 mb-4">
+              <div class="card w-100 d-flex align-items-center justify-content-center">
+                <div class="card-header bg-transparent">
+                  <h5>결제 수단</h5>
+                </div>
+                <div class="card-body w-75">
+                  <div class="d-flex justify-content-center">
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="paymentMethod" id="cardPayment" value="카드" checked/>
+                      <label class="form-check-label" for="cardPayment">카드</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="paymentMethod" id="cashPayment" value="현금"/>
+                      <label class="form-check-label" for="cashPayment">현금</label>
+                    </div>
                   </div>
-                  <div class="card-body w-75">
-                    <div class="d-flex justify-content-center">
-                      <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="paymentMethod" id="cardPayment" value="카드" checked/>
-                        <label class="form-check-label" for="cardPayment">카드</label>
-                      </div>
-                      <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="paymentMethod" id="cashPayment" value="현금"/>
-                        <label class="form-check-label" for="cashPayment">현금</label>
-                      </div>
-                    </div>
-                    <div class="d-flex justify-content-center">
-                      <button class="btn btn-primary mt-3" type="submit">결제하기</button>
-                    </div>
+                  <div class="d-flex justify-content-center">
+                    <button class="btn btn-primary mt-3" type="submit">결제하기</button>
                   </div>
                 </div>
               </div>
-            </form>
+            </div>
             <!-- End of Order Form -->
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </form>
 </section>
 <!--Footer-->
 <footer class="text-center text-lg-start bg-body-tertiary text-muted pt-5">
@@ -506,9 +506,7 @@
           <p>
             <a th:href="@{/api/page/drip-bag}" class="text-reset">Drip Bag</a>
           </p>
-          <p>
-            <a th:href="@{/api/page/supplies}" class="text-reset">Supplies</a>
-          </p>
+
         </div>
         <!-- Grid column -->
 
@@ -549,6 +547,8 @@
 <script th:src="@{/js/swiper.js}"></script>
 <script th:src="@{/js/snippets.js}"></script>
 <script th:src="@{/js/kakao-find-address.js}"></script>
+<script th:src="@{/js/kakao-find-address_new_address.js}"></script>
+
 <script th:src="@{/js/form-outline.js}"></script>
 
 <!--<script th:src="@{/js/delete-from-cart.js}"></script>-->

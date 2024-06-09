@@ -136,22 +136,8 @@
              data-bs-auto-close="outside">Products</a>
           <ul class="dropdown-menu shadow">
             <li><a class="dropdown-item" th:href="@{/api/page/drip-bag}">DripBag</a></li>
-            <li><a class="dropdown-item" th:href="@{/api/page/supplies}">Supplies</a></li>
           </ul>
         </li>
-<!--        <li>-->
-<!--          <div class="input-group text-dark">-->
-<!--            <div class="form-outline border-dark" style="border-top-color: transparent; border-right-color: transparent; border-left-color: transparent" data-mdb-input-init>-->
-<!--              <input type="search" id="form1" class="form-control"/>-->
-<!--              <label class="form-label" for="form1">Search</label>-->
-<!--            </div>-->
-<!--            <button type="button" class="btn btn-outline-" style="border-width: thin" data-mdb-ripple-init data-mdb-ripple-color="dark">-->
-<!--                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">-->
-<!--                  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>-->
-<!--                </svg>-->
-<!--            </button>-->
-<!--          </div>-->
-<!--        </li>-->
       </ul>
       <ul class="navbar-nav ms-auto">
         <li class="user-info ms-2 m-auto">
@@ -239,7 +225,7 @@
   <div class="pd-title">SEASONAL</div>
   <p id="custom-h3">매월 새롭게 소개하는 시즈널 커피</p>
   <div class="row w-100">
-    <div class="row row-cols-auto g-5 mt-5 ms-3">
+    <div class="row row-cols-auto g-3 mt-5 ms-3">
       <div th:each="product : ${SeasonalProductList}">
         <div class="col pd-col ms-5">
           <div class="card bg-image roaster-card-img bg-dark text-white hover-overlay hover-zoom" data-mdb-ripple-init
@@ -278,7 +264,7 @@
   </p>
   <div>
     <div class="row w-100">
-      <div class="row row-cols-auto g-5 ms-3 mt-5">
+      <div class="row row-cols-auto g-3 ms-3 mt-5">
         <div th:each="product : ${AllSeasonProductList}">
           <div class="col pd-col ms-5">
             <div class="card bg-image roaster-card-img bg-dark text-white hover-overlay hover-zoom" data-mdb-ripple-init
@@ -322,33 +308,20 @@
         집이나 사무실에 두거나, 선물하기도 좋습니다.
       </p>
       <button class="custom-btn mt-3 ms-5">
-        <a th:href="@{drip-bag}" class="link-light"><span>Link</span></a>
+        <a th:href="@{/api/page/drip-bag}" class="link-light"><span>Link</span></a>
       </button>
     </div>
   </div>
 </div>
 <!--dripBag-->
 
-<!--supplies-->
-<div class="pd container-fluid">
-  <div class="pd-title">
-    COFFEE SUPPLIES
-  </div>
-  <p>
-    커피 용품 (추가 예정)
-  </p>
-</div>
-<!--supplies-->
 
 <!--footer-->
 <footer class="text-center text-lg-start bg-body-tertiary text-muted pt-5">
   <section class="">
     <div class="container text-center text-md-start mt-5">
-
       <div class="row mt-3">
-
         <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-
           <h6 class="text-uppercase fw-bold mb-4">
             <i class="fas fa-gem me-3"></i> 201958110 신윤섭
           </h6>
@@ -356,10 +329,7 @@
             DataBase Programming
           </p>
         </div>
-
-
         <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-
           <h6 class="text-uppercase fw-bold mb-4">
             Roastery
           </h6>
@@ -376,24 +346,16 @@
             <a th:href="@{/api/page/CoffeeHeureum}" class="text-reset">Coffee Heureum</a>
           </p>
         </div>
-
-
         <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-
           <h6 class="text-uppercase fw-bold mb-4">
             Products
           </h6>
           <p>
             <a th:href="@{/api/page/drip-bag}" class="text-reset">Drip Bag</a>
           </p>
-          <p>
-            <a th:href="@{/api/page/supplies}" class="text-reset">Supplies</a>
-          </p>
+
         </div>
-
-
         <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-
           <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
           <p><i class="fas fa-home me-3"></i>한신대학교 장준하기념관 18201-1</p>
           <p>
@@ -402,18 +364,13 @@
           </p>
           <p><i class="fas fa-phone me-3"></i>010-1234-5679</p>
         </div>
-
       </div>
-
     </div>
   </section>
-
-
   <div class="text-center p-4 bg-black text-light">
     © 2024 Copyright:
     <a class="text-reset fw-bold link-light" th:href="@{'https://github.com/F-UMI'}">Shin Yun Seop</a>
   </div>
-
 </footer>
 <!--footer-->
 
